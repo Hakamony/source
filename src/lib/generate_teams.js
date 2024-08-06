@@ -1,4 +1,3 @@
-
 function calculateAverageRating(players) {
 
     const totalRating = players.reduce((sum, player) => sum + player.Rating, 0);
@@ -32,14 +31,23 @@ function balanceAgeGroups(players, numTeams) {
 }
 
 
+function shuffleArray(array) {
+    // Fisher-Yates shuffle algorithm
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 function generateTeams(players, numTeams) {
-   
-    players.sort((a, b) => b.Rating - a.Rating);
+    // Shuffle players to randomize their order
+    const shuffledPlayers = shuffleArray([...players]);
 
-    const balancedTeams = balanceAgeGroups(players, numTeams);
+    // Create balanced teams based on shuffled players
+    const ageBalancedTeams = balanceAgeGroups(shuffledPlayers, numTeams);
 
-    
+    // Create empty teams
     const teams = Array.from({ length: numTeams }, (_, i) => ({
         id: i + 1,
         name: `Team ${i + 1}`,
@@ -47,22 +55,23 @@ function generateTeams(players, numTeams) {
         teamRating: 0
     }));
 
-    let teamIndex = 0;
-    players.forEach(player => {
-        teams[teamIndex].players.push(player);
-        teamIndex = (teamIndex + 1) % numTeams;
+    // Distribute players to teams ensuring age groups are balanced
+    ageBalancedTeams.forEach((ageGroup, index) => {
+        ageGroup.forEach((player, playerIndex) => {
+            teams[playerIndex % numTeams].players.push(player);
+        });
     });
 
-    
+    // Calculate the team ratings
     teams.forEach(team => {
         team.teamRating = calculateAverageRating(team.players);
     });
 
-    
+    // Format result
     const resultTeams = teams.map(team => ({
         id: team.id,
         name: team.name,
-        players: team.players.map(player => player.name), 
+        players: team.players.map(player => player.id),
         teamRating: team.teamRating
     }));
 
