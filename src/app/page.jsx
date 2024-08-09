@@ -2,9 +2,11 @@ import Link from 'next/link';
 
 export default function Home() {
 	return (
-		<main className="flex items-center flex-col w-[100vw] h-[100vh] justify-center">
-			<h1 className="text-4xl font-bold">This is the home page.</h1>
-			<Link href="/SelectEvent" className="text-blue-700">
+		<main className="flex h-screen w-screen flex-col items-center justify-center">
+			<h1 className="mb-10 border-2 border-prime-orange text-4xl font-bold text-prime-blue">
+				Welcome to Hakamony
+			</h1>
+			<Link href="/SelectEvent" className="text-prime-dark">
 				Select Event Page
 			</Link>
 		</main>
