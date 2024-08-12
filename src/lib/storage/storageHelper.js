@@ -1,17 +1,14 @@
 const saveEvent = (event) => {
-	window.localStorage.setItem('currentEvent', event);
+	window.localStorage.setItem('currentEvent', JSON.stringify(event));
 };
 
-const localStorageConfig = () => {
-	// runs first at the creation of new event
-	window.localStorage.setItem('players', JSON.stringify({}));
-	window.localStorage.setItem('teams', JSON.stringify({}));
-	window.localStorage.setItem('currentEvent', JSON.stringify({}));
-};
+const getEvent = () =>{
+    return JSON.parse(window.localStorage.getItem('currentEvent'))
+}
 
 const helper = {
 	saveEvent,
-    localStorageConfig
+    getEvent
 };
 
 export default helper;
