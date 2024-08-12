@@ -2,7 +2,7 @@
 	"extends": ["airbnb", "prettier", "next/core-web-vitals"],
 	"plugins": ["prettier"],
 	"rules": {
-		"prettier/prettier": "warn",
+		"prettier/prettier": "off",
 		"no-unused-vars": "warn",
 		"arrow-body-style": "off"
 	}
