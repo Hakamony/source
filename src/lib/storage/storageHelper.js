@@ -4,7 +4,7 @@ import playerStorage from "./playerStorage";
 const localStorageConfig = () => {
 	// runs first at the creation of new event
 	const players = [
-		{ id: -1, name: 'noName', 'Age-Group': -1, Rating: -1 },
+		{ id: 1, name: 'noName', 'Age-Group': 1, Rating: 1 },
 	];
 	const teams = [
 		{

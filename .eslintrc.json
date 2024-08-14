@@ -4,6 +4,7 @@
 	"rules": {
 		"prettier/prettier": "off",
 		"no-unused-vars": "warn",
-		"arrow-body-style": "off"
+		"arrow-body-style": "off",
+		"no-restricted-syntax": "off"
 	}
 }
