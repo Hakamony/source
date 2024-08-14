@@ -21,7 +21,7 @@ export default function Storage() {
 				"Rating": 5
 			}
 		])
-		playerStorage.savePlayer({id:5, name:"myMan", "Age-Group": 3, "Rating": 4})
+		playerStorage.updatePlayer(1,{name:"myMan", "Age-Group": 3, "Rating": 4})
 		console.log(playerStorage.getPlayers())
 	}, [])
 
