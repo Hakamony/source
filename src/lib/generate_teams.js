@@ -114,12 +114,12 @@ const players = [
 ];
 
 // For number of teams
-const teamsByNumber = generateTeamsByNumber(players, 4);
-console.log("Teams by Number of Teams:", teamsByNumber);
+//const teamsByNumber = generateTeamsByNumber(players, 4);
+//console.log("Teams by Number of Teams:", teamsByNumber);
 
 // For maximum number of players per team
-//const teamsByMaxPlayers = generateTeamsByMaxPlayers(players, 5);
-//console.log("Teams by Max Players per Team:", teamsByMaxPlayers);
+const teamsByMaxPlayers = generateTeamsByMaxPlayers(players, 8);
+console.log("Teams by Max Players per Team:", teamsByMaxPlayers);
 
 
 
