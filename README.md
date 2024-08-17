@@ -109,7 +109,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 // Ahmed
 1. generateTeams()
 2. generateEvent()
-3. generateMatches()
+3. generateMatches().
 // Yousef
 4. importPlayers()
 5. exportPlayers()
