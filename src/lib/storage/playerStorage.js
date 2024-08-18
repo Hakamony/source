@@ -85,12 +85,22 @@ const updatePlayer = (id, data) => {
 	savePlayersNoValidation(newPlayers);
 };
 
+const removePlayer = (id) =>{
+	const players = getPlayers()
+	const newPlayers = players.filter((player) => player.id !== id)
+	if(players.length === newPlayers.length){
+		throw new Error('no player has this id')
+	}
+	savePlayersNoValidation(newPlayers)
+}
+
 const playerStorage = {
 	getPlayer,
 	getPlayers,
 	addPlayer,
 	savePlayers,
-    updatePlayer
+    updatePlayer,
+	removePlayer
 };
 
 export default playerStorage;

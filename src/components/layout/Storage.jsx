@@ -20,7 +20,8 @@ export default function Storage() {
 			}
 		])
 		const currentPlayer = playerStorage.getPlayers()[0]
-		playerStorage.updatePlayer(currentPlayer.id,{name:"myMan", "Age-Group": 3, "Rating": 4})
+		//playerStorage.updatePlayer(currentPlayer.id,{name:"myMan", "Age-Group": 3, "Rating": 4})
+		playerStorage.removePlayer(currentPlayer.id)
 		console.log(playerStorage.getPlayers())
 	}, [])
 
