@@ -22,7 +22,7 @@ const localStorageConfig = () => {
 		},
 	];
 	const event = {
-		id: -1,
+		id: 'someID',
 		name: 'noName',
 		'start-time': 'noTime',
 		'end-time': 'noTime',
@@ -31,7 +31,7 @@ const localStorageConfig = () => {
 		'fields-number': -1,
 		'players-number': -1,
 		'max-team-player': -1,
-		'total-coast': -1,
+		'total-cost': -1,
 		'teams-number': -1,
 		'matches-number': -1,
 		teams: [-1, -1],
