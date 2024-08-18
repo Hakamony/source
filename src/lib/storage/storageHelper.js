@@ -1,5 +1,4 @@
 import eventStorage from "./eventStorage";
-import playerStorage from "./playerStorage";
 
 const localStorageConfig = () => {
 	// runs first at the creation of new event
@@ -40,17 +39,21 @@ const localStorageConfig = () => {
 		status: -1, // 0: not started, 1: on going, 2: done
 	};
 
-	playerStorage.savePlayers(players)
+	window.localStorage.setItem('players', JSON.stringify(players))
 	window.localStorage.setItem('teams', JSON.stringify(teams));
 	eventStorage.saveEvent(event);
 };
 
+const generateID = () =>{
+	return Date.now().toString(36) + Math.random().toString(36).substring(2, 12).padStart(12, 0)
+}
 
 const addTeams = () => {};
 
 const storageHelper = {
 	addTeams,
 	localStorageConfig,
+	generateID
 };
 
 export default storageHelper;
