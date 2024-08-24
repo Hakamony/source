@@ -1,27 +1,27 @@
-import helper from "./storageHelper"
+import helper from './storageHelper';
 
 const isValidPlayer = (data) => {
-	const requiredFields = ['id', 'name', 'Rating', 'Age-Group'];
+	const requiredFields = {
+		id: 'string',
+		name: 'string',
+		Rating: 'number',
+		'Age-Group': 'number',
+	};
+	const fieldsKeys = Object.keys(requiredFields);
 	const dataKeys = Object.keys(data);
-	for (const field of requiredFields) {
+	for (const field of fieldsKeys) {
 		if (!dataKeys.includes(field)) {
 			return false;
 		}
+		if (typeof data[field] !== requiredFields[field]) {
+			return false;
+		}
 	}
-	if (typeof data.id !== 'string') {
+
+	if (data.Rating < 0 || data.Rating > 5) {
 		return false;
 	}
-	if (typeof data.name !== 'string') {
-		return false;
-	}
-	if (typeof data.Rating !== 'number' || data.Rating < 0 || data.Rating > 5) {
-		return false;
-	}
-	if (
-		typeof data['Age-Group'] !== 'number' ||
-		data['Age-Group'] < 1 ||
-		data['Age-Group'] > 3
-	) {
+	if (data['Age-Group'] < 1 || data['Age-Group'] > 3) {
 		return false;
 	}
 	return true;
@@ -40,29 +40,28 @@ const getPlayer = (id) => {
 	return result;
 };
 
-
 const savePlayersNoValidation = (players) => {
 	window.localStorage.setItem('players', JSON.stringify(players));
 };
 
 const savePlayers = (players) => {
-    /**
-     * replace the players list in local storage with new players list
-     */
+	/**
+	 * replace the players list in local storage with new players list
+	 */
 	players.forEach((player) => {
-		player.id = helper.generateID()
+		player.id = helper.generateID();
 		if (!isValidPlayer(player)) {
 			throw new Error('invalid data');
 		}
 	});
-	savePlayersNoValidation(players)
+	savePlayersNoValidation(players);
 };
 
 const addPlayer = (player) => {
-    /**
-     * adds a player to players list in local storage
-     */
-	player.id = helper.generateID()
+	/**
+	 * adds a player to players list in local storage
+	 */
+	player.id = helper.generateID();
 	if (!isValidPlayer(player)) {
 		throw new Error('invalid data');
 	}
@@ -72,9 +71,9 @@ const addPlayer = (player) => {
 };
 
 const updatePlayer = (id, data) => {
-    /**
-     * updates the player with provided id in local storage
-     */
+	/**
+	 * updates the player with provided id in local storage
+	 */
 	const oldPlayer = getPlayer(id);
 	const newPlayer = { ...oldPlayer, ...data };
 	if (!isValidPlayer(newPlayer)) {
@@ -85,22 +84,22 @@ const updatePlayer = (id, data) => {
 	savePlayersNoValidation(newPlayers);
 };
 
-const removePlayer = (id) =>{
-	const players = getPlayers()
-	const newPlayers = players.filter((player) => player.id !== id)
-	if(players.length === newPlayers.length){
-		throw new Error('no player has this id')
+const removePlayer = (id) => {
+	const players = getPlayers();
+	const newPlayers = players.filter((player) => player.id !== id);
+	if (players.length === newPlayers.length) {
+		throw new Error('no player has this id');
 	}
-	savePlayersNoValidation(newPlayers)
-}
+	savePlayersNoValidation(newPlayers);
+};
 
 const playerStorage = {
 	getPlayer,
 	getPlayers,
 	addPlayer,
 	savePlayers,
-    updatePlayer,
-	removePlayer
+	updatePlayer,
+	removePlayer,
 };
 
 export default playerStorage;

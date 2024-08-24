@@ -1,39 +1,42 @@
-
 const isValidEvent = (data) => {
-	const requiredFields = ['id', 'name', 'start-time', 'end-time', "sport", "score-type", 'fields-number', 'players-number', 'max-team-player', 'total-cost', 'teams-number', 'teams', 'event-type', 'status'];
+	const requiredFields = {
+		id: 'string',
+		name: 'string',
+		'start-time': 'string',
+		'end-time': 'string',
+		sport: 'string',
+		'score-type': 'string',
+		'fields-number': 'number',
+		'players-number': 'number',
+		'max-team-player': 'number',
+		'total-coast': 'number',
+		'teams-number': 'number',
+		'matches-number': 'number',
+		teams: typeof [],
+		'event-type': 'string',
+		status: 'number', // 0: not started, 1: on going, 2: done
+	};
+	const fieldsKeys = Object.keys(requiredFields);
 	const dataKeys = Object.keys(data);
-	for (const field of requiredFields) {
+	for (const field of fieldsKeys) {
 		if (!dataKeys.includes(field)) {
 			return false;
 		}
+		if (typeof data[field] !== requiredFields[field]) {
+			return false;
+		}
 	}
-	if (typeof data.id !== 'string') {
-		return false;
-	}
-	if (typeof data.name !== 'string') {
-		return false;
-	}
-	if (typeof data.Rating !== 'number' || data.Rating < 0 || data.Rating > 5) {
-		return false;
-	}
-	if (
-		typeof data['Age-Group'] !== 'number' ||
-		data['Age-Group'] < 1 ||
-		data['Age-Group'] > 3
-	) {
-		return false;
-	}
+
 	return true;
 };
-
 
 const saveEvent = (event) => {
 	window.localStorage.setItem('currentEvent', JSON.stringify(event));
 };
 
-const getEvent = () =>{
-    return JSON.parse(window.localStorage.getItem('currentEvent'))
-}
+const getEvent = () => {
+	return JSON.parse(window.localStorage.getItem('currentEvent'));
+};
 
 const updateEvent = (data) => {
 	try {
@@ -47,12 +50,11 @@ const updateEvent = (data) => {
 
 const importEvent = () => {};
 
-
 const eventStorage = {
-    saveEvent,
-    getEvent,
-    updateEvent,
-	importEvent
-}
+	saveEvent,
+	getEvent,
+	updateEvent,
+	importEvent,
+};
 
-export default eventStorage
+export default eventStorage;
