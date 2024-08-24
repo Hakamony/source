@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,7 +12,7 @@
 
 @layer components {
 	.btn-base {
-		@apply bg-prime-green-200 rounded-lg px-8 py-2;
+		@apply rounded-lg bg-prime-green-200 px-8 py-2;
 	}
 
 	.btn-disabled {
