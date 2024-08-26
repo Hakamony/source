@@ -19,6 +19,7 @@ const isValidEvent = (data) => {
 		status: 'number', // 0: not started, 1: on going, 2: done
 	};
 	storageHelper.validFields(requiredFields, data)
+	storageHelper.validIdList(data.teams)
 };
 
 const saveEvent = (event) => {

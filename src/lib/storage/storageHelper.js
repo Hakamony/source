@@ -59,10 +59,19 @@ const validFields = (requiredFields, data) =>{
 	}
 }
 
+const validIdList = (idList) =>{
+	idList.forEach(element => {
+		if(typeof element !== 'string'){
+			throw new Error('Invalid id list')
+		}
+	});
+}
+
 const storageHelper = {
 	localStorageConfig,
 	generateID,
-	validFields
+	validFields,
+	validIdList
 };
 
 export default storageHelper;
