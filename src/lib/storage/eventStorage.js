@@ -43,6 +43,10 @@ const updateEvent = (data) => {
 	saveEvent(newEvent);
 };
 
+const addTeam = (id) =>{
+	const currentEvent = getEvent()
+	currentEvent.teams.unshift(id)
+}
 const importEvent = () => {};
 
 const eventStorage = {
@@ -50,6 +54,7 @@ const eventStorage = {
 	getEvent,
 	updateEvent,
 	importEvent,
+	addTeam
 };
 
 export default eventStorage;
