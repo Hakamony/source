@@ -63,6 +63,8 @@ const addTeam = (team) => {
 const updateTeam = (id, data) => {
 	/**
 	 * updates the player with provided id in local storage
+     * you should only provide the fields you want to change in data
+     * for example if you want to change the name call updateTeam(id, {name:"newName"})
 	 */
 	const oldTeam = getTeam(id);
 	const newTeam = { ...oldTeam, ...data };
