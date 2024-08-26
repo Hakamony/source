@@ -90,37 +90,41 @@ const addPlayerToTeam = (playerId, teamId) => {
 	updateTeam(teamId, team);
 };
 
+const removePlayerFromTeam = (playerId, teamId) => {
+	const team = getTeam(teamId);
+	team.players = team.players.filter((id) => id !== playerId);
+	updateTeam(teamId, team);
+};
+
 const getTeamRating = (teamId) => {
 	const team = getTeam(teamId);
 	if (team.players.length) {
-		const totalRating = team.players.reduce(
-			(sum, playerId) => {
-                const player = playerStorage.getPlayer(playerId)
-                return sum + player.Rating
-            },0   
-		);
+		const totalRating = team.players.reduce((sum, playerId) => {
+			const player = playerStorage.getPlayer(playerId);
+			return sum + player.Rating;
+		}, 0);
 		return totalRating / team.players.length;
 	}
 	return 0;
 };
 
-const addWinToTeam = (teamId) =>{
-    const team = getTeam(teamId)
-    team['match-played'].won += 1
-    updateTeam(teamId, team)
-}
+const addWinToTeam = (teamId) => {
+	const team = getTeam(teamId);
+	team['match-played'].won += 1;
+	updateTeam(teamId, team);
+};
 
-const addLoseToTeam = (teamId) =>{
-    const team = getTeam(teamId)
-    team['match-played'].lose += 1
-    updateTeam(teamId, team)
-}
+const addLoseToTeam = (teamId) => {
+	const team = getTeam(teamId);
+	team['match-played'].lose += 1;
+	updateTeam(teamId, team);
+};
 
-const addTieToTeam = (teamId) =>{
-    const team = getTeam(teamId)
-    team['match-played'].tie += 1
-    updateTeam(teamId, team)
-}
+const addTieToTeam = (teamId) => {
+	const team = getTeam(teamId);
+	team['match-played'].tie += 1;
+	updateTeam(teamId, team);
+};
 
 const teamStorage = {
 	getTeam,
@@ -130,10 +134,11 @@ const teamStorage = {
 	updateTeam,
 	removeTeam,
 	addPlayerToTeam,
+	removePlayerFromTeam,
 	getTeamRating,
-    addWinToTeam,
-    addLoseToTeam,
-    addTieToTeam,
+	addWinToTeam,
+	addLoseToTeam,
+	addTieToTeam,
 };
 
 export default teamStorage;
