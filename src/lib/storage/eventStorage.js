@@ -32,6 +32,10 @@ const getEvent = () => {
 };
 
 const updateEvent = (data) => {
+	/**
+	 * you should only provide the fields you want to change in data
+     * for example if you want to change the name call updateEvent({name:"newName"})
+	 */
 	const currentEvent = getEvent();
 	const newEvent = { ...currentEvent, ...data };
 	saveEvent(newEvent);
@@ -39,8 +43,19 @@ const updateEvent = (data) => {
 
 const addTeam = (id) =>{
 	const currentEvent = getEvent()
+	if(currentEvent.teams.find(teamId => teamId === id)){
+		throw new Error("the team is already added to current event")
+	}
 	currentEvent.teams.unshift(id)
+	saveEvent(currentEvent)
 }
+
+const removeTeam = id =>{
+	const currentEvent = getEvent()
+	currentEvent.teams.filter(teamId => teamId !== id)
+	saveEvent(currentEvent)
+}
+
 const importEvent = () => {};
 
 const eventStorage = {
@@ -48,7 +63,8 @@ const eventStorage = {
 	getEvent,
 	updateEvent,
 	importEvent,
-	addTeam
+	addTeam,
+	removeTeam
 };
 
 export default eventStorage;
