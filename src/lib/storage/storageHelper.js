@@ -1,22 +1,16 @@
 const localStorageConfig = () => {
 	// runs first at the creation of new event
-	const players = [
-		{ id: 1, name: 'noName', 'Age-Group': 1, Rating: 1 },
-	];
+	const players = [{ id: 1, name: 'noName', 'Age-Group': 1, Rating: 1 }];
 	const teams = [
 		{
 			id: -1,
 			name: 'noName',
-			'number-of-players': -1,
 			players: [-1, -2],
-			'team-rating': -1,
 			'match-played': {
 				won: -1,
 				tie: -1,
 				lose: -1,
-				total: -1,
 			},
-			points: -1,
 		},
 	];
 	const event = {
@@ -37,16 +31,29 @@ const localStorageConfig = () => {
 		status: -1, // 0: not started, 1: on going, 2: done
 	};
 
-	window.localStorage.setItem('players', JSON.stringify(players))
+	window.localStorage.setItem('players', JSON.stringify(players));
 	window.localStorage.setItem('teams', JSON.stringify(teams));
 	window.localStorage.setItem('currentEvent', JSON.stringify(event));
 };
 
-const generateID = () =>{
-	return Date.now().toString(36) + Math.random().toString(36).substring(2, 12).padStart(12, 0)
-}
+const generateID = () => {
+	return (
+		Date.now().toString(36) +
+		Math.random().toString(36).substring(2, 12).padStart(12, 0)
+	);
+};
 
-const validFields = (requiredFields, data) =>{
+const validFields = (requiredFields, data) => {
+	/**
+	 * check if all the required fields are in the data
+	 * and check each for rquired data types of the fields
+	 * 
+	 * requiredFields should have the form 
+	 * {
+	 * 	field: field type,
+	 * 	field: field type,
+	 * }
+	 */
 	const fieldsKeys = Object.keys(requiredFields);
 	const dataKeys = Object.keys(data);
 	for (const field of fieldsKeys) {
@@ -57,21 +64,21 @@ const validFields = (requiredFields, data) =>{
 			throw new Error(`${field} have invalid type`);
 		}
 	}
-}
+};
 
-const validIdList = (idList) =>{
-	idList.forEach(element => {
-		if(typeof element !== 'string'){
-			throw new Error('Invalid id list')
+const validIdList = (idList) => {
+	idList.forEach((element) => {
+		if (typeof element !== 'string') {
+			throw new Error('Invalid id list');
 		}
 	});
-}
+};
 
 const storageHelper = {
 	localStorageConfig,
 	generateID,
 	validFields,
-	validIdList
+	validIdList,
 };
 
 export default storageHelper;

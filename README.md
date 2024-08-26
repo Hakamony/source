@@ -50,16 +50,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 {
     "id": 2334,
     "name": "f1",
-    "number-of-players": 5,
     "players": [24, 35, 68, 14],
-    "team-rating": 3.6,
     "match-played": {
         "won": 2,
         "tie": 0,
-        "lose": 1,
-        "total": 3
-    },
-    "points": 0
+        "lose": 1
+    }
 }
 
 // Event object
