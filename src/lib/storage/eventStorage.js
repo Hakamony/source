@@ -1,3 +1,5 @@
+import storageHelper from "./storageHelper";
+
 const isValidEvent = (data) => {
 	const requiredFields = {
 		id: 'string',
@@ -16,16 +18,7 @@ const isValidEvent = (data) => {
 		'event-type': 'string',
 		status: 'number', // 0: not started, 1: on going, 2: done
 	};
-	const fieldsKeys = Object.keys(requiredFields);
-	const dataKeys = Object.keys(data);
-	for (const field of fieldsKeys) {
-		if (!dataKeys.includes(field)) {
-			throw new Error(`${field} not found`);
-		}
-		if (typeof data[field] !== requiredFields[field]) {
-			throw new Error(`${field} have invalid type`);
-		}
-	}
+	storageHelper.validFields(requiredFields, data)
 };
 
 const saveEvent = (event) => {

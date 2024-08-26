@@ -7,16 +7,7 @@ const isValidPlayer = (data) => {
 		Rating: 'number',
 		'Age-Group': 'number',
 	};
-	const fieldsKeys = Object.keys(requiredFields);
-	const dataKeys = Object.keys(data);
-	for (const field of fieldsKeys) {
-		if (!dataKeys.includes(field)) {
-			throw new Error(`${field} not found`);
-		}
-		if (typeof data[field] !== requiredFields[field]) {
-			throw new Error(`${field} have invalid type`);
-		}
-	}
+	helper.validFields(requiredFields, data)
 
 	if (data.Rating < 0 || data.Rating > 5) {
 		throw new Error(`Rating out of boundary`);

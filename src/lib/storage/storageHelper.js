@@ -46,12 +46,23 @@ const generateID = () =>{
 	return Date.now().toString(36) + Math.random().toString(36).substring(2, 12).padStart(12, 0)
 }
 
-const addTeams = () => {};
+const validFields = (requiredFields, data) =>{
+	const fieldsKeys = Object.keys(requiredFields);
+	const dataKeys = Object.keys(data);
+	for (const field of fieldsKeys) {
+		if (!dataKeys.includes(field)) {
+			throw new Error(`${field} not found`);
+		}
+		if (typeof data[field] !== requiredFields[field]) {
+			throw new Error(`${field} have invalid type`);
+		}
+	}
+}
 
 const storageHelper = {
-	addTeams,
 	localStorageConfig,
-	generateID
+	generateID,
+	validFields
 };
 
 export default storageHelper;
