@@ -51,7 +51,8 @@ export default function Storage() {
 		const team = teamStorage.getTeams()[0]
 		teamStorage.addPlayerToTeam(players[0].id, team.id)
 		teamStorage.addPlayerToTeam(players[1].id, team.id)
-		console.log(teamStorage.getTeamRating(team.id))
+		teamStorage.addTieToTeam(team.id)
+		// console.log(teamStorage.getTeamRating(team.id))
 		//playerStorage.updatePlayer(currentPlayer.id,{name:"myMan", "Age-Group": 3, "Rating": 4})
 		// playerStorage.removePlayer(currentPlayer.id)
 		// console.log(playerStorage.getPlayers());

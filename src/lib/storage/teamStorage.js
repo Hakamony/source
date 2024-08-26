@@ -104,6 +104,24 @@ const getTeamRating = (teamId) => {
 	return 0;
 };
 
+const addWinToTeam = (teamId) =>{
+    const team = getTeam(teamId)
+    team['match-played'].won += 1
+    updateTeam(teamId, team)
+}
+
+const addLoseToTeam = (teamId) =>{
+    const team = getTeam(teamId)
+    team['match-played'].lose += 1
+    updateTeam(teamId, team)
+}
+
+const addTieToTeam = (teamId) =>{
+    const team = getTeam(teamId)
+    team['match-played'].tie += 1
+    updateTeam(teamId, team)
+}
+
 const teamStorage = {
 	getTeam,
 	getTeams,
@@ -113,6 +131,9 @@ const teamStorage = {
 	removeTeam,
 	addPlayerToTeam,
 	getTeamRating,
+    addWinToTeam,
+    addLoseToTeam,
+    addTieToTeam,
 };
 
 export default teamStorage;

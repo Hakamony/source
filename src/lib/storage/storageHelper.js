@@ -56,6 +56,9 @@ const validFields = (requiredFields, data) => {
 	 */
 	const fieldsKeys = Object.keys(requiredFields);
 	const dataKeys = Object.keys(data);
+	if(dataKeys.length !== fieldsKeys.length){
+		throw new Error("Invalid data: missing or extra fields")
+	}
 	for (const field of fieldsKeys) {
 		if (!dataKeys.includes(field)) {
 			throw new Error(`${field} not found`);
