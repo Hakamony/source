@@ -1,5 +1,3 @@
-import eventStorage from "./eventStorage";
-
 const localStorageConfig = () => {
 	// runs first at the creation of new event
 	const players = [
@@ -41,7 +39,7 @@ const localStorageConfig = () => {
 
 	window.localStorage.setItem('players', JSON.stringify(players))
 	window.localStorage.setItem('teams', JSON.stringify(teams));
-	eventStorage.saveEvent(event);
+	window.localStorage.setItem('currentEvent', JSON.stringify(event));
 };
 
 const generateID = () =>{

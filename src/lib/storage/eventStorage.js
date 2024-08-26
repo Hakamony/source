@@ -9,7 +9,7 @@ const isValidEvent = (data) => {
 		'fields-number': 'number',
 		'players-number': 'number',
 		'max-team-player': 'number',
-		'total-coast': 'number',
+		'total-cost': 'number',
 		'teams-number': 'number',
 		'matches-number': 'number',
 		teams: typeof [],
@@ -20,17 +20,16 @@ const isValidEvent = (data) => {
 	const dataKeys = Object.keys(data);
 	for (const field of fieldsKeys) {
 		if (!dataKeys.includes(field)) {
-			return false;
+			throw new Error(`${field} not found`);
 		}
 		if (typeof data[field] !== requiredFields[field]) {
-			return false;
+			throw new Error(`${field} have invalid type`);
 		}
 	}
-
-	return true;
 };
 
 const saveEvent = (event) => {
+	isValidEvent(event);
 	window.localStorage.setItem('currentEvent', JSON.stringify(event));
 };
 
@@ -39,13 +38,9 @@ const getEvent = () => {
 };
 
 const updateEvent = (data) => {
-	try {
-		let currentEvent = getEvent();
-		currentEvent = { ...currentEvent, ...data };
-		saveEvent(currentEvent);
-	} catch (error) {
-		console.log(error.message);
-	}
+	const currentEvent = getEvent();
+	const newEvent = { ...currentEvent, ...data };
+	saveEvent(newEvent);
 };
 
 const importEvent = () => {};

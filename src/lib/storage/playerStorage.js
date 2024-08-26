@@ -11,20 +11,19 @@ const isValidPlayer = (data) => {
 	const dataKeys = Object.keys(data);
 	for (const field of fieldsKeys) {
 		if (!dataKeys.includes(field)) {
-			return false;
+			throw new Error(`${field} not found`);
 		}
 		if (typeof data[field] !== requiredFields[field]) {
-			return false;
+			throw new Error(`${field} have invalid type`);
 		}
 	}
 
 	if (data.Rating < 0 || data.Rating > 5) {
-		return false;
+		throw new Error(`Rating out of boundary`);
 	}
 	if (data['Age-Group'] < 1 || data['Age-Group'] > 3) {
-		return false;
+		throw new Error(`Age-Group out of boundary`);
 	}
-	return true;
 };
 
 const getPlayers = () => {
@@ -50,9 +49,7 @@ const savePlayers = (players) => {
 	 */
 	players.forEach((player) => {
 		player.id = helper.generateID();
-		if (!isValidPlayer(player)) {
-			throw new Error('invalid data');
-		}
+		isValidPlayer(player);
 	});
 	savePlayersNoValidation(players);
 };
@@ -62,9 +59,7 @@ const addPlayer = (player) => {
 	 * adds a player to players list in local storage
 	 */
 	player.id = helper.generateID();
-	if (!isValidPlayer(player)) {
-		throw new Error('invalid data');
-	}
+	isValidPlayer(player);
 	const players = getPlayers();
 	players.unshift(player);
 	savePlayersNoValidation(players);
@@ -76,9 +71,7 @@ const updatePlayer = (id, data) => {
 	 */
 	const oldPlayer = getPlayer(id);
 	const newPlayer = { ...oldPlayer, ...data };
-	if (!isValidPlayer(newPlayer)) {
-		throw new Error('invalid data');
-	}
+	isValidPlayer(newPlayer);
 	const newPlayers = getPlayers().filter((player) => player.id !== id);
 	newPlayers.unshift(newPlayer);
 	savePlayersNoValidation(newPlayers);
