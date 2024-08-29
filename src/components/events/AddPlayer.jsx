@@ -2,14 +2,14 @@
 
 import { FaUserPlus } from 'react-icons/fa';
 
-export default function AddPlayer() {
+export default function AddPlayer(props) {
 	function handleNewPlayer(e) {
 		e.preventDefault();
 	}
 	return (
 		<form
-			className="absolute inset-y-1/3 mx-2 flex h-fit flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
-			style={{ display: 'none' }}
+			className="fixed bottom-20 mx-2 flex h-fit flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
+			style={{ display: props.active ? 'flex' : 'none' }}
 		>
 			<div>
 				<h3 className="mb-4 text-2xl font-bold">اسم اللاعب</h3>
@@ -87,7 +87,7 @@ export default function AddPlayer() {
 					onClick={handleNewPlayer}
 					className="flex cursor-pointer items-center justify-center gap-4 rounded-lg bg-prime-green-200 px-16 py-2 text-xl font-bold text-prime-white"
 				>
-					اضف اللاعب
+					اضف لاعب
 					<FaUserPlus className="text-2xl" />
 				</button>
 				<span className="flex items-center justify-center rounded-lg border-2 border-solid border-prime-green-200 px-4 py-2 text-xl font-bold text-prime-green-200">
