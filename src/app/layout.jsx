@@ -18,8 +18,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
-			<body className={`${inter.className} h-[100vh]`}>{children}</body>
+		<html lang="ar">
+			<body className={`${inter.className} min-h-[100vh]`} dir="rtl">
+				{children}
+			</body>
 		</html>
 	);
 }

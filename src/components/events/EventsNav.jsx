@@ -11,7 +11,7 @@ export default function EventsNav(props) {
 		);
 	}
 	return (
-		<nav>
+		<nav className="mb-12">
 			<ul className="flex justify-center gap-5">{steps}</ul>
 		</nav>
 	);

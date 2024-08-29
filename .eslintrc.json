@@ -9,6 +9,7 @@
 		"import/no-unresolved": "off",
 		"no-plusplus": "off",
 		"no-nested-ternary": "off",
-		"jsx-a11y/label-has-associated-control": "off"
+		"jsx-a11y/label-has-associated-control": "off",
+		"jsx-a11y/control-has-associated-label": "off"
 	}
 }
