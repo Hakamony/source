@@ -1,31 +1,54 @@
-function generateMatches(event) {
+function generateMatches(teams) {
     const matches = [];
     let matchId = 1;
 
-    // Generate matches based on teams
-    for (let i = 0; i < event.teams.length; i++) {
-        for (let j = i + 1; j < event.teams.length; j++) {
-            const match = {
+    // Generate matches so that each team plays against each other once
+    for (let i = 0; i < teams.length; i++) {
+        for (let j = i + 1; j < teams.length; j++) {
+            matches.push({
                 id: matchId++,
-                number: matchId,
                 teams: {
-                    first: event.teams[i],
-                    second: event.teams[j]
-                },
-                scores: {
-                    first: 0, // Scores can be updated later
-                    second: 0
-                },
-                "start-time": "TBD", // Set start time based on event
-                "end-time": "TBD", // Set end time based on event
-                status: 0 // Not started
-            };
-            matches.push(match);
+                    first: teams[i].id,
+                    second: teams[j].id
+                }
+            });
         }
     }
 
-    return matches;
+    // Shuffle matches to randomize the order
+    for (let i = matches.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [matches[i], matches[randomIndex]] = [matches[randomIndex], matches[i]];
+    }
+
+    // Return a list of match IDs in the randomized order
+    return matches.map(match => match.id);
 }
 
-const matches = generateMatches(event);
-console.log(matches);
+// Example usage
+const teams = [
+    {
+        id: 1,
+        name: 'Team 1',
+        players: [22, 13, 17, 10, 35, 34, 44, 66],
+        teamRating: '3.50',
+        numberOfPlayers: 8
+    },
+    {
+        id: 2,
+        name: 'Team 2',
+        players: [17, 12, 14, 16, 15, 77, 33],
+        teamRating: '4.14',
+        numberOfPlayers: 7
+    },
+    {
+        id: 3,
+        name: 'Team 3',
+        players: [55, 9, 17, 99, 68, 11, 88],
+        teamRating: '3.29',
+        numberOfPlayers: 7
+    }
+];
+
+const matchIds = generateMatches(teams);
+console.log(matchIds);
