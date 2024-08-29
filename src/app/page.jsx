@@ -3,6 +3,7 @@ import hakamImg from '../../public/assets/hakamDraft.png';
 import Button from '@/components/layout/ButtonNav';
 
 export default function Home() {
+
 	return (
 		<main className="h-100vh flex h-screen w-screen flex-col items-center justify-between py-8 font-main">
 			<section>
