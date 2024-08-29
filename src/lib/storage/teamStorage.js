@@ -55,7 +55,10 @@ const addTeam = (team) => {
 	 */
 	team.id = storageHelper.generateID();
 	isValidTeam(team);
-	const teams = getTeams();
+	let teams = getTeams();
+	if(!teams){
+		teams = []
+	}
 	teams.unshift(team);
 	saveTeamsNoValidation(teams);
 };
@@ -63,8 +66,8 @@ const addTeam = (team) => {
 const updateTeam = (id, data) => {
 	/**
 	 * updates the player with provided id in local storage
-     * you should only provide the fields you want to change in data
-     * for example if you want to change the name call updateTeam(id, {name:"newName"})
+	 * you should only provide the fields you want to change in data
+	 * for example if you want to change the name call updateTeam(id, {name:"newName"})
 	 */
 	const oldTeam = getTeam(id);
 	const newTeam = { ...oldTeam, ...data };
@@ -128,6 +131,10 @@ const addTieToTeam = (teamId) => {
 	updateTeam(teamId, team);
 };
 
+const clearTeams = () => {
+	window.localStorage.setItem('teams', []);
+};
+
 const teamStorage = {
 	getTeam,
 	getTeams,
@@ -141,6 +148,7 @@ const teamStorage = {
 	addWinToTeam,
 	addLoseToTeam,
 	addTieToTeam,
+	clearTeams,
 };
 
 export default teamStorage;

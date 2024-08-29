@@ -61,7 +61,10 @@ const addMatch = (match) => {
 	 */
 	match.id = storageHelper.generateID();
 	isValidMatch(match);
-	const matches = getMatches();
+	let matches = getMatches();
+	if(!matches){
+		matches = []
+	}
 	matches.unshift(match);
 	saveMatchesNoValidation(matches);
 };
@@ -134,6 +137,14 @@ const moveMatch = (matchID, place) =>{
     saveMatchList(matchList)
 }
 
+const clearMatches = () =>{
+	window.localStorage.setItem('matches', []);
+}
+
+const clearMatchList = () =>{
+	window.localStorage.setItem('matchList', []);
+}
+
 const matchStorage = {
     getMatch,
     getMatches,
@@ -148,7 +159,9 @@ const matchStorage = {
     getMatchesList,
     saveMatchList,
     addToMatchList,
-    moveMatch
+    moveMatch,
+	clearMatchList,
+	clearMatches
 }
 
 export default matchStorage

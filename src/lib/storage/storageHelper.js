@@ -1,19 +1,5 @@
-const localStorageConfig = () => {
-	// runs first at the creation of new event
-	const players = [{ id: 1, name: 'noName', 'Age-Group': 1, Rating: 1 }];
-	const teams = [
-		{
-			id: -1,
-			name: 'noName',
-			players: [-1, -2],
-			'match-played': {
-				won: -1,
-				tie: -1,
-				lose: -1,
-			},
-		},
-	];
-	const event = {
+const getDefaultEvent = () =>{
+	return {
 		id: 'someID',
 		name: 'noName',
 		'start-time': 'noTime',
@@ -26,10 +12,19 @@ const localStorageConfig = () => {
 		'total-cost': -1,
 		'teams-number': -1,
 		'matches-number': -1,
-		teams: [-1, -1],
+		teams: [],
 		'event-type': 'noType',
 		status: -1, // 0: not started, 1: on going, 2: done
 	};
+}
+
+const localStorageConfig = () => {
+	/**
+	 * run this function at home page
+	 */
+	const players = [];
+	const teams = [];
+	const event = getDefaultEvent();
 	const matches = []
 	const matchList = []
 	window.localStorage.setItem('players', JSON.stringify(players));
@@ -85,6 +80,7 @@ const storageHelper = {
 	generateID,
 	validFields,
 	validIdList,
+	getDefaultEvent
 };
 
 export default storageHelper;

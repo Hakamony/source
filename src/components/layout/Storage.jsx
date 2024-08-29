@@ -6,15 +6,11 @@ import playerStorage from '@/lib/storage/playerStorage';
 import eventStorage from '@/lib/storage/eventStorage';
 import teamStorage from '@/lib/storage/teamStorage';
 import matchStorage from '@/lib/storage/matchStorage';
+import pastEventStorage from '@/lib/storage/pastEventStorage';
 
 export default function Storage() {
 	useEffect(() => {
 		storageHelper.localStorageConfig();
-		// const event = {
-		// 	id: '26473',
-		// 	name: 'event1',
-		// };
-		// eventStorage.updateEvent(event);
 		// playerStorage.savePlayers([
 		// 	{
 		// 		name: 'folan',
@@ -93,6 +89,26 @@ export default function Storage() {
 		matchStorage.saveMatchList(['a', 'b', 'c']);
 		matchStorage.addToMatchList('d')
 		matchStorage.moveMatch('a', 0)
+
+		const event = {
+			"name": "event1",
+			"start-time": "13-7-2024 18:45",
+			"end-time": "13-7-2024 21:45",
+			"sport": "Volley Ball",
+			"score-type": "points",
+			"fields-number": 2,
+			"players-number": 35,
+			"max-team-player": 6,
+			"total-cost": 600,
+			"teams-number": 5,
+			"matches-number": 15,
+			"teams": ['gag', 'gqgea'],
+			"event-type": "league",
+			"status": 2 // 0: not started, 1: on going, 2: done
+		}
+		eventStorage.saveEvent(event)
+		pastEventStorage.clearPastEvents()
+		pastEventStorage.saveCurrentEventToPastEvents()
 	}, []);
 
 	return <div>storage is working</div>;

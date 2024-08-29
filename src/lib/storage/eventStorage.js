@@ -2,7 +2,6 @@ import storageHelper from "./storageHelper";
 
 const isValidEvent = (data) => {
 	const requiredFields = {
-		id: 'string',
 		name: 'string',
 		'start-time': 'string',
 		'end-time': 'string',
@@ -20,6 +19,9 @@ const isValidEvent = (data) => {
 	};
 	storageHelper.validFields(requiredFields, data)
 	storageHelper.validIdList(data.teams)
+	if(data.status < 0 || data.status >2){
+        throw new Error('status out of boundary');
+    }
 };
 
 const saveEvent = (event) => {
@@ -36,13 +38,19 @@ const updateEvent = (data) => {
 	 * you should only provide the fields you want to change in data
      * for example if you want to change the name call updateEvent({name:"newName"})
 	 */
-	const currentEvent = getEvent();
+	let currentEvent = getEvent();
+	if(!currentEvent){
+		currentEvent = {}
+	}
 	const newEvent = { ...currentEvent, ...data };
 	saveEvent(newEvent);
 };
 
 const addTeam = (id) =>{
-	const currentEvent = getEvent()
+	let currentEvent = getEvent()
+	if(!currentEvent){
+		currentEvent = storageHelper.getDefaultEvent()
+	}
 	if(currentEvent.teams.find(teamId => teamId === id)){
 		throw new Error("the team is already added to current event")
 	}
@@ -56,15 +64,17 @@ const removeTeam = id =>{
 	saveEvent(currentEvent)
 }
 
-const importEvent = () => {};
+const clearCurrentEvent = () =>{
+	window.localStorage.setItem('currentEvent', {});
+}
 
 const eventStorage = {
 	saveEvent,
 	getEvent,
 	updateEvent,
-	importEvent,
 	addTeam,
-	removeTeam
+	removeTeam,
+	clearCurrentEvent
 };
 
 export default eventStorage;

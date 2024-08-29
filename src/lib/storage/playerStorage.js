@@ -51,7 +51,10 @@ const addPlayer = (player) => {
 	 */
 	player.id = helper.generateID();
 	isValidPlayer(player);
-	const players = getPlayers();
+	let players = getPlayers();
+	if(!players){
+		players = []
+	}
 	players.unshift(player);
 	savePlayersNoValidation(players);
 };
@@ -79,6 +82,10 @@ const removePlayer = (id) => {
 	savePlayersNoValidation(newPlayers);
 };
 
+const clearPlayers = () =>{
+	window.localStorage.setItem('players', []);
+}
+
 const playerStorage = {
 	getPlayer,
 	getPlayers,
@@ -86,6 +93,7 @@ const playerStorage = {
 	savePlayers,
 	updatePlayer,
 	removePlayer,
+	clearPlayers,
 };
 
 export default playerStorage;
