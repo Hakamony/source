@@ -30,10 +30,13 @@ const localStorageConfig = () => {
 		'event-type': 'noType',
 		status: -1, // 0: not started, 1: on going, 2: done
 	};
-
+	const matches = []
+	const matchList = []
 	window.localStorage.setItem('players', JSON.stringify(players));
 	window.localStorage.setItem('teams', JSON.stringify(teams));
 	window.localStorage.setItem('currentEvent', JSON.stringify(event));
+	window.localStorage.setItem('matches', JSON.stringify(matches));
+	window.localStorage.setItem('matchList', JSON.stringify(matches));
 };
 
 const generateID = () => {
