@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function UploadPlayers() {
 	return (
-		<main>
-			<h1>This is the select event page.</h1>
+		<main className="px-4 py-12">
+			<h1>هذا فونت عربي</h1>
 			<Link href="/">Back Home</Link>
 		</main>
 	);
