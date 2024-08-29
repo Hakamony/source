@@ -8,6 +8,10 @@
 	body {
 		@apply bg-prime-white text-prime-dark;
 	}
+
+	option {
+		@apply text-center text-lg font-bold;
+	}
 }
 
 @layer components {
