@@ -16,12 +16,7 @@ function Counter({ ...props }) {
 		}
 	};
 	return (
-		<div
-			className={twMerge(
-				'mx-2 flex h-12 items-center rounded-lg border-2 border-solid border-prime-dark',
-				props.className,
-			)}
-		>
+		<div className={twMerge('flex items-center justify-around', props.className)}>
 			<button
 				type="button"
 				onClick={handlePlus}
@@ -29,7 +24,7 @@ function Counter({ ...props }) {
 			>
 				+
 			</button>
-			<div className="flex items-center justify-center text-center text-6xl text-white">
+			<div className="flex items-center justify-center text-center text-4xl font-bold text-prime-dark">
 				{num}
 			</div>
 			<button
