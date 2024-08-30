@@ -1,3 +1,6 @@
+import playerStorage from "../storage/playerStorage";
+import teamStorage from "../storage/teamStorage";
+
 function calculateAverageRating(players) {
     const totalRating = players.reduce((sum, player) => sum + player.Rating, 0);
     return totalRating / players.length;
@@ -43,48 +46,67 @@ function distributePlayersEqually(players, numTeams) {
     return teams;
 }
 
-function generateTeamsByNumber(players, numTeams) {
+function generateTeamsByNumber(numTeams) {
+    const players = playerStorage.getPlayers()
     const shuffledPlayers = shuffleArray([...players]);
     const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
 
-    const teams = ageBalancedTeams.map((team, i) => ({
-        id: i + 1,
-        name: `Team ${i + 1}`,
-        players: team,
-        teamRating: calculateAverageRating(team),
-        numberOfPlayers: team.length
-    }));
+    const teams = ageBalancedTeams.map((team, i) => {
+        const newTeam = {
+            name: `Team ${i + 1}`,
+            players: team,
+            "team-rating": calculateAverageRating(team),
+            'number-of-players': team.length
+        }
+        return newTeam;
+    });
 
-    return teams.map(team => ({
-        id: team.id,
+    const newTeams = teams.map(team => ({
         name: team.name,
         players: team.players.map(player => player.id),
-        teamRating: team.teamRating.toFixed(2),
-        numberOfPlayers: team.numberOfPlayers
+        "team-rating": Number(team['team-rating'].toFixed(2)),
+        'number-of-players': team['number-of-players'],
+            'match-played':{
+                won: 0,
+                tie: 0,
+                lose: 0,
+        }
     }));
+
+    teamStorage.saveTeams(newTeams);
+
 }
 
-function generateTeamsByMaxPlayers(players, maxPlayersPerTeam) {
+function generateTeamsByMaxPlayers(maxPlayersPerTeam) {
+    const players = playerStorage.getPlayers()
     const shuffledPlayers = shuffleArray([...players]);
     const numTeams = Math.ceil(shuffledPlayers.length / maxPlayersPerTeam);
 
     const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
 
-    const teams = ageBalancedTeams.map((team, i) => ({
-        id: i + 1,
-        name: `Team ${i + 1}`,
-        players: team,
-        teamRating: calculateAverageRating(team),
-        numberOfPlayers: team.length
-    }));
+    const teams = ageBalancedTeams.map((team, i) => {
+        const newTeam = {
+            name: `Team ${i + 1}`,
+            players: team,
+            "team-rating": calculateAverageRating(team),
+            'number-of-players': team.length
+        }
+        return newTeam;
+    });
 
-    return teams.map(team => ({
-        id: team.id,
+    const newTeams = teams.map(team => ({
         name: team.name,
         players: team.players.map(player => player.id),
-        teamRating: team.teamRating.toFixed(2),
-        numberOfPlayers: team.numberOfPlayers
+        "team-rating": Number(team['team-rating'].toFixed(2)),
+        'number-of-players': team['number-of-players'],
+            'match-played':{
+                won: 0,
+                tie: 0,
+                lose: 0,
+        }
     }));
+
+    teamStorage.saveTeams(newTeams);
 }
 
 // Example usage:
@@ -113,17 +135,20 @@ const players = [
     { id: 17, name: "Zyad", "Age-Group": 2, Rating: 4 }
 ];
 
-// For number of teams
-const teamsByNumber = generateTeamsByNumber(players, 4);
-console.log("Teams by Number of Teams:", teamsByNumber);
+// // For number of teams
+// const teamsByNumber = generateTeamsByNumber(players, 4);
+// console.log("Teams by Number of Teams:", teamsByNumber);
 
-// For maximum number of players per team
-const teamsByMaxPlayers = generateTeamsByMaxPlayers(players, 8);
-console.log("Teams by Max Players per Team:", teamsByMaxPlayers);
-
-
+// // For maximum number of players per team
+// const teamsByMaxPlayers = generateTeamsByMaxPlayers(players, 8);
+// console.log("Teams by Max Players per Team:", teamsByMaxPlayers);
 
 
+const generateTeams = {
+    generateTeamsByNumber,
+    generateTeamsByMaxPlayers,
+}
 
 
+export default generateTeams
 

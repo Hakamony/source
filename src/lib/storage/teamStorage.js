@@ -7,6 +7,8 @@ const isValidTeam = (data) => {
 		name: 'string',
 		players: typeof [],
 		'match-played': typeof {},
+		"team-rating": 'number',
+		'number-of-players': 'number'
 	};
 	const requiredFieldsMatchPlayed = {
 		won: 'number',
@@ -132,7 +134,7 @@ const addTieToTeam = (teamId) => {
 };
 
 const clearTeams = () => {
-	window.localStorage.setItem('teams', []);
+	window.localStorage.setItem('teams', JSON.stringify([]));
 };
 
 const teamStorage = {

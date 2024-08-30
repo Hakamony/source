@@ -1,20 +1,32 @@
-function generateMatches(teams) {
-    const matches = [];
+import teamStorage from "../storage/teamStorage";
+import matchStorage from "../storage/matchStorage";
+
+function generateMatches() {
+    const teams = teamStorage.getTeams();
+    let matches = [];
     let matchId = 1;
 
     // Generate matches so that each team plays against each other once
     for (let i = 0; i < teams.length; i++) {
         for (let j = i + 1; j < teams.length; j++) {
             matches.push({
-                id: matchId++,
-                teams: {
+                number: matchId++,
+                teams:{
                     first: teams[i].id,
                     second: teams[j].id
-                }
-            });
-        }
-    }
-
+                },                
+                scores: {
+                    first: 0,
+                    second: 0
+                },
+                'start-time':"fdafdfa",
+                'end-time':"fdafdfa",
+                'status' : 0
+            })
+    }}
+    console.log(matches.length);
+    matchStorage.saveMatches(matches);
+    matches = matchStorage.getMatches();
     // Shuffle matches to randomize the order
     for (let i = matches.length - 1; i > 0; i--) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
@@ -22,7 +34,9 @@ function generateMatches(teams) {
     }
 
     // Return a list of match IDs in the randomized order
-    return matches.map(match => match.id);
+    matches.forEach(match => {
+        matchStorage.addToMatchList(match.id)
+    });
 }
 
 // Example usage
@@ -64,5 +78,7 @@ const teams = [
     }
 ];
 
-const matchIds = generateMatches(teams);
-console.log(matchIds);
+// const matchIds = generateMatches(teams);
+// console.log(matchIds);
+
+export default generateMatches;

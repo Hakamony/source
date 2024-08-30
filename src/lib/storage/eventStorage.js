@@ -65,7 +65,7 @@ const removeTeam = id =>{
 }
 
 const clearCurrentEvent = () =>{
-	window.localStorage.setItem('currentEvent', {});
+	window.localStorage.setItem('currentEvent', JSON.stringify({}));
 }
 
 const eventStorage = {
