@@ -4,6 +4,12 @@
 	"rules": {
 		"prettier/prettier": "warn",
 		"no-unused-vars": "warn",
-		"arrow-body-style": "off"
+		"arrow-body-style": "off",
+		"import/extensions": "off",
+		"import/no-unresolved": "off",
+		"no-plusplus": "off",
+		"no-nested-ternary": "off",
+		"jsx-a11y/label-has-associated-control": "off",
+		"jsx-a11y/control-has-associated-label": "off"
 	}
 }
