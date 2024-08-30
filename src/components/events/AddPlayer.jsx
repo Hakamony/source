@@ -1,19 +1,55 @@
 'use client';
 
+import { useState } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
+import playerStorage from '@/lib/storage/playerStorage';
 
 export default function AddPlayer(props) {
+	const [form, setForm] = useState({
+		name: '',
+		Rating: 1,
+		'Age-Group': 1,
+	});
+
+	function handleFormChange(e) {
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
+		});
+	}
+
 	function handleNewPlayer(e) {
 		e.preventDefault();
+		playerStorage.addPlayer({
+			name:form.name,
+			Rating:Number(form.Rating),
+			'Age-Group':Number(form['Age-Group'])
+		})
+		props.setPlayers(playerStorage.getPlayers())
+		setForm({
+			name:'',
+			Rating:'',
+			"Age-Group": 1
+		})
+		props.setShowForm(prev=>!prev)
 	}
 	return (
 		<form
 			className="fixed bottom-20 right-2 flex h-fit w-[95vw] flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
 			style={{ display: props.active ? 'flex' : 'none' }}
+			onSubmit={handleNewPlayer}
 		>
 			<div>
 				<h3 className="mb-4 text-2xl font-bold">اسم اللاعب</h3>
-				<input type="text" name="name" id="name" className="h-12 w-full" required />
+				<input
+					type="text"
+					name="name"
+					id="name"
+					className="h-12 w-full"
+					value={form.name}
+					onChange={handleFormChange}
+					required
+				/>
 			</div>
 			<div>
 				<h3 className="mb-4 text-2xl font-bold" for="playerName">
@@ -24,9 +60,10 @@ export default function AddPlayer(props) {
 						<input
 							type="radio"
 							id="young"
-							name="ageGroup"
+							name="Age-Group"
 							value="1"
 							className="hidden"
+							onChange={handleFormChange}
 							required
 						/>
 						<label
@@ -40,9 +77,11 @@ export default function AddPlayer(props) {
 						<input
 							type="radio"
 							id="youth"
-							name="ageGroup"
+							name="Age-Group"
 							value="2"
 							className="hidden"
+							onChange={handleFormChange}
+							required
 						/>
 						<label
 							for="youth"
@@ -55,9 +94,11 @@ export default function AddPlayer(props) {
 						<input
 							type="radio"
 							id="adult"
-							name="ageGroup"
+							name="Age-Group"
 							value="3"
 							className="hidden"
+							onChange={handleFormChange}
+							required
 						/>
 						<label
 							for="adult"
@@ -71,12 +112,14 @@ export default function AddPlayer(props) {
 			<div>
 				<h3 className="mb-4 text-2xl font-bold">تقييم اللاعب من 5 نجوم</h3>
 				<select
-					name="rating"
+					name="Rating"
 					id="rating"
 					className="h-12 w-full bg-white text-center"
+					onChange={handleFormChange}
+					value={form.Rating}
 					required
 				>
-					<option value="">اختر</option>
+					<option value="" disabled>اختر</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -88,7 +131,6 @@ export default function AddPlayer(props) {
 				<button
 					type="submit"
 					htmlFor="uploadPlayers"
-					onClick={handleNewPlayer}
 					className="flex cursor-pointer items-center justify-center gap-4 rounded-lg bg-prime-green-200 px-16 py-2 text-xl font-bold text-prime-white"
 				>
 					اضف لاعب
