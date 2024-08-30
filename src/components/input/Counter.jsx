@@ -1,24 +1,41 @@
 'use client';
+
 import { useState } from 'react';
 
-function Counter() {
-    const [num, setNum] = useState(0)
+function Counter(props) {
+	const [num, setNum] = useState(0);
 
-    const handlePlus = () =>{
-        setNum(p => p + 1)
-    }
+	const handlePlus = () => {
+		setNum((p) => p + 1);
+	};
 
-    const handleMinus = () =>{
-        if(num > 0){
-            setNum(p => p - 1)
-        }
-    }
-
+	const handleMinus = () => {
+		if (num > 0) {
+			setNum((p) => p - 1);
+		}
+	};
+	let styling =
+		'mx-2 flex h-12 items-center rounded-lg border-2 border-solid border-prime-dark';
+	styling += ' ' + props.className;
 	return (
-		<div className={'flex mx-2 items-center h-1/5'}>
-			<button onClick = {handlePlus} className={`w-1/5 rounded-r-lg h-full bg-prime-orange text-center text-4xl font-bold text-prime-white`}>+</button>
-            <div className={"w-3/5 bg-gray-500 text-white flex items-center justify-center text-center text-6xl h-full"}>{num}</div>
-			<button onClick = {handleMinus} className={`w-1/5 items-center rounded-l-lg h-full bg-prime-orange text-center text-4xl font-bold text-prime-white`}>-</button>
+		<div className={styling}>
+			<button
+				type="button"
+				onClick={handlePlus}
+				className="rounded-r-lg text-center text-4xl font-bold text-prime-dark"
+			>
+				+
+			</button>
+			<div className="flex items-center justify-center text-center text-6xl text-white">
+				{num}
+			</div>
+			<button
+				type="button"
+				onClick={handleMinus}
+				className="items-center rounded-l-lg text-center text-4xl font-bold text-prime-dark"
+			>
+				-
+			</button>
 		</div>
 	);
 }
