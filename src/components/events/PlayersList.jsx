@@ -9,28 +9,42 @@ import playerStorage from '@/lib/storage/playerStorage';
 export default function PlayersList() {
 	const [showForm, setShowForm] = useState(false);
 	const [players, setPlayers] = useState([]);
+	const [form, setForm] = useState({
+		name: '',
+		Rating: '',
+		'Age-Group': 1,
+	});
 
-	useEffect(()=>{
-		setPlayers(playerStorage.getPlayers())
-	},[])
+	useEffect(() => {
+		setPlayers(playerStorage.getPlayers());
+	}, []);
 
 	function handleForm() {
 		setShowForm((prev) => !prev);
 	}
 
-	const handleDelete = (id)=>{
-		playerStorage.removePlayer(id)
-		setPlayers(playerStorage.getPlayers()) 
-	}
-	function stars(num){
-		const stars = []
-		for(let i =0 ; i< num; i++){
-			stars.push(<FaStar key = {i}className=" text-prime-yellow text-xl"/>)
+	const handleDelete = (id) => {
+		playerStorage.removePlayer(id);
+		setPlayers(playerStorage.getPlayers());
+	};
+
+	const handleUpdate = (name, Rating, ageGroup) => {
+		setForm({
+			name,
+			Rating,
+			'Age-Group': ageGroup,
+		});
+		setShowForm(prev=>!prev)
+	};
+	function stars(num) {
+		const stars = [];
+		for (let i = 0; i < num; i++) {
+			stars.push(<FaStar key={i} className="text-xl text-prime-yellow" />);
 		}
-		for(let i = num; i< 5; i++){
-			stars.push(<FaStar key = {i} className='text-xl' />)
+		for (let i = num; i < 5; i++) {
+			stars.push(<FaStar key={i} className="text-xl" />);
 		}
-		return stars
+		return stars;
 	}
 
 	return (
@@ -45,18 +59,24 @@ export default function PlayersList() {
 						>
 							<div className="flex flex-1 flex-col items-start justify-between text-2xl font-bold">
 								<div>{player.name}</div>
-								<div className="flex items-center gap-2">
-									{stars(player.Rating)}
-								</div>
+								<div className="flex items-center gap-2">{stars(player.Rating)}</div>
 							</div>
 							<div className="flex flex-none gap-2">
-								<button type="button" className="rounded-md bg-prime-yellow px-8 py-1">
+								<button
+									type="button"
+									className="rounded-md bg-prime-yellow px-8 py-1"
+									onClick={() => {
+										handleUpdate(player.name, player.Rating, player['Age-Group']);
+									}}
+								>
 									تعديل
 								</button>
 								<button
 									type="button"
 									className="rounded-md bg-red-500 px-8 py-1 text-prime-white"
-									onClick={() => {handleDelete(player.id)}}
+									onClick={() => {
+										handleDelete(player.id);
+									}}
 								>
 									حذف
 								</button>
@@ -65,7 +85,14 @@ export default function PlayersList() {
 					);
 				})}
 			</ul>
-			<AddPlayer active={showForm} setPlayers={setPlayers} setShowForm={setShowForm}/>
+			<AddPlayer
+				active={showForm}
+				setPlayers={setPlayers}
+				setShowForm={setShowForm}
+				form={form}
+				setForm={setForm}
+				players={players}
+			/>
 			<button type="button" onClick={handleForm}>
 				<FaCirclePlus
 					className="fixed bottom-4 right-4 text-6xl text-prime-green-200 duration-200 data-[active=true]:rotate-45"

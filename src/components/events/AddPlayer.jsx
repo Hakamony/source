@@ -4,12 +4,7 @@ import { useState } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
 import playerStorage from '@/lib/storage/playerStorage';
 
-export default function AddPlayer(props) {
-	const [form, setForm] = useState({
-		name: '',
-		Rating: 1,
-		'Age-Group': 1,
-	});
+export default function AddPlayer({form, setForm, active, setPlayers, setShowForm, players}) {
 
 	function handleFormChange(e) {
 		setForm({
@@ -25,18 +20,18 @@ export default function AddPlayer(props) {
 			Rating:Number(form.Rating),
 			'Age-Group':Number(form['Age-Group'])
 		})
-		props.setPlayers(playerStorage.getPlayers())
+		setPlayers(playerStorage.getPlayers())
 		setForm({
 			name:'',
 			Rating:'',
 			"Age-Group": 1
 		})
-		props.setShowForm(prev=>!prev)
+		setShowForm(prev=>!prev)
 	}
 	return (
 		<form
 			className="fixed bottom-20 right-2 flex h-fit w-[95vw] flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
-			style={{ display: props.active ? 'flex' : 'none' }}
+			style={{ display: active ? 'flex' : 'none' }}
 			onSubmit={handleNewPlayer}
 		>
 			<div>
@@ -137,7 +132,7 @@ export default function AddPlayer(props) {
 					<FaUserPlus className="text-2xl" />
 				</button>
 				<span className="flex items-center justify-center rounded-lg border-2 border-solid border-prime-green-200 px-4 py-2 text-xl font-bold text-prime-green-200">
-					40
+					{players.length}
 				</span>
 			</div>
 		</form>
