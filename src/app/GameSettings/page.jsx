@@ -24,7 +24,7 @@ export default function UploadPlayers() {
 				</div>
 				<div className="flex items-center justify-between">
 					<h3 className="mb-4 text-2xl font-bold">عدد لاعبين الفريق</h3>
-					<Counter className="w-full" />
+					<Counter className="bg-prime-green-200" />
 				</div>
 				<div className="itemc-center flex justify-between"></div>
 				<div className="itemc-center flex justify-between"></div>

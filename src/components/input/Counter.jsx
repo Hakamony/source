@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-function Counter(props) {
+function Counter({ ...props }) {
 	const [num, setNum] = useState(0);
 
 	const handlePlus = () => {
@@ -14,11 +15,13 @@ function Counter(props) {
 			setNum((p) => p - 1);
 		}
 	};
-	let styling =
-		'mx-2 flex h-12 items-center rounded-lg border-2 border-solid border-prime-dark';
-	styling += ' ' + props.className;
 	return (
-		<div className={styling}>
+		<div
+			className={twMerge(
+				'mx-2 flex h-12 items-center rounded-lg border-2 border-solid border-prime-dark',
+				props.className,
+			)}
+		>
 			<button
 				type="button"
 				onClick={handlePlus}
