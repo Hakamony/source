@@ -8,7 +8,7 @@ export default function AddPlayer(props) {
 	}
 	return (
 		<form
-			className="fixed bottom-20 mx-2 flex h-fit flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
+			className="fixed bottom-20 right-2 flex h-fit w-[95vw] flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
 			style={{ display: props.active ? 'flex' : 'none' }}
 		>
 			<div>
@@ -20,48 +20,52 @@ export default function AddPlayer(props) {
 					الفئة العمرية
 				</h3>
 				<div className="flex items-center justify-center gap-2">
-					<input
-						type="radio"
-						id="young"
-						name="ageGroup"
-						value="1"
-						className="hidden"
-						required
-					/>
-					<label
-						for="young"
-						className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
-					>
-						صغار
-					</label>
-					<br />
-					<input
-						type="radio"
-						id="youth"
-						name="ageGroup"
-						value="2"
-						className="hidden"
-					/>
-					<label
-						for="youth"
-						className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
-					>
-						شباب
-					</label>
-					<br />
-					<input
-						type="radio"
-						id="adult"
-						name="ageGroup"
-						value="3"
-						className="hidden"
-					/>
-					<label
-						for="adult"
-						className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
-					>
-						كبار
-					</label>
+					<div className="flex-1">
+						<input
+							type="radio"
+							id="young"
+							name="ageGroup"
+							value="1"
+							className="hidden"
+							required
+						/>
+						<label
+							for="young"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
+						>
+							صغار
+						</label>
+					</div>
+					<div className="flex-1">
+						<input
+							type="radio"
+							id="youth"
+							name="ageGroup"
+							value="2"
+							className="hidden"
+						/>
+						<label
+							for="youth"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
+						>
+							شباب
+						</label>
+					</div>
+					<div className="flex-1">
+						<input
+							type="radio"
+							id="adult"
+							name="ageGroup"
+							value="3"
+							className="hidden"
+						/>
+						<label
+							for="adult"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
+						>
+							كبار
+						</label>
+					</div>
 				</div>
 			</div>
 			<div>
