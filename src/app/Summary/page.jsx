@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function UploadPlayers() {
+export default function Summary() {
 	return (
 		<main>
 			<h1>This is the select event page.</h1>
