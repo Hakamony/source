@@ -54,6 +54,13 @@ const teams = [
         players: [55, 9, 17, 99, 68, 11],
         teamRating: '3.6',
         numberOfPlayers: 6
+    },
+    {
+        id: 5,
+        name: 'Team 5',
+        players: [55, 9, 17, 99, 68, 11, 13, 22, 14],
+        teamRating: '3.2',
+        numberOfPlayers: 9
     }
 ];
 

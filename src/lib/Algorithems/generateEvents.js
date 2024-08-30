@@ -34,7 +34,7 @@ function generateEvent(eventName, sport, scoreType, fieldsNumber, playersNumber,
         id: eventId,
         name: eventName,
         "start-time": eventStartTime.toISOString().slice(0, 16).replace('T', ' '),
-        "end-time": new Date(eventStartTime.getTime() + matchIds.length * matchDuration * 60000).toISOString().slice(0, 16).replace('T', ' '),
+        "end-time": new Date(eventStartTime.getTime() + matchIds.length * matchDuration * 600).toISOString().slice(0, 16).replace('T', ' '),
         sport: sport,
         "score-type": scoreType,
         "fields-number": fieldsNumber,
@@ -48,7 +48,7 @@ function generateEvent(eventName, sport, scoreType, fieldsNumber, playersNumber,
         status: 0 // Not started
     };
 
-    return event.id; // Return the event ID
+    return event; // Return the event object
 }
 
 // Example usage
@@ -60,6 +60,18 @@ const matchDetails = [
 
 const matchIds = [13, 19, 24];
 
-const eventId = generateEvent("Summer League", "Soccer", "points", 2, 30, 5, 800, "league", matchIds, matchDetails);
-console.log(eventId); 
+const event = generateEvent(
+    "Summer League", 
+    "Soccer", 
+    "points", 
+    2, 
+    30, 
+    5, 
+    800, 
+    "league", 
+    matchIds, 
+    matchDetails
+);
+
+console.log(event);
 
