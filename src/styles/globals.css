@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	body {
+		@apply bg-prime-white text-prime-dark;
+	}
+
+	option {
+		@apply text-center text-lg font-bold;
+	}
+}
+
+@layer components {
+	.btn-base {
+		@apply rounded-lg bg-prime-green-200 px-8 py-2;
+	}
+
+	.btn-disabled {
+		@apply bg-prime-green-100;
+	}
+}
