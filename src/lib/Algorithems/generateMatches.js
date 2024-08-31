@@ -1,8 +1,11 @@
 import teamStorage from "../storage/teamStorage";
 import matchStorage from "../storage/matchStorage";
+import eventStorage from "../storage/eventStorage";
 
 function generateMatches() {
     const teams = teamStorage.getTeams();
+    const event = eventStorage.getEvent();
+    const fields = event["fields-number"];
     let matches = [];
     let matchId = 1;
 
@@ -37,7 +40,12 @@ function generateMatches() {
     matches.forEach(match => {
         matchStorage.addToMatchList(match.id)
     });
-}
+
+    for (let i = 0; i < fields; i++) {
+        
+        let id = matches[i].id;
+        matchStorage.updateMatch(id, {status: 1})
+    }
 
 // Example usage
 const teams = [
