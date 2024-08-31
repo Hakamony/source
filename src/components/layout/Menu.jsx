@@ -1,11 +1,5 @@
-import React from 'react';
+import { IoMenu } from 'react-icons/io5';
 
-const menu = () => {
-	return (
-		<div>
-			<p>Hello, world</p>
-		</div>
-	);
-};
-
-export default menu;
+export default function Menu() {
+	return <IoMenu className="text-6xl" />;
+}
