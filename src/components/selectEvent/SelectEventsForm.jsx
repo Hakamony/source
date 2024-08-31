@@ -1,25 +1,51 @@
 'use client';
 
-import { useState } from "react";
-import ButtonDev from "../layout/ButtonNav";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'
+import SubmitButton from '../layout/SubmitButton';
+import eventStorage from '@/lib/storage/eventStorage';
 
 export default function SelectEventsForm() {
-    const [form, setForm] = useState({
-        name: '',
-        sport: '',
-        'event-type':''
-    })
+	const [form, setForm] = useState({
+		name: '',
+		sport: '',
+		'event-type': '',
+	});
+
+    const router = useRouter()
+
+	function handleFormChange(e) {
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
+		});
+	}
+
+	function handleFormSubmit(e) {
+		e.preventDefault();
+		eventStorage.updateEvent(form);
+        router.push("/UploadPlayers")
+	}
 
 	return (
 		<form
 			action=""
 			className="mt-8 flex h-[80vh] flex-col items-center justify-center gap-16"
+			onSubmit={handleFormSubmit}
 		>
 			<div className="flex w-full flex-col items-center gap-4">
 				<label for="name" htmlFor="name" className="text-4xl font-bold">
 					اسم الفعالية
 				</label>
-				<input type="text" name="name" id="name" value={form.name} className="h-12 w-full" />
+				<input
+					type="text"
+					name="name"
+					id="name"
+					value={form.name}
+					className="h-12 w-full"
+					onChange={handleFormChange}
+					required
+				/>
 			</div>
 			<div className="flex w-full flex-col items-center gap-4">
 				<label for="sport" htmlFor="sport" className="text-4xl font-bold">
@@ -30,6 +56,8 @@ export default function SelectEventsForm() {
 					id="sport"
 					className="h-12 w-full bg-white text-center"
 					value={form.sport}
+					onChange={handleFormChange}
+					required
 				>
 					<option value="" disabled>
 						اختر
@@ -48,8 +76,9 @@ export default function SelectEventsForm() {
 					name="event-type"
 					id="type"
 					className="h-12 w-full bg-white text-center"
-                    value={form['event-type']}
-                    required 
+					value={form['event-type']}
+					required
+					onChange={handleFormChange}
 				>
 					<option value="" disabled>
 						اختر
@@ -66,9 +95,11 @@ export default function SelectEventsForm() {
 					</option>
 				</select>
 			</div>
-			<ButtonDev color="green-200" link="/UploadPlayers">
-				التالي
-			</ButtonDev>
+			<input
+				type="submit"
+				className="rounded-lg bg-prime-green-200 px-20 py-2 text-xl font-bold text-prime-white"
+				value="التالي"
+			/>
 		</form>
 	);
 }
