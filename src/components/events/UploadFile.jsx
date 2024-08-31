@@ -1,5 +1,6 @@
 'use client';
 
+import playerStorage from '@/lib/storage/playerStorage';
 import { useState } from 'react';
 import { CiSquareCheck } from 'react-icons/ci';
 
@@ -9,14 +10,23 @@ export default function UploadFile(props) {
 		setFile(() => e.target.files[0]);
 	}
 	function handleFileSubmit(e) {
-		e.preventDefault();
+		if(file.name.split('.').pop().toLowerCase() === 'json'){
+			const reader = new FileReader();
+			reader.readAsText(file)
+			reader.onload = () =>{
+				playerStorage.importPlayers(JSON.parse(reader.result))
+			}
+		}
+		else{
+			throw new Error("Invalid file type")
+		}
 	}
 	return (
 		<form className="my-8 text-center" id="uploadPlayers">
-			<div className="my-8 text-center">
+			<div className="my-8 flex w-full text-center">
 				<label
 					htmlFor="file"
-					className="cursor-pointer rounded-lg bg-prime-orange px-20 py-2 text-xl font-bold text-prime-white"
+					className="flex-1 cursor-pointer rounded-lg bg-prime-orange py-2 text-xl font-bold text-prime-white"
 				>
 					تحميل الملف (صيغة <span dir="ltr">.json</span>)
 				</label>

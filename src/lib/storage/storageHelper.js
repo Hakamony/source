@@ -1,20 +1,19 @@
 const getDefaultEvent = () =>{
 	return {
-		id: 'someID',
-		name: 'noName',
-		'start-time': 'noTime',
-		'end-time': 'noTime',
-		sport: 'noName',
-		'score-type': 'noType',
-		'fields-number': -1,
-		'players-number': -1,
-		'max-team-player': -1,
-		'total-cost': -1,
-		'teams-number': -1,
-		'matches-number': -1,
+		name: '',
+		'start-time': '',
+		'end-time': '',
+		sport: '',
+		'score-type': '',
+		'fields-number': 0,
+		'players-number': 0,
+		'max-team-player': 0,
+		'total-cost': 0,
+		'teams-number': 0,
+		'matches-number': 0,
 		teams: [],
-		'event-type': 'noType',
-		status: -1, // 0: not started, 1: on going, 2: done
+		'event-type': '',
+		status: 0, // 0: not started, 1: on going, 2: done
 	};
 }
 

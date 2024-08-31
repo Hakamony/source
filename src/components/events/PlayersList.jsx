@@ -1,34 +1,57 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { FaStar } from 'react-icons/fa';
 import AddPlayer from './AddPlayer';
+import playerStorage from '@/lib/storage/playerStorage';
 
 export default function PlayersList() {
-	const playersList = [
-		{ id: '1', name: 'folan folany', Rating: 4, 'Age-Group': 3 },
-		{ id: '2', name: 'folan this', Rating: 4, 'Age-Group': 2 },
-		{ id: '3', name: 'folan mesh', Rating: 2, 'Age-Group': 3 },
-		{ id: '4', name: 'folan hala', Rating: 5, 'Age-Group': 2 },
-		{ id: '5', name: 'folan you', Rating: 3, 'Age-Group': 1 },
-		{ id: '6', name: 'folan folany', Rating: 4, 'Age-Group': 3 },
-		{ id: '7', name: 'folan this', Rating: 4, 'Age-Group': 2 },
-		{ id: '8', name: 'folan mesh', Rating: 2, 'Age-Group': 3 },
-		{ id: '9', name: 'folan hala', Rating: 5, 'Age-Group': 2 },
-		{ id: '10', name: 'folan you', Rating: 3, 'Age-Group': 1 },
-	];
-
 	const [showForm, setShowForm] = useState(false);
+	const [players, setPlayers] = useState([]);
+	const [form, setForm] = useState({
+		name: '',
+		Rating: '',
+		'Age-Group': 1,
+	});
+
+	useEffect(() => {
+		setPlayers(playerStorage.getPlayers());
+	}, []);
+
 	function handleForm() {
 		setShowForm((prev) => !prev);
+	}
+
+	const handleDelete = (id) => {
+		playerStorage.removePlayer(id);
+		setPlayers(playerStorage.getPlayers());
+	};
+
+	const handleUpdate = (name, Rating, ageGroup) => {
+		setForm({
+			name,
+			Rating,
+			'Age-Group': ageGroup,
+		});
+		setShowForm(prev=>!prev)
+	};
+	function stars(num) {
+		const stars = [];
+		for (let i = 0; i < num; i++) {
+			stars.push(<FaStar key={i} className="text-xl text-prime-yellow" />);
+		}
+		for (let i = num; i < 5; i++) {
+			stars.push(<FaStar key={i} className="text-xl" />);
+		}
+		return stars;
 	}
 
 	return (
 		<section className="mt-8">
 			<h2 className="text-center text-4xl font-bold">قائمة اللاعبين المضافة</h2>
 			<ul className="divide-y divide-y-2 divide-solid">
-				{playersList.map((player) => {
+				{players.map((player) => {
 					return (
 						<li
 							key={player.id}
@@ -36,17 +59,24 @@ export default function PlayersList() {
 						>
 							<div className="flex flex-1 flex-col items-start justify-between text-2xl font-bold">
 								<div>{player.name}</div>
-								<div className="flex items-center gap-2">
-									<FaStar /> <FaStar /> <FaStar /> <FaStar />
-								</div>
+								<div className="flex items-center gap-2">{stars(player.Rating)}</div>
 							</div>
 							<div className="flex flex-none gap-2">
-								<button type="button" className="rounded-md bg-prime-yellow px-8 py-1">
+								<button
+									type="button"
+									className="rounded-md bg-prime-yellow px-8 py-1"
+									onClick={() => {
+										handleUpdate(player.name, player.Rating, player['Age-Group']);
+									}}
+								>
 									تعديل
 								</button>
 								<button
 									type="button"
 									className="rounded-md bg-red-500 px-8 py-1 text-prime-white"
+									onClick={() => {
+										handleDelete(player.id);
+									}}
 								>
 									حذف
 								</button>
@@ -55,7 +85,14 @@ export default function PlayersList() {
 					);
 				})}
 			</ul>
-			<AddPlayer active={showForm} />
+			<AddPlayer
+				active={showForm}
+				setPlayers={setPlayers}
+				setShowForm={setShowForm}
+				form={form}
+				setForm={setForm}
+				players={players}
+			/>
 			<button type="button" onClick={handleForm}>
 				<FaCirclePlus
 					className="fixed bottom-4 right-4 text-6xl text-prime-green-200 duration-200 data-[active=true]:rotate-45"
