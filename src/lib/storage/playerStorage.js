@@ -83,7 +83,7 @@ const removePlayer = (id) => {
 };
 
 const clearPlayers = () => {
-	window.localStorage.setItem('players', []);
+	window.localStorage.setItem('players', JSON.stringify([]));
 };
 
 const importPlayers = (data) => {

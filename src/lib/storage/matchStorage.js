@@ -125,7 +125,10 @@ const saveMatchList = (matchList) =>{
 }
 
 const addToMatchList = (matchId) =>{
-    const matchList = getMatchesList()
+    let matchList = getMatchesList()
+	if(!matchList){
+		matchList = []
+	}
     matchList.push(matchId)
     saveMatchList(matchList)
 }
@@ -142,7 +145,7 @@ const clearMatches = () =>{
 }
 
 const clearMatchList = () =>{
-	window.localStorage.setItem('matchList', []);
+	window.localStorage.setItem('matchList', JSON.stringify([]));
 }
 
 const matchStorage = {
