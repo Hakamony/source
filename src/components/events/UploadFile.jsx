@@ -1,5 +1,6 @@
 'use client';
 
+import playerStorage from '@/lib/storage/playerStorage';
 import { useState } from 'react';
 import { CiSquareCheck } from 'react-icons/ci';
 
@@ -9,7 +10,16 @@ export default function UploadFile(props) {
 		setFile(() => e.target.files[0]);
 	}
 	function handleFileSubmit(e) {
-		e.preventDefault();
+		if(file.name.split('.').pop().toLowerCase() === 'json'){
+			const reader = new FileReader();
+			reader.readAsText(file)
+			reader.onload = () =>{
+				playerStorage.importPlayers(JSON.parse(reader.result))
+			}
+		}
+		else{
+			throw new Error("Invalid file type")
+		}
 	}
 	return (
 		<form className="my-8 text-center" id="uploadPlayers">

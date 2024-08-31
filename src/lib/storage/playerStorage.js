@@ -7,7 +7,7 @@ const isValidPlayer = (data) => {
 		Rating: 'number',
 		'Age-Group': 'number',
 	};
-	helper.validFields(requiredFields, data)
+	helper.validFields(requiredFields, data);
 
 	if (data.Rating < 0 || data.Rating > 5) {
 		throw new Error(`Rating out of boundary`);
@@ -52,8 +52,8 @@ const addPlayer = (player) => {
 	player.id = helper.generateID();
 	isValidPlayer(player);
 	let players = getPlayers();
-	if(!players){
-		players = []
+	if (!players) {
+		players = [];
 	}
 	players.unshift(player);
 	savePlayersNoValidation(players);
@@ -62,8 +62,8 @@ const addPlayer = (player) => {
 const updatePlayer = (id, data) => {
 	/**
 	 * updates the player with provided id in local storage
-     * you should only provide the fields you want to change in data
-     * for example if you want to change the name call updatePlayer(id, {name:"newName"})
+	 * you should only provide the fields you want to change in data
+	 * for example if you want to change the name call updatePlayer(id, {name:"newName"})
 	 */
 	const oldPlayer = getPlayer(id);
 	const newPlayer = { ...oldPlayer, ...data };
@@ -82,9 +82,21 @@ const removePlayer = (id) => {
 	savePlayersNoValidation(newPlayers);
 };
 
-const clearPlayers = () =>{
+const clearPlayers = () => {
 	window.localStorage.setItem('players', []);
-}
+};
+
+const importPlayers = (data) => {
+	/**
+	 * data should be of type json
+	 */
+
+	const players = data.map((player) => {
+		delete player.id;
+		return player;
+	});
+	savePlayers(players)
+};
 
 const playerStorage = {
 	getPlayer,
@@ -94,6 +106,7 @@ const playerStorage = {
 	updatePlayer,
 	removePlayer,
 	clearPlayers,
+	importPlayers,
 };
 
 export default playerStorage;
