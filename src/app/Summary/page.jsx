@@ -1,5 +1,6 @@
 import { FaStar } from 'react-icons/fa';
 import EventsNav from '@/components/events/EventsNav';
+import ButtonNav from '@/components/layout/ButtonNav';
 
 export default function Summary() {
 	const dummyEvent = {
@@ -142,15 +143,77 @@ export default function Summary() {
 		// 	Rating: 3,
 		// },
 	];
+	const dummyMatch = [
+		{
+			id: 24,
+			number: 3,
+			teams: {
+				first: 24,
+				second: 46,
+			},
+			scores: {
+				first: 24,
+				second: 18,
+			},
+			'start-time': '18:45',
+			'end-time': '20:45',
+			status: 1, // 0: not started, 1: on going, 2: done
+		},
+		{
+			id: 25,
+			number: 2,
+			teams: {
+				first: 24,
+				second: 46,
+			},
+			scores: {
+				first: 24,
+				second: 18,
+			},
+			'start-time': '18:45',
+			'end-time': '20:45',
+			status: 1, // 0: not started, 1: on going, 2: done
+		},
+		{
+			id: 26,
+			number: 1,
+			teams: {
+				first: 24,
+				second: 46,
+			},
+			scores: {
+				first: 24,
+				second: 18,
+			},
+			'start-time': '18:45',
+			'end-time': '20:45',
+			status: 0, // 0: not started, 1: on going, 2: done
+		},
+		{
+			id: 27,
+			number: 5,
+			teams: {
+				first: 24,
+				second: 46,
+			},
+			scores: {
+				first: 24,
+				second: 18,
+			},
+			'start-time': '18:45',
+			'end-time': '20:45',
+			status: 0, // 0: not started, 1: on going, 2: done
+		},
+	];
 	function stars(num) {
-		const stars = [];
+		const starArr = [];
 		for (let i = 0; i < num; i++) {
-			stars.push(<FaStar key={i} className="text-prime-yellow" />);
+			starArr.push(<FaStar key={i} className="text-prime-yellow" />);
 		}
 		for (let i = num; i < 5; i++) {
-			stars.push(<FaStar key={i} />);
+			starArr.push(<FaStar key={i} />);
 		}
-		return stars;
+		return starArr;
 	}
 	return (
 		<main className="px-4 py-12 text-center">
@@ -216,6 +279,45 @@ export default function Summary() {
 						);
 					})}
 				</div>
+			</section>
+			<section className="my-12">
+				<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
+				<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll">
+					{dummyMatch.map((match, i) => {
+						return (
+							<div
+								className="w-full shrink-0 rounded-lg border-2 border-prime-orange p-4 shadow-lg"
+								key={match.id}
+							>
+								<h3 className="t mb-8 text-4xl font-bold text-prime-orange">
+									مباراة رقم {i + 1}
+								</h3>
+								<div className="flex flex-col gap-4 text-xl font-bold">
+									<p className="flex justify-between">
+										<span>{dummyTeams[0].name}</span>
+										<span>V.S</span>
+										<span>{dummyTeams[1].name}</span>
+									</p>
+									{/* <p>ملعب: </p> */}
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</section>
+			<section className="my-12 flex flex-col gap-4 font-bold">
+				<ButtonNav color="yellow" link="/">
+					تعديل جدول المباريات
+				</ButtonNav>
+				<ButtonNav color="yellow" link="/">
+					تعديل الفرق
+				</ButtonNav>
+				<ButtonNav color="yellow" link="/">
+					تعديل الفعالية
+				</ButtonNav>
+				<ButtonNav color="green-200" link="/">
+					بدء الفاعلية
+				</ButtonNav>
 			</section>
 		</main>
 	);
