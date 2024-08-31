@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import hakamImg from '../../public/assets/hakamDraft.png';
 import Button from '@/components/layout/ButtonNav';
-import Storage from '@/components/Storage';
 
 export default function Home() {
 
@@ -10,7 +9,6 @@ export default function Home() {
 			<section>
 				<Image src={hakamImg} alt="Picture of the author" width={300} />
 			</section>
-			<Storage />
 			<section className="flex flex-col gap-4 text-center">
 				<Button link="/SelectEvent" color="orange">
 					ابدأ الفاعلية
