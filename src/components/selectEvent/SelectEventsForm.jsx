@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
-import SubmitButton from '../layout/SubmitButton';
 import eventStorage from '@/lib/storage/eventStorage';
+import storageHelper from '@/lib/storage/storageHelper';
 
 export default function SelectEventsForm() {
 	const [form, setForm] = useState({
@@ -23,6 +23,7 @@ export default function SelectEventsForm() {
 
 	function handleFormSubmit(e) {
 		e.preventDefault();
+		storageHelper.localStorageConfig()
 		eventStorage.updateEvent(form);
         router.push("/UploadPlayers")
 	}
