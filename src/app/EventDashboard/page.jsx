@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import Menu from '@/components/layout/Menu';
+import MatchPopUp from '@/components/events/MatchPopUp';
 
 export default function UploadPlayers() {
 	const dummyEvent = {
@@ -130,6 +134,15 @@ export default function UploadPlayers() {
 			'number-of-players': 6,
 		},
 	];
+	const [showPopup, setShowPopup] = useState(false);
+	const [matchId, setMatchId] = useState(null);
+
+	function handlePopup(e) {
+		setShowPopup((prev) => !prev);
+		if (e.target.id === 'match-card') {
+			setMatchId(() => e.target.dataset.matchId);
+		}
+	}
 	return (
 		<main className="px-4 py-12">
 			<nav className="flex items-center justify-between">
@@ -156,6 +169,9 @@ export default function UploadPlayers() {
 								<button
 									type="button"
 									className="rounded-lg bg-prime-green-200 px-12 py-1 text-xl font-bold text-prime-white"
+									onClick={handlePopup}
+									data-match-id={dummyMatch[0].number}
+									id="match-card"
 								>
 									انهاء
 								</button>
@@ -170,6 +186,11 @@ export default function UploadPlayers() {
 					);
 				})}
 			</section>
+			<MatchPopUp
+				show={showPopup}
+				handlePopup={(e) => handlePopup(e)}
+				matchId={matchId}
+			/>
 		</main>
 	);
 }
