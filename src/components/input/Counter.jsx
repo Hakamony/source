@@ -6,8 +6,9 @@ import { twMerge } from 'tailwind-merge';
 function Counter({ ...props }) {
 	const [num, setNum] = useState(0);
 
-	const handlePlus = () => {
+	const handlePlus = (e) => {
 		setNum((p) => p + 1);
+		props.handleFormChange(e);
 	};
 
 	const handleMinus = () => {
@@ -21,6 +22,7 @@ function Counter({ ...props }) {
 				type="button"
 				onClick={handlePlus}
 				className="rounded-r-lg text-center text-4xl font-bold text-prime-dark"
+				name="max-team-player"
 			>
 				+
 			</button>
@@ -31,6 +33,7 @@ function Counter({ ...props }) {
 				type="button"
 				onClick={handleMinus}
 				className="items-center rounded-l-lg text-center text-4xl font-bold text-prime-dark"
+				name="max-team-player"
 			>
 				-
 			</button>
