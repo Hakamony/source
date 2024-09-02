@@ -1,6 +1,12 @@
+'use client';
+
 import { FaStar } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 import EventsNav from '@/components/events/EventsNav';
 import ButtonNav from '@/components/layout/ButtonNav';
+import eventStorage from '@/lib/storage/eventStorage';
+import teamStorage from '@/lib/storage/teamStorage';
+import matchStorage from '@/lib/storage/matchStorage';
 
 export default function Summary() {
 	const dummyEvent = {
@@ -205,6 +211,19 @@ export default function Summary() {
 			status: 0, // 0: not started, 1: on going, 2: done
 		},
 	];
+
+	const [event, setEvent] = useState({});
+	const [teams, setTeams] = useState([]);
+	const [mathces, setMathces] = useState([]);
+
+	useEffect(() => {
+		setEvent(() => eventStorage.getEvent());
+		setTeams(() => teamStorage.getTeams());
+		setMathces(() =>
+			matchStorage.getMatchesList().map((id) => matchStorage.getMatch(id)),
+		);
+	}, []);
+
 	function stars(num) {
 		const starArr = [];
 		for (let i = 0; i < num; i++) {
@@ -223,27 +242,27 @@ export default function Summary() {
 				<ul className="text-start">
 					<li>
 						<h2 className="text-2xl font-bold">
-							اسم الفعالية: <span>{dummyEvent.name}</span>
+							اسم الفعالية: <span>{event.name}</span>
 						</h2>
 					</li>
 					<li>
 						<h2 className="text-2xl font-bold">
-							الرياضة: <span>{dummyEvent.sport}</span>
+							الرياضة: <span>{event.sport}</span>
 						</h2>
 					</li>
 					<li>
 						<h2 className="text-2xl font-bold">
-							نظام التقييم: <span>{dummyEvent['score-type']}</span>
+							نظام التقييم: <span>{event['score-type']}</span>
 						</h2>
 					</li>
 					<li>
 						<h2 className="text-2xl font-bold">
-							عدد اللاعبين: <span>{dummyEvent['players-number']}</span>
+							عدد اللاعبين: <span>{event['players-number']}</span>
 						</h2>
 					</li>
 					<li>
 						<h2 className="text-2xl font-bold">
-							عدد الفرق: <span>{dummyEvent['teams-number']}</span>
+							عدد الفرق: <span>{event['teams-number']}</span>
 						</h2>
 					</li>
 				</ul>
@@ -251,7 +270,7 @@ export default function Summary() {
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">توزيع الفرق</h1>
 				<div className="flex items-center gap-8 overflow-x-scroll">
-					{dummyTeams.map((team) => {
+					{teams.map((team) => {
 						return (
 							<div
 								className="shrink-0 rounded-lg border-2 border-prime-orange p-4 shadow-lg"
@@ -283,7 +302,7 @@ export default function Summary() {
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
 				<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll">
-					{dummyMatch.map((match, i) => {
+					{mathces.map((match, i) => {
 						return (
 							<div
 								className="w-full shrink-0 rounded-lg border-2 border-prime-orange p-4 shadow-lg"
