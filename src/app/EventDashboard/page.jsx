@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Menu from '@/components/layout/Menu';
 import MatchPopUp from '@/components/events/MatchPopUp';
 
-export default function UploadPlayers() {
+export default function EventDashboard() {
 	const dummyEvent = {
 		id: 26473,
 		name: 'event1',
@@ -154,7 +154,7 @@ export default function UploadPlayers() {
 					return (
 						<div
 							className="rounded-lg border-2 border-prime-orange p-4 text-center shadow-lg"
-							key={dummyEvent['fields-number'][i]}
+							key={dummyMatch[i].id}
 						>
 							<h3 className="text-6xl font-bold text-prime-orange">ملعب {i + 1}</h3>
 							<div className="mt-4 flex flex-col gap-4 text-xl font-bold">
@@ -170,7 +170,7 @@ export default function UploadPlayers() {
 									type="button"
 									className="rounded-lg bg-prime-green-200 px-12 py-1 text-xl font-bold text-prime-white"
 									onClick={handlePopup}
-									data-match-id={dummyMatch[0].number}
+									data-match-id={dummyMatch[i].number}
 									id="match-card"
 								>
 									انهاء
