@@ -7,6 +7,7 @@ import ButtonNav from '@/components/layout/ButtonNav';
 import eventStorage from '@/lib/storage/eventStorage';
 import teamStorage from '@/lib/storage/teamStorage';
 import matchStorage from '@/lib/storage/matchStorage';
+import playerStorage from '@/lib/storage/playerStorage';
 
 export default function Summary() {
 	const dummyEvent = {
@@ -281,12 +282,13 @@ export default function Summary() {
 										{team.name}
 									</h3>
 									<div className="flex items-center gap-2">
-										{stars(team['team-rating'])}
+										{stars(Math.floor(team['team-rating']))}
 										<span>. {team['number-of-players']} لاعبين</span>
 									</div>
 								</div>
 								<ul className="flex h-48 w-full list-inside list-decimal flex-col flex-wrap content-start gap-4 gap-x-12">
-									{dummyPlayers.map((player) => {
+									{team.players.map((id) => {
+										const player = playerStorage.getPlayer(id);
 										return (
 											<li key={player.id} className="text-start text-xl font-bold">
 												{player.name}
@@ -303,6 +305,9 @@ export default function Summary() {
 				<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
 				<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll">
 					{mathces.map((match, i) => {
+						const team1 = teamStorage.getTeam(match.teams.first);
+						const team2 = teamStorage.getTeam(match.teams.second);
+
 						return (
 							<div
 								className="w-full shrink-0 rounded-lg border-2 border-prime-orange p-4 shadow-lg"
@@ -313,9 +318,9 @@ export default function Summary() {
 								</h3>
 								<div className="flex flex-col gap-4 text-xl font-bold">
 									<p className="flex justify-between">
-										<span>{dummyTeams[0].name}</span>
+										<span>{team1.name}</span>
 										<span>V.S</span>
-										<span>{dummyTeams[1].name}</span>
+										<span>{team2.name}</span>
 									</p>
 									{/* <p>ملعب: </p> */}
 								</div>
@@ -325,15 +330,25 @@ export default function Summary() {
 				</div>
 			</section>
 			<section className="my-12 flex flex-col gap-4 font-bold">
-				<ButtonNav color="yellow" link="/">
+				<button
+					type="button"
+					color="yellow"
+					link="/"
+					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
+				>
 					تعديل جدول المباريات
-				</ButtonNav>
-				<ButtonNav color="yellow" link="/">
+				</button>
+				<button
+					type="button"
+					color="yellow"
+					link="/"
+					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
+				>
 					تعديل الفرق
-				</ButtonNav>
-				<ButtonNav color="yellow" link="/">
+				</button>
+				{/* <ButtonNav color="yellow" link="/">
 					تعديل الفعالية
-				</ButtonNav>
+				</ButtonNav> */}
 				<ButtonNav color="green-200" link="/">
 					بدء الفاعلية
 				</ButtonNav>

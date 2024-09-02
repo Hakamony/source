@@ -43,7 +43,7 @@ function generateMatches() {
 	});
 
 	for (let i = 0; i < fields; i++) {
-		let id = matches[i].id;
+		const id = matches[i].id;
 		matchStorage.updateMatch(id, { status: 1 });
 	}
 }

@@ -1,4 +1,4 @@
-const getDefaultEvent = () =>{
+const getDefaultEvent = () => {
 	return {
 		name: '',
 		'start-time': '',
@@ -15,7 +15,7 @@ const getDefaultEvent = () =>{
 		'event-type': '',
 		status: 0, // 0: not started, 1: on going, 2: done
 	};
-}
+};
 
 const localStorageConfig = () => {
 	/**
@@ -24,8 +24,8 @@ const localStorageConfig = () => {
 	const players = [];
 	const teams = [];
 	const event = getDefaultEvent();
-	const matches = []
-	const matchList = []
+	const matches = [];
+	const matchList = [];
 	window.localStorage.setItem('players', JSON.stringify(players));
 	window.localStorage.setItem('teams', JSON.stringify(teams));
 	window.localStorage.setItem('currentEvent', JSON.stringify(event));
@@ -44,8 +44,8 @@ const validFields = (requiredFields, data) => {
 	/**
 	 * check if all the required fields are in the data
 	 * and check each for rquired data types of the fields
-	 * 
-	 * requiredFields should have the form 
+	 *
+	 * requiredFields should have the form
 	 * {
 	 * 	field: field type,
 	 * 	field: field type,
@@ -53,17 +53,17 @@ const validFields = (requiredFields, data) => {
 	 */
 	const fieldsKeys = Object.keys(requiredFields);
 	const dataKeys = Object.keys(data);
-	if(dataKeys.length !== fieldsKeys.length){
-		throw new Error("Invalid data: missing or extra fields")
+	if (dataKeys.length !== fieldsKeys.length) {
+		throw new Error('Invalid data: missing or extra fields');
 	}
-	for (const field of fieldsKeys) {
+	fieldsKeys.forEach((field) => {
 		if (!dataKeys.includes(field)) {
 			throw new Error(`${field} not found`);
 		}
 		if (typeof data[field] !== requiredFields[field]) {
 			throw new Error(`${field} have invalid type`);
 		}
-	}
+	});
 };
 
 const validIdList = (idList) => {
@@ -79,7 +79,7 @@ const storageHelper = {
 	generateID,
 	validFields,
 	validIdList,
-	getDefaultEvent
+	getDefaultEvent,
 };
 
 export default storageHelper;

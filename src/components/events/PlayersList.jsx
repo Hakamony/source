@@ -34,17 +34,17 @@ export default function PlayersList() {
 			Rating,
 			'Age-Group': ageGroup,
 		});
-		setShowForm(prev=>!prev)
+		setShowForm((prev) => !prev);
 	};
 	function stars(num) {
-		const stars = [];
+		const starsList = [];
 		for (let i = 0; i < num; i++) {
-			stars.push(<FaStar key={i} className="text-xl text-prime-yellow" />);
+			starsList.push(<FaStar key={i} className="text-xl text-prime-yellow" />);
 		}
 		for (let i = num; i < 5; i++) {
-			stars.push(<FaStar key={i} className="text-xl" />);
+			starsList.push(<FaStar key={i} className="text-xl" />);
 		}
-		return stars;
+		return starsList;
 	}
 
 	return (

@@ -22,9 +22,9 @@ const isValidMatch = (data) => {
 	storageHelper.validFields(teamsFields, data.teams);
 	storageHelper.validFields(scoresFields, data.scores);
 
-    if(data.status < 0 || data.status >2){
-        throw new Error('status out of boundary');
-    }
+	if (data.status < 0 || data.status > 2) {
+		throw new Error('status out of boundary');
+	}
 };
 
 const getMatches = () => {
@@ -62,8 +62,8 @@ const addMatch = (match) => {
 	match.id = storageHelper.generateID();
 	isValidMatch(match);
 	let matches = getMatches();
-	if(!matches){
-		matches = []
+	if (!matches) {
+		matches = [];
 	}
 	matches.unshift(match);
 	saveMatchesNoValidation(matches);
@@ -87,84 +87,84 @@ const removeMatch = (id) => {
 	saveMatchesNoValidation(newMatches);
 };
 
-const setMatchFirstTeam = (matchID, teamID) =>{
-    const match = getMatch(matchID)
-    match.teams = {...match.teams, first:teamID}
-    updateMatch(matchID, match)
-}
+const setMatchFirstTeam = (matchID, teamID) => {
+	const match = getMatch(matchID);
+	match.teams = { ...match.teams, first: teamID };
+	updateMatch(matchID, match);
+};
 
-const setMatchSecondTeam = (matchID, teamID) =>{
-    const match = getMatch(matchID)
-    match.teams = {...match.teams, second:teamID}
-    updateMatch(matchID, match)
-}
+const setMatchSecondTeam = (matchID, teamID) => {
+	const match = getMatch(matchID);
+	match.teams = { ...match.teams, second: teamID };
+	updateMatch(matchID, match);
+};
 
-const setMatchFirstTeamScore = (matchID, score) =>{
-    const match = getMatch(matchID)
-    match.scores = {...match.scores, first:score}
-    updateMatch(matchID, match)
-}
+const setMatchFirstTeamScore = (matchID, score) => {
+	const match = getMatch(matchID);
+	match.scores = { ...match.scores, first: score };
+	updateMatch(matchID, match);
+};
 
-const setMatchSecondTeamScore = (matchID, score) =>{
-    const match = getMatch(matchID)
-    match.scores = {...match.scores, second:score}
-    updateMatch(matchID, match)
-}
+const setMatchSecondTeamScore = (matchID, score) => {
+	const match = getMatch(matchID);
+	match.scores = { ...match.scores, second: score };
+	updateMatch(matchID, match);
+};
 
 const getMatchesList = () => {
 	return JSON.parse(window.localStorage.getItem('matchList'));
 };
 
-const saveMatchListNoValidation = (matchList) =>{
-    window.localStorage.setItem('matchList', JSON.stringify(matchList));
-}
+const saveMatchListNoValidation = (matchList) => {
+	window.localStorage.setItem('matchList', JSON.stringify(matchList));
+};
 
-const saveMatchList = (matchList) =>{
-    storageHelper.validIdList(matchList)
-    saveMatchListNoValidation(matchList)
-}
+const saveMatchList = (matchList) => {
+	storageHelper.validIdList(matchList);
+	saveMatchListNoValidation(matchList);
+};
 
-const addToMatchList = (matchId) =>{
-    let matchList = getMatchesList()
-	if(!matchList){
-		matchList = []
+const addToMatchList = (matchId) => {
+	let matchList = getMatchesList();
+	if (!matchList) {
+		matchList = [];
 	}
-    matchList.push(matchId)
-    saveMatchList(matchList)
-}
+	matchList.push(matchId);
+	saveMatchList(matchList);
+};
 
-const moveMatch = (matchID, place) =>{
-    let matchList = getMatchesList()
-    matchList = matchList.filter((id) => id !== matchID)
-    matchList.splice(place, 0, matchID)
-    saveMatchList(matchList)
-}
+const moveMatch = (matchID, place) => {
+	let matchList = getMatchesList();
+	matchList = matchList.filter((id) => id !== matchID);
+	matchList.splice(place, 0, matchID);
+	saveMatchList(matchList);
+};
 
-const clearMatches = () =>{
+const clearMatches = () => {
 	window.localStorage.setItem('matches', []);
-}
+};
 
-const clearMatchList = () =>{
+const clearMatchList = () => {
 	window.localStorage.setItem('matchList', JSON.stringify([]));
-}
+};
 
 const matchStorage = {
-    getMatch,
-    getMatches,
-    addMatch,
-    saveMatches,
-    updateMatch,
-    removeMatch,
-    setMatchFirstTeam,
-    setMatchSecondTeam,
-    setMatchFirstTeamScore,
-    setMatchSecondTeamScore,
-    getMatchesList,
-    saveMatchList,
-    addToMatchList,
-    moveMatch,
+	getMatch,
+	getMatches,
+	addMatch,
+	saveMatches,
+	updateMatch,
+	removeMatch,
+	setMatchFirstTeam,
+	setMatchSecondTeam,
+	setMatchFirstTeamScore,
+	setMatchSecondTeamScore,
+	getMatchesList,
+	saveMatchList,
+	addToMatchList,
+	moveMatch,
 	clearMatchList,
-	clearMatches
-}
+	clearMatches,
+};
 
-export default matchStorage
+export default matchStorage;
