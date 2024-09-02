@@ -6,6 +6,8 @@ import EventsNav from '@/components/events/EventsNav';
 // import Counter from '@/components/input/Counter';
 // import ButtonNav from '@/components/layout/ButtonNav';
 import eventStorage from '@/lib/storage/eventStorage';
+import generateTeams from '@/lib/Algorithems/generateTeams';
+import generateMatches from '@/lib/Algorithems/generateMatches';
 
 export default function UploadPlayers() {
 	const [form, setForm] = useState({
@@ -35,6 +37,8 @@ export default function UploadPlayers() {
 	function handleFormSubmit(e) {
 		e.preventDefault();
 		eventStorage.updateEvent(form);
+		generateTeams.generateTeamsByMaxPlayers(form['max-team-player']);
+		generateMatches();
 		router.push('/Summary');
 	}
 
