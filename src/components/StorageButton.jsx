@@ -21,9 +21,9 @@ export default function StorageButton() {
 			'event-type': 'league',
 			status: 0, // 0: not started, 1: on going, 2: done
 		});
-        pastEventStorage.clearPastEvents()
-        pastEventStorage.saveCurrentEventToPastEvents()
-        eventStorage.saveEvent({
+		pastEventStorage.clearPastEvents();
+		pastEventStorage.saveCurrentEventToPastEvents();
+		eventStorage.saveEvent({
 			name: 'event 2',
 			'start-time': 'fadfad',
 			'end-time': 'gadfgadg',
@@ -39,9 +39,13 @@ export default function StorageButton() {
 			'event-type': 'league',
 			status: 0, // 0: not started, 1: on going, 2: done
 		});
-        pastEventStorage.saveCurrentEventToPastEvents()
-        console.log(pastEventStorage.getPastEvents())
+		pastEventStorage.saveCurrentEventToPastEvents();
+		console.log(pastEventStorage.getPastEvents());
 	};
 
-	return <button onClick={handleButton}>run</button>;
+	return (
+		<button onClick={handleButton} type="button">
+			run
+		</button>
+	);
 }
