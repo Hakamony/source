@@ -8,214 +8,13 @@ import eventStorage from '@/lib/storage/eventStorage';
 import teamStorage from '@/lib/storage/teamStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import playerStorage from '@/lib/storage/playerStorage';
+import EditPlayers from '@/components/events/EditPlayers';
 
 export default function Summary() {
-	const dummyEvent = {
-		name: 'event1',
-		'start-time': '8:30',
-		'end-time': '10:45',
-		sport: 'football',
-		'score-type': 'points',
-		'fields-number': '2',
-		'players-number': '40',
-		'max-team-player': '6',
-		'total-cost': '700',
-		'teams-number': '5',
-		'matches-number': '5',
-		teams: typeof [],
-		'event-type': 'league',
-		status: '0',
-	};
-	const dummyTeams = [
-		{
-			id: 2334,
-			name: 'فريق القادحين',
-			players: [24, 35, 68, 14],
-			'match-played': {
-				won: 2,
-				tie: 0,
-				lose: 1,
-			},
-			'team-rating': 4.1,
-			'number-of-players': 6,
-		},
-		{
-			id: 2335,
-			name: 'فريق الرهيبين',
-			players: [24, 35, 68, 14],
-			'match-played': {
-				won: 2,
-				tie: 0,
-				lose: 1,
-			},
-			'team-rating': 4.1,
-			'number-of-players': 6,
-		},
-		{
-			id: 2336,
-			name: 'اساطير الشورما',
-			players: [24, 35, 68, 14],
-			'match-played': {
-				won: 2,
-				tie: 0,
-				lose: 1,
-			},
-			'team-rating': 4.1,
-			'number-of-players': 6,
-		},
-		{
-			id: 2337,
-			name: 'تيم الرهيبين',
-			players: [24, 35, 68, 14],
-			'match-played': {
-				won: 2,
-				tie: 0,
-				lose: 1,
-			},
-			'team-rating': 4.1,
-			'number-of-players': 6,
-		},
-	];
-	const dummyPlayers = [
-		{
-			id: 34,
-			name: 'محمد م',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		{
-			id: 35,
-			name: 'احمد خ',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		{
-			id: 36,
-			name: 'معاذ ز',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		{
-			id: 37,
-			name: 'محمد ج',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		{
-			id: 38,
-			name: 'فلان الفلاني',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		{
-			id: 39,
-			name: 'هيلب هي',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		{
-			id: 40,
-			name: 'بليز اي شي',
-			'Age-Group': 3,
-			Rating: 3,
-		},
-		// {
-		// 	id: 41,
-		// 	name: 'folan',
-		// 	'Age-Group': 3,
-		// 	Rating: 3,
-		// },
-		// {
-		// 	id: 42,
-		// 	name: 'folan',
-		// 	'Age-Group': 3,
-		// 	Rating: 3,
-		// },
-		// {
-		// 	id: 43,
-		// 	name: 'folan',
-		// 	'Age-Group': 3,
-		// 	Rating: 3,
-		// },
-		// {
-		// 	id: 44,
-		// 	name: 'folan',
-		// 	'Age-Group': 3,
-		// 	Rating: 3,
-		// },
-		// {
-		// 	id: 45,
-		// 	name: 'folan',
-		// 	'Age-Group': 3,
-		// 	Rating: 3,
-		// },
-	];
-	const dummyMatch = [
-		{
-			id: 24,
-			number: 3,
-			teams: {
-				first: 24,
-				second: 46,
-			},
-			scores: {
-				first: 24,
-				second: 18,
-			},
-			'start-time': '18:45',
-			'end-time': '20:45',
-			status: 1, // 0: not started, 1: on going, 2: done
-		},
-		{
-			id: 25,
-			number: 2,
-			teams: {
-				first: 24,
-				second: 46,
-			},
-			scores: {
-				first: 24,
-				second: 18,
-			},
-			'start-time': '18:45',
-			'end-time': '20:45',
-			status: 1, // 0: not started, 1: on going, 2: done
-		},
-		{
-			id: 26,
-			number: 1,
-			teams: {
-				first: 24,
-				second: 46,
-			},
-			scores: {
-				first: 24,
-				second: 18,
-			},
-			'start-time': '18:45',
-			'end-time': '20:45',
-			status: 0, // 0: not started, 1: on going, 2: done
-		},
-		{
-			id: 27,
-			number: 5,
-			teams: {
-				first: 24,
-				second: 46,
-			},
-			scores: {
-				first: 24,
-				second: 18,
-			},
-			'start-time': '18:45',
-			'end-time': '20:45',
-			status: 0, // 0: not started, 1: on going, 2: done
-		},
-	];
-
 	const [event, setEvent] = useState({});
 	const [teams, setTeams] = useState([]);
 	const [mathces, setMathces] = useState([]);
+	const [showEdit, setShowEdit] = useState(false);
 
 	useEffect(() => {
 		setEvent(() => eventStorage.getEvent());
@@ -234,6 +33,10 @@ export default function Summary() {
 			starArr.push(<FaStar key={i} />);
 		}
 		return starArr;
+	}
+
+	function handleEditPlayers() {
+		setShowEdit((prev) => !prev);
 	}
 	return (
 		<main className="px-4 py-12 text-center">
@@ -343,16 +146,21 @@ export default function Summary() {
 					color="yellow"
 					link="/"
 					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
+					onClick={handleEditPlayers}
 				>
 					تعديل الفرق
 				</button>
 				{/* <ButtonNav color="yellow" link="/">
 					تعديل الفعالية
 				</ButtonNav> */}
-				<ButtonNav color="green-200" link="/">
+				{/* <ButtonNav color="yellow" link="/UploadPlayers">
+					تعديل اللاعبين
+				</ButtonNav> */}
+				<ButtonNav color="green-200" link="/EventDashboard">
 					بدء الفاعلية
 				</ButtonNav>
 			</section>
+			<EditPlayers active={showEdit} teams={teams} />
 		</main>
 	);
 }
