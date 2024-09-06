@@ -35,18 +35,18 @@ export default function TeamsList({ ...props }) {
 						<option
 							key={team.id}
 							value={team.id}
-							disabled={props.fromTeam === team.id ? 'true' : 'false'}
+							disabled={props.fromTeam === team.id}
 						>
 							{team.name}
 						</option>
 					);
 				})}
-				<input
-					type="submit"
-					value="نقل"
-					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
-				/>
 			</select>
+			<input
+				type="submit"
+				value="نقل"
+				className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
+			/>
 		</form>
 	);
 }
