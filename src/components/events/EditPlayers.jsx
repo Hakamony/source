@@ -18,7 +18,15 @@ export default function EditPlayers({ ...props }) {
 	// function handleShowTeam(e) {
 	// 	console.log(e.target.children);
 	// }
-	function handleUpdate(id, teamTo) {}
+	function handleUpdate(id, fromTeam) {
+		setShowEdit((prev) => !prev);
+		setUpdateTeam({
+			...updateTeam,
+			id,
+			fromTeam,
+			toTeam: fromTeam,
+		})
+	}
 	return (
 		<div
 			style={{ display: props.active ? 'flex' : 'none' }}
@@ -67,11 +75,13 @@ export default function EditPlayers({ ...props }) {
 					);
 				})}
 			</ul>
+			<button onClick={() => {props.setActive(prev => !prev)}}>اغلاق</button>
 			<TeamsList
-				fromTeam={updateTeam.fromTeam}
-				setToTeam={setUpdateTeam}
+				updateTeam = {updateTeam}
+				setUpdateTeam={setUpdateTeam}
 				active={showEdit}
 				setShowEdit={setShowEdit}
+				setTeams={props.setTeams}
 			/>
 		</div>
 	);

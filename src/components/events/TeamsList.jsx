@@ -4,18 +4,24 @@ import { useState } from 'react';
 import teamStorage from '@/lib/storage/teamStorage';
 
 export default function TeamsList({ ...props }) {
-	const [newTeam, setNewTeam] = useState(0);
+	
 	function handleChange(e) {
-		setNewTeam(() => e.target.value);
+		props.setUpdateTeam({
+			...props.updateTeam,
+			toTeam: e.target.value
+		});
 	}
 	function handleSubmit(e) {
 		e.preventDefault();
-		props.setToTeam((prev) => {
-			return {
-				...prev,
-				toTeam: newTeam,
-			};
-		});
+		// props.setToTeam((prev) => {
+		// 	return {
+		// 		...prev,
+		// 		toTeam: newTeam,
+		// 	};
+		// });
+		teamStorage.removePlayerFromTeam(props.updateTeam.id, props.updateTeam.fromTeam)
+		teamStorage.addPlayerToTeam(props.updateTeam.id, props.updateTeam.toTeam)
+		props.setTeams(teamStorage.getTeams())
 		props.setShowEdit((prev) => !prev);
 	}
 	return (
@@ -27,7 +33,7 @@ export default function TeamsList({ ...props }) {
 			<select
 				name="change-team"
 				id="change-team"
-				value={newTeam}
+				value={props.updateTeam.toTeam}
 				onChange={handleChange}
 			>
 				{teamStorage.getTeams().map((team) => {
@@ -35,7 +41,7 @@ export default function TeamsList({ ...props }) {
 						<option
 							key={team.id}
 							value={team.id}
-							disabled={props.fromTeam === team.id}
+							disabled={props.updateTeam.fromTeam === team.id}
 						>
 							{team.name}
 						</option>

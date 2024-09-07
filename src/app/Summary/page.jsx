@@ -160,7 +160,7 @@ export default function Summary() {
 					بدء الفاعلية
 				</ButtonNav>
 			</section>
-			<EditPlayers active={showEdit} teams={teams} />
+			<EditPlayers active={showEdit} teams={teams} setActive={setShowEdit} setTeams={setTeams}/>
 		</main>
 	);
 }
