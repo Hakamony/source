@@ -3,25 +3,10 @@
 import { useState } from 'react';
 import Menu from '@/components/layout/Menu';
 import MatchPopUp from '@/components/events/MatchPopUp';
+import eventStorage from '@/lib/storage/eventStorage';
 
 export default function EventDashboard() {
-	const dummyEvent = {
-		id: 26473,
-		name: 'event1',
-		'start-time': '13-7-2024 18:45',
-		'end-time': '13-7-2024 21:45',
-		sport: 'Volley Ball',
-		'score-type': 'points',
-		'fields-number': 3,
-		'players-number': 35,
-		'max-team-player': 6,
-		'total-coast': 600,
-		'teams-number': 5,
-		'matches-number': 15,
-		teams: [2334, 3583, 9830, 2234, 7384],
-		'event-type': 'league',
-		status: 2, // 0: not started, 1: on going, 2: done
-	};
+	const event = eventStorage.getEvent()
 	const dummyMatch = [
 		{
 			id: 24,
@@ -146,11 +131,11 @@ export default function EventDashboard() {
 	return (
 		<main className="px-4 py-12">
 			<nav className="flex items-center justify-between">
-				<h1 className="text-4xl font-bold">{dummyEvent.name}</h1>
+				<h1 className="text-4xl font-bold">{event.name}</h1>
 				<Menu />
 			</nav>
 			<section className="my-12 flex flex-col gap-8">
-				{Array.from({ length: dummyEvent['fields-number'] }, (_, i) => {
+				{Array.from({ length: event['fields-number'] }, (_, i) => {
 					return (
 						<div
 							className="rounded-lg border-2 border-prime-orange p-4 text-center shadow-lg"
