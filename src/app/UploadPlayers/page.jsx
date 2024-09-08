@@ -2,6 +2,7 @@ import UploadFile from '@/components/events/UploadFile';
 import EventsNav from '@/components/events/EventsNav';
 import PlayersList from '@/components/events/PlayersList';
 import ButtonDev from '@/components/layout/ButtonNav';
+import ExportPlayersButton from '@/components/input/ExportPlayersButton';
 
 export default function UploadPlayers() {
 	return (
@@ -9,6 +10,7 @@ export default function UploadPlayers() {
 			<EventsNav active={2} />
 			<section className="mt-8">
 				<h2 className="text-center text-4xl font-bold">تحميل ملف اللاعبين</h2>
+				<ExportPlayersButton />
 				<UploadFile />
 				<hr className="text-4xl text-black" />
 			</section>
