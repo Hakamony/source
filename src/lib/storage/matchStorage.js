@@ -181,6 +181,7 @@ const matchStorage = {
 	moveMatch,
 	clearMatchList,
 	clearMatches,
+	getNextMatch,
 };
 
 export default matchStorage;
