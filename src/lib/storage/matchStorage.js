@@ -140,6 +140,22 @@ const moveMatch = (matchID, place) => {
 	saveMatchList(matchList);
 };
 
+const getNextMatch = () => {
+	/**
+	 * returns next unActive match; if no match is upcoming returns -1
+	 */
+	const matchList = getMatchesList();
+	for (let i = 0; i < matchList.length; i++) {
+		const match = getMatch(matchList[i]);
+		if (match.status === 0) {
+			match.status = 1;
+			updateMatch(match.id, { status: 1 });
+			return match;
+		}
+	}
+	return -1;
+};
+
 const clearMatches = () => {
 	window.localStorage.setItem('matches', []);
 };
