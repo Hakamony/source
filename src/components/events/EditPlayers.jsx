@@ -12,12 +12,6 @@ export default function EditPlayers({ ...props }) {
 		toTeam: 0,
 	});
 	const [showEdit, setShowEdit] = useState(false);
-	function handleEditPlayers() {
-		setShowEdit((prev) => !prev);
-	}
-	// function handleShowTeam(e) {
-	// 	console.log(e.target.children);
-	// }
 	function handleUpdate(id, fromTeam) {
 		setShowEdit((prev) => !prev);
 		setUpdateTeam({
@@ -25,12 +19,12 @@ export default function EditPlayers({ ...props }) {
 			id,
 			fromTeam,
 			toTeam: fromTeam,
-		})
+		});
 	}
 	return (
 		<div
 			style={{ display: props.active ? 'flex' : 'none' }}
-			className="fixed inset-x-2 inset-y-12 flex flex-col gap-8 overflow-y-scroll rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
+			className="fixed inset-x-2 top-12 flex h-fit flex-col gap-8 overflow-y-scroll rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
 		>
 			<h2 className="text-4xl font-bold">تعديل الفرق</h2>
 			<ul className="flex flex-col gap-4">
@@ -75,9 +69,17 @@ export default function EditPlayers({ ...props }) {
 					);
 				})}
 			</ul>
-			<button onClick={() => {props.setActive(prev => !prev)}}>اغلاق</button>
+			<button
+				onClick={() => {
+					props.setActive((prev) => !prev);
+				}}
+				type="button"
+				className="rounded-lg bg-red-700 px-20 py-2 text-xl font-bold text-prime-white"
+			>
+				اغلاق
+			</button>
 			<TeamsList
-				updateTeam = {updateTeam}
+				updateTeam={updateTeam}
 				setUpdateTeam={setUpdateTeam}
 				active={showEdit}
 				setShowEdit={setShowEdit}

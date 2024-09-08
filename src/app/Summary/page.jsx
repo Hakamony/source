@@ -9,17 +9,19 @@ import teamStorage from '@/lib/storage/teamStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import playerStorage from '@/lib/storage/playerStorage';
 import EditPlayers from '@/components/events/EditPlayers';
+import EditMatches from '@/components/events/EditMatches';
 
 export default function Summary() {
 	const [event, setEvent] = useState({});
 	const [teams, setTeams] = useState([]);
-	const [mathces, setMathces] = useState([]);
+	const [matches, setMatches] = useState([]);
 	const [showEdit, setShowEdit] = useState(false);
+	const [showEditMatches, setShowEditMatches] = useState(false);
 
 	useEffect(() => {
 		setEvent(() => eventStorage.getEvent());
 		setTeams(() => teamStorage.getTeams());
-		setMathces(() =>
+		setMatches(() =>
 			matchStorage.getMatchesList().map((id) => matchStorage.getMatch(id)),
 		);
 	}, []);
@@ -42,13 +44,8 @@ export default function Summary() {
 		<main className="px-4 py-12 text-center">
 			<EventsNav active={4} />
 			<section className="my-12">
-				<h1 className="mb-8 text-4xl font-bold">ملخص الفعالية</h1>
-				<ul className="text-start">
-					<li>
-						<h2 className="text-2xl font-bold">
-							اسم الفعالية: <span>{event.name}</span>
-						</h2>
-					</li>
+				<h1 className="mb-8 text-4xl font-bold">{event.name}</h1>
+				<ul className="text-center">
 					<li>
 						<h2 className="text-2xl font-bold">
 							الرياضة: <span>{event.sport}</span>
@@ -107,7 +104,7 @@ export default function Summary() {
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
 				<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll">
-					{mathces.map((match, i) => {
+					{matches.map((match, i) => {
 						const team1 = teamStorage.getTeam(match.teams.first);
 						const team2 = teamStorage.getTeam(match.teams.second);
 
@@ -138,6 +135,7 @@ export default function Summary() {
 					color="yellow"
 					link="/"
 					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
+					onClick={() => setShowEditMatches((prev) => !prev)}
 				>
 					تعديل جدول المباريات
 				</button>
@@ -160,7 +158,18 @@ export default function Summary() {
 					بدء الفاعلية
 				</ButtonNav>
 			</section>
-			<EditPlayers active={showEdit} teams={teams} setActive={setShowEdit} setTeams={setTeams}/>
+			<EditPlayers
+				active={showEdit}
+				teams={teams}
+				setActive={setShowEdit}
+				setTeams={setTeams}
+			/>
+			<EditMatches
+				active={showEditMatches}
+				setShowEditMatches={setShowEditMatches}
+				mathces={matches}
+				setMatches={setMatches}
+			/>
 		</main>
 	);
 }
