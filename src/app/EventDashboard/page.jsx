@@ -35,6 +35,7 @@ export default function EventDashboard() {
 		<main className="px-4 py-12">
 			<nav className="flex items-center justify-between">
 				<h1 className="text-4xl font-bold">{event.name}</h1>
+				<h1 className="text-4xl font-bold">{event.name}</h1>
 				<Menu />
 			</nav>
 			<section className="my-12 flex flex-col gap-8">
