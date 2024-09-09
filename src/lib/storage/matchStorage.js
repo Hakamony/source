@@ -142,17 +142,27 @@ const moveMatch = (matchID, place) => {
 
 const getNextMatch = () => {
 	/**
-	 * returns next unActive match; if no match is upcoming returns -1
+	 * returns next unActive match;
+	 * if no match is upcoming returns -1;
+	 * returns the next unActive match
 	 */
 	const matchList = getMatchesList();
+	const teamsPlaying = [];
 	for (let i = 0; i < matchList.length; i++) {
 		const match = getMatch(matchList[i]);
-		if (match.status === 0) {
-			match.status = 1;
-			updateMatch(match.id, { status: 1 });
-			return match;
+		if (match.status === 1) {
+			teamsPlaying.push(match.teams.first);
+			teamsPlaying.push(match.teams.second);
+		} else if (match.status === 0) {
+			if (
+				(!teamsPlaying.includes(match.teams.first) &&
+					!teamsPlaying.includes(match.teams.second)) ||
+				i === matchList.length - 1
+			)
+				return match;
 		}
 	}
+
 	return -1;
 };
 

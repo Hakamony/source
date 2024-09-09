@@ -1,4 +1,5 @@
 import helper from './storageHelper';
+import eventStorage from './eventStorage';
 
 const isValidPlayer = (data) => {
 	const requiredFields = {
@@ -32,6 +33,7 @@ const getPlayer = (id) => {
 
 const savePlayersNoValidation = (players) => {
 	window.localStorage.setItem('players', JSON.stringify(players));
+	eventStorage.updateEvent({ 'players-number': players.length });
 };
 
 const savePlayers = (players) => {
@@ -95,7 +97,7 @@ const importPlayers = (data) => {
 		delete player.id;
 		return player;
 	});
-	savePlayers(players)
+	savePlayers(players);
 };
 
 const playerStorage = {
