@@ -1,19 +1,42 @@
+import { useState } from 'react';
+import { FaUsers } from 'react-icons/fa';
 import teamStorage from '@/lib/storage/teamStorage';
 import matchStorage from '@/lib/storage/matchStorage';
+import PlayersPopUp from './PlayersPopUp';
 
 export default function FieldCard({ ...props }) {
+	const [showTeam, setShowTeam] = useState(false);
+	const [teamId, setTeamId] = useState();
 	const match = matchStorage.getMatch(props.matchId);
 	const firstTeam = teamStorage.getTeam(match.teams.first);
 	const secondTeam = teamStorage.getTeam(match.teams.second);
+	function handleShowTeam(team) {
+		setTeamId(() => team);
+		setShowTeam((prev) => !prev);
+	}
 
 	return (
 		<div className="rounded-lg border-2 border-prime-orange p-4 text-center shadow-lg">
 			<h3 className="text-6xl font-bold text-prime-orange">ملعب {props.i + 1}</h3>
 			<div className="mt-4 flex flex-col gap-4 text-xl font-bold">
-				<p className="flex justify-between">
-					<span>{firstTeam.name}</span>
+				<p className="flex items-center justify-between gap-4">
+					<button
+						type="button"
+						onClick={() => handleShowTeam(firstTeam)}
+						className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-prime-orange bg-white py-1"
+					>
+						{firstTeam.name}
+						<FaUsers />
+					</button>
 					<span>V.S</span>
-					<span>{secondTeam.name}</span>
+					<button
+						type="button"
+						onClick={() => handleShowTeam(secondTeam)}
+						className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-prime-orange bg-white py-1"
+					>
+						{secondTeam.name}
+						<FaUsers />
+					</button>
 				</p>
 				<p className="text-start">مباراة: {match.number} </p>
 			</div>
@@ -34,6 +57,9 @@ export default function FieldCard({ ...props }) {
 					تعديل
 				</button> */}
 			</div>
+			{teamId && (
+				<PlayersPopUp team={teamId} show={showTeam} setShowTeam={setShowTeam} />
+			)}
 		</div>
 	);
 }

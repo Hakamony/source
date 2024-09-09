@@ -6,6 +6,7 @@ import MatchPopUp from '@/components/events/MatchPopUp';
 import eventStorage from '@/lib/storage/eventStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import FieldCard from '@/components/events/FieldCard';
+import EndEventPopUp from '@/components/events/EndEventPopUp';
 
 export default function EventDashboard() {
 	const [event, setEvent] = useState({});
@@ -13,6 +14,7 @@ export default function EventDashboard() {
 	const [matchId, setMatchId] = useState(null);
 	const [currentMatches, setCurrentMatches] = useState([]);
 	const [matchesList, setMatchesList] = useState([]);
+	const [endEvent, setEndEvent] = useState(false);
 
 	useEffect(() => {
 		const currEvent = eventStorage.getEvent();
@@ -38,7 +40,7 @@ export default function EventDashboard() {
 		} else if (currentMatches.length !== 1) {
 			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
 		} else {
-			console.log('End event');
+			setEndEvent((prev) => !prev);
 		}
 	}
 
@@ -52,7 +54,7 @@ export default function EventDashboard() {
 		<main className="px-4 py-12">
 			<nav className="flex items-center justify-between">
 				<h1 className="text-4xl font-bold">{event.name}</h1>
-				<Menu />
+				{/* <Menu /> */}
 			</nav>
 			<section className="my-12 flex flex-col gap-8">
 				{currentMatches.map((match, i) => {
@@ -71,6 +73,7 @@ export default function EventDashboard() {
 				handlePopup={(e) => handlePopup(e)}
 				matchId={matchId}
 			/>
+			<EndEventPopUp show={endEvent} />
 		</main>
 	);
 }
