@@ -15,7 +15,7 @@ export default function UploadPlayers() {
 		'max-team-player': 0,
 		'fields-number': 0,
 		'event-type': '',
-		'total-cost': 0,
+		'total-cost': '',
 	});
 
 	const router = useRouter();
@@ -190,8 +190,8 @@ export default function UploadPlayers() {
 						id="total-cost"
 						required
 						className="h-10 w-1/2 bg-white text-center text-2xl font-bold"
-						placeholder="0"
 						onChange={handleFormChange}
+						placeholder="0"
 						value={form['total-cost']}
 					/>
 				</div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import eventStorage from '@/lib/storage/eventStorage';
 import storageHelper from '@/lib/storage/storageHelper';
 
@@ -12,7 +12,7 @@ export default function SelectEventsForm() {
 		'event-type': '',
 	});
 
-    const router = useRouter()
+	const router = useRouter();
 
 	function handleFormChange(e) {
 		setForm({
@@ -23,9 +23,9 @@ export default function SelectEventsForm() {
 
 	function handleFormSubmit(e) {
 		e.preventDefault();
-		storageHelper.localStorageConfig()
+		storageHelper.localStorageConfig();
 		eventStorage.updateEvent(form);
-        router.push("/UploadPlayers")
+		router.push('/UploadPlayers');
 	}
 
 	return (
@@ -43,7 +43,7 @@ export default function SelectEventsForm() {
 					name="name"
 					id="name"
 					value={form.name}
-					className="h-12 w-full"
+					className="h-12 w-full p-2 text-xl"
 					onChange={handleFormChange}
 					required
 				/>
@@ -55,7 +55,7 @@ export default function SelectEventsForm() {
 				<select
 					name="sport"
 					id="sport"
-					className="h-12 w-full bg-white text-center"
+					className="h-12 w-full bg-white p-2 text-center"
 					value={form.sport}
 					onChange={handleFormChange}
 					required
@@ -65,8 +65,12 @@ export default function SelectEventsForm() {
 					</option>
 					<option value="football">كرة قدم</option>
 					<option value="volyball">كرة طائرة</option>
-					<option value="pingpong">تنس طاولة</option>
-					<option value="padel">بادل</option>
+					<option value="pingpong" disabled>
+						تنس طاولة
+					</option>
+					<option value="padel" disabled>
+						بادل
+					</option>
 				</select>
 			</div>
 			<div className="flex w-full flex-col items-center gap-4">
@@ -84,7 +88,9 @@ export default function SelectEventsForm() {
 					<option value="" disabled>
 						اختر
 					</option>
-					<option value="league">دوري</option>
+					<option value="league" defaultChecked>
+						دوري
+					</option>
 					<option value="winner" disabled>
 						الفائز مستمر-قريباً-
 					</option>

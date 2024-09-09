@@ -12,11 +12,11 @@ export default function Home() {
 				<ButtonNav link="/SelectEvent" color="orange">
 					ابدأ الفاعلية
 				</ButtonNav>
-				<ButtonNav link="/PtrvEvents" color="green-200">
-					عرض الفاعليات
+				<ButtonNav link="/" color="dark">
+					عرض الفاعليات - قريبا -
 				</ButtonNav>
-				<ButtonNav link="/RandomGames" color="yellow">
-					العاب عشوائية
+				<ButtonNav link="/" color="dark">
+					العاب عشوائية - قريبا -
 				</ButtonNav>
 			</section>
 		</main>

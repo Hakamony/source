@@ -39,10 +39,10 @@ export default function PlayersList() {
 	function stars(num) {
 		const starsList = [];
 		for (let i = 0; i < num; i++) {
-			starsList.push(<FaStar key={i} className="text-xl text-prime-yellow" />);
+			starsList.push(<FaStar key={i} className="text-lg text-prime-yellow" />);
 		}
 		for (let i = num; i < 5; i++) {
-			starsList.push(<FaStar key={i} className="text-xl" />);
+			starsList.push(<FaStar key={i} className="text-lg" />);
 		}
 		return starsList;
 	}
@@ -57,23 +57,23 @@ export default function PlayersList() {
 							key={player.id}
 							className="mt-2 flex items-center justify-between py-4"
 						>
-							<div className="flex flex-1 flex-col items-start justify-between text-2xl font-bold">
+							<div className="flex flex-1 flex-col items-start justify-between text-xl font-bold">
 								<div>{player.name}</div>
 								<div className="flex items-center gap-2">{stars(player.Rating)}</div>
 							</div>
-							<div className="flex flex-none gap-2">
-								<button
+							<div className="flex w-1/2 flex-none gap-2">
+								{/* <button
 									type="button"
-									className="rounded-md bg-prime-yellow px-8 py-1"
+									className="flex-1 rounded-md bg-prime-yellow py-1"
 									onClick={() => {
 										handleUpdate(player.name, player.Rating, player['Age-Group']);
 									}}
 								>
 									تعديل
-								</button>
+								</button> */}
 								<button
 									type="button"
-									className="rounded-md bg-red-500 px-8 py-1 text-prime-white"
+									className="flex-1 rounded-md bg-red-500 py-1 text-prime-white"
 									onClick={() => {
 										handleDelete(player.id);
 									}}

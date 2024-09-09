@@ -42,18 +42,20 @@ export default function Summary() {
 	}
 	return (
 		<main className="px-4 py-12 text-center">
-			<EventsNav active={4} />(
+			<EventsNav active={4} />
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">{event.name}</h1>
 				<ul className="text-center">
 					<li>
 						<h2 className="text-2xl font-bold">
-							الرياضة: <span>{event.sport}</span>
+							الرياضة:{' '}
+							<span>{event.sport === 'football' ? 'كرة قدم' : 'كرة طائرة'}</span>
 						</h2>
 					</li>
 					<li>
 						<h2 className="text-2xl font-bold">
-							نظام التقييم: <span>{event['score-type']}</span>
+							نظام التقييم: نقاط
+							{/* <span>{event['score-type']}</span> */}
 						</h2>
 					</li>
 					<li>
@@ -63,12 +65,11 @@ export default function Summary() {
 					</li>
 					<li>
 						<h2 className="text-2xl font-bold">
-							عدد الفرق: <span>{event['teams-number']}</span>
+							عدد الفرق: <span>{teams.length}</span>
 						</h2>
 					</li>
 				</ul>
 			</section>
-			)
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">توزيع الفرق</h1>
 				<div className="flex items-center gap-8 overflow-x-scroll">
