@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
 import playerStorage from '@/lib/storage/playerStorage';
 
-export default function AddPlayer({form, setForm, active, setPlayers, setShowForm, players}) {
-
+export default function AddPlayer({
+	form,
+	setForm,
+	active,
+	setPlayers,
+	setShowForm,
+	players,
+}) {
 	function handleFormChange(e) {
 		setForm({
 			...form,
@@ -16,18 +22,19 @@ export default function AddPlayer({form, setForm, active, setPlayers, setShowFor
 	function handleNewPlayer(e) {
 		e.preventDefault();
 		playerStorage.addPlayer({
-			name:form.name,
-			Rating:Number(form.Rating),
-			'Age-Group':Number(form['Age-Group'])
-		})
-		setPlayers(playerStorage.getPlayers())
+			name: form.name,
+			Rating: Number(form.Rating),
+			'Age-Group': Number(form['Age-Group']),
+		});
+		setPlayers(playerStorage.getPlayers());
 		setForm({
-			name:'',
-			Rating:'',
-			"Age-Group": 1
-		})
-		setShowForm(prev=>!prev)
+			name: '',
+			Rating: '',
+			'Age-Group': 1,
+		});
+		setShowForm((prev) => !prev);
 	}
+
 	return (
 		<form
 			className="fixed bottom-20 right-2 flex h-fit w-[95vw] flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
@@ -40,7 +47,7 @@ export default function AddPlayer({form, setForm, active, setPlayers, setShowFor
 					type="text"
 					name="name"
 					id="name"
-					className="h-12 w-full"
+					className="h-12 w-full p-2"
 					value={form.name}
 					onChange={handleFormChange}
 					required
@@ -63,7 +70,7 @@ export default function AddPlayer({form, setForm, active, setPlayers, setShowFor
 						/>
 						<label
 							for="young"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
 						>
 							صغار
 						</label>
@@ -80,7 +87,7 @@ export default function AddPlayer({form, setForm, active, setPlayers, setShowFor
 						/>
 						<label
 							for="youth"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
 						>
 							شباب
 						</label>
@@ -97,7 +104,7 @@ export default function AddPlayer({form, setForm, active, setPlayers, setShowFor
 						/>
 						<label
 							for="adult"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white active:bg-prime-orange active:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
 						>
 							كبار
 						</label>
@@ -114,7 +121,9 @@ export default function AddPlayer({form, setForm, active, setPlayers, setShowFor
 					value={form.Rating}
 					required
 				>
-					<option value="" disabled>اختر</option>
+					<option value="" disabled>
+						اختر
+					</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>

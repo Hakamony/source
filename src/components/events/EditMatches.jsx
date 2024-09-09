@@ -28,9 +28,11 @@ export default function EditMatches({ ...props }) {
 	return (
 		<div
 			style={{ display: props.active ? 'flex' : 'none' }}
-			className="fixed inset-x-2 top-12 flex h-fit flex-col gap-8 overflow-y-scroll rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
+			className="fixed inset-x-2 bottom-12 top-12 flex h-fit flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
 		>
-			<ul className="flex flex-col gap-4">
+			<h2 className="text-2xl font-bold">تعديل قائمة المباريات</h2>
+
+			<ul className="flex max-h-[50vh] flex-col gap-4 overflow-y-scroll">
 				{props.mathces.map((match, i) => {
 					const team1 = teamStorage.getTeam(match.teams.first);
 					const team2 = teamStorage.getTeam(match.teams.second);
