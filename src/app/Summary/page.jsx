@@ -10,6 +10,7 @@ import matchStorage from '@/lib/storage/matchStorage';
 import playerStorage from '@/lib/storage/playerStorage';
 import EditPlayers from '@/components/events/EditPlayers';
 import EditMatches from '@/components/events/EditMatches';
+import StorageButton from '@/components/StorageButton';
 
 export default function Summary() {
 	const [event, setEvent] = useState({});
@@ -42,6 +43,7 @@ export default function Summary() {
 	}
 	return (
 		<main className="px-4 py-12 text-center">
+			{/* <StorageButton /> */}
 			<EventsNav active={4} />
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">{event.name}</h1>

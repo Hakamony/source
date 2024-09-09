@@ -148,19 +148,27 @@ const getNextMatch = () => {
 	 */
 	const matchList = getMatchesList();
 	const teamsPlaying = [];
+	const matches0 = [];
 	for (let i = 0; i < matchList.length; i++) {
 		const match = getMatch(matchList[i]);
 		if (match.status === 1) {
 			teamsPlaying.push(match.teams.first);
 			teamsPlaying.push(match.teams.second);
 		} else if (match.status === 0) {
-			if (
-				(!teamsPlaying.includes(match.teams.first) &&
-					!teamsPlaying.includes(match.teams.second)) ||
-				i === matchList.length - 1
-			)
-				return match;
+			matches0.push(match);
 		}
+	}
+
+	for (let i = 0; i < matches0.length; i++) {
+		const match = matches0[i];
+		if (
+			!(
+				teamsPlaying.includes(match.teams.first) ||
+				teamsPlaying.includes(match.teams.second)
+			) ||
+			i === matches0.length - 1
+		)
+			return match.id;
 	}
 
 	return -1;
