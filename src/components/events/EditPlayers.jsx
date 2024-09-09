@@ -1,3 +1,5 @@
+'use client';
+
 import { IoIosArrowDown } from 'react-icons/io';
 import { useState } from 'react';
 import playerStorage from '@/lib/storage/playerStorage';

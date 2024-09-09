@@ -42,7 +42,7 @@ export default function Summary() {
 	}
 	return (
 		<main className="px-4 py-12 text-center">
-			<EventsNav active={4} />
+			<EventsNav active={4} />(
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">{event.name}</h1>
 				<ul className="text-center">
@@ -68,6 +68,7 @@ export default function Summary() {
 					</li>
 				</ul>
 			</section>
+			)
 			<section className="my-12">
 				<h1 className="mb-8 text-4xl font-bold">توزيع الفرق</h1>
 				<div className="flex items-center gap-8 overflow-x-scroll">
@@ -158,18 +159,22 @@ export default function Summary() {
 					بدء الفاعلية
 				</ButtonNav>
 			</section>
-			<EditPlayers
-				active={showEdit}
-				teams={teams}
-				setActive={setShowEdit}
-				setTeams={setTeams}
-			/>
-			<EditMatches
-				active={showEditMatches}
-				setShowEditMatches={setShowEditMatches}
-				mathces={matches}
-				setMatches={setMatches}
-			/>
+			{showEdit && (
+				<EditPlayers
+					active={showEdit}
+					teams={teams}
+					setActive={setShowEdit}
+					setTeams={setTeams}
+				/>
+			)}
+			{showEditMatches && (
+				<EditMatches
+					active={showEditMatches}
+					setShowEditMatches={setShowEditMatches}
+					mathces={matches}
+					setMatches={setMatches}
+				/>
+			)}
 		</main>
 	);
 }
