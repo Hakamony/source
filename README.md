@@ -34,3 +34,81 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Objects organization
+
+```bash
+// player object
+{
+    "id": 34,
+    "name": "folan",
+    "Age-Group": 3,
+    "Rating": 3
+}
+
+// Team object
+{
+    "id": 2334,
+    "name": "f1",
+    "players": [24, 35, 68, 14],
+    "match-played": {
+        "won": 2,
+        "tie": 0,
+        "lose": 1
+    }
+}
+
+// Event object
+{
+    "id": 26473,
+    "name": "event1",
+    "start-time": "13-7-2024 18:45",
+    "end-time": "13-7-2024 21:45",
+    "sport": "Volley Ball",
+    "score-type": "points",
+    "fields-number": 2,
+    "players-number": 35,
+    "max-team-player": 6,
+    "total-coast": 600,
+    "teams-number": 5,
+    "matches-number": 15,
+    "teams": [2334, 3583, 9830, 2234, 7384],
+    "event-type": "league",
+    "status": 2 // 0: not started, 1: on going, 2: done
+}
+
+// Match object
+{
+    "id": 24,
+    "number": 3,
+    "teams": {
+        "first": 24,
+        "second": 46
+    },
+    "scores": {
+        "first": 24,
+        "second": 18
+    },
+    "start-time": "18:45",
+    "end-time": "20:45",
+    "status": 1 // 0: not started, 1: on going, 2: done
+}
+
+// matches list
+[24, 13, 22, 19, 16]
+
+//
+["out of the loop", "the wolf"]
+
+// algorithms
+
+// Ahmed
+1. generateTeams()
+2. generateEvent()tches().
+3. generateMatches()
+// Yousef
+4. importPlayers()
+5. exportPlayers()
+6. removePlayer()
+7. editPlayer()
+```

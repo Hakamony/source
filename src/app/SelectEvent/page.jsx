@@ -1,10 +1,11 @@
-import Link from 'next/link';
+import EventsNav from '@/components/events/EventsNav';
+import SelectEventsForm from '@/components/selectEvent/SelectEventsForm';
 
 export default function SelectEvent() {
 	return (
-		<main>
-			<h1>This is the select event page.</h1>
-			<Link href="/">Back Home</Link>
+		<main className="font-main px-4 py-12">
+			<EventsNav active={1} />
+			<SelectEventsForm />
 		</main>
 	);
 }
