@@ -28,7 +28,6 @@ function generateMatches() {
 			});
 		}
 	}
-	console.log(matches.length);
 	matchStorage.saveMatches(matches);
 	matches = matchStorage.getMatches();
 	// Shuffle matches to randomize the order
