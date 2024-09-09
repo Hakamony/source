@@ -1,3 +1,5 @@
+'use client';
+
 import { FaArrowUp } from 'react-icons/fa';
 import matchStorage from '@/lib/storage/matchStorage';
 import teamStorage from '@/lib/storage/teamStorage';
