@@ -156,7 +156,7 @@ export default function Summary() {
 				{/* <ButtonNav color="yellow" link="/UploadPlayers">
 					تعديل اللاعبين
 				</ButtonNav> */}
-				<ButtonNav color="green-200" link="/EventDashboard">
+				<ButtonNav color="bg-prime-green-200" link="/EventDashboard">
 					بدء الفاعلية
 				</ButtonNav>
 			</section>

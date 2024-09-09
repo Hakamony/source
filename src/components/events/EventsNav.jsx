@@ -10,7 +10,11 @@ export default function EventsNav({ ...props }) {
 				key={i}
 				className={twMerge(
 					'flex h-14 w-14 flex-col items-center justify-center rounded-full text-center text-2xl font-bold',
-					`bg-prime-${props.active === i + 1 ? 'yellow' : props.active > i + 1 ? 'green-200' : 'green-100'}`,
+					props.active === i + 1
+						? 'bg-prime-yellow'
+						: props.active > i + 1
+							? 'bg-prime-green-200'
+							: 'bg-prime-green-100',
 				)}
 			>
 				{i + 1}
