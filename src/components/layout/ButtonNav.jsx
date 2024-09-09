@@ -6,8 +6,8 @@ export default function ButtonNav({ children, ...props }) {
 		<button
 			type="button"
 			className={twMerge(
-				'rounded-lg px-20 py-2 text-xl font-bold text-prime-white',
-				`bg-prime-${props.color}`,
+				'rounded-lg bg-prime-white px-20 py-2 text-xl font-bold text-prime-white',
+				props.color,
 			)}
 		>
 			<Link href={props.link}>{children}</Link>

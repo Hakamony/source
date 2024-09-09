@@ -14,7 +14,7 @@ export default function UploadPlayers() {
 				<UploadFile />
 				<hr className="text-4xl font-bold text-black" />
 			</section>
-			<ButtonDev color="green-200" link="/GameSettings">
+			<ButtonDev color="bg-prime-green-200" link="/GameSettings">
 				التالي
 			</ButtonDev>
 			<PlayersList />

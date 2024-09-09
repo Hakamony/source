@@ -8,14 +8,14 @@ export default function Home() {
 			<section>
 				<Image src={hakamImg} alt="Picture of the author" width={300} />
 			</section>
-			<section className="flex flex-col gap-4 text-center">
-				<ButtonNav link="/SelectEvent" color="orange">
+			<section className="flex flex-col gap-4 overflow-y-scroll text-center">
+				<ButtonNav link="/SelectEvent" color="bg-prime-orange">
 					ابدأ الفاعلية
 				</ButtonNav>
-				<ButtonNav link="/" color="dark">
+				<ButtonNav link="/" color="bg-prime-dark">
 					عرض الفاعليات - قريبا -
 				</ButtonNav>
-				<ButtonNav link="/" color="dark">
+				<ButtonNav link="/" color="bg-prime-dark">
 					العاب عشوائية - قريبا -
 				</ButtonNav>
 			</section>
