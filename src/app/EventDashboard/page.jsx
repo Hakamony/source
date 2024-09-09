@@ -12,21 +12,34 @@ export default function EventDashboard() {
 	const [showPopup, setShowPopup] = useState(false);
 	const [matchId, setMatchId] = useState(null);
 	const [currentMatches, setCurrentMatches] = useState([]);
+	const [matchesList, setMatchesList] = useState([]);
 
 	useEffect(() => {
 		const currEvent = eventStorage.getEvent();
 		setEvent(() => currEvent);
-		const matchesList = matchStorage.getMatchesList();
+		const tmpList = matchStorage.getMatchesList();
+		setMatchesList(() => tmpList.slice(currEvent['fields-number']));
 		const mlist = [];
 		for (let i = 0; i < currEvent['fields-number']; i++) {
-			matchStorage.updateMatch(matchesList[i], { status: 1 });
-			mlist.push(matchesList[i]);
+			matchStorage.updateMatch(tmpList[i], { status: 1 });
+			mlist.push(tmpList[i]);
 		}
 		setCurrentMatches(() => mlist);
 	}, []);
 
-	function addNextMatch() {
-		if ()
+	function addNextMatch(id) {
+		if (matchesList.length !== 0) {
+			const newMatchId = matchesList[0];
+			matchStorage.updateMatch(id, { status: 2 });
+			matchStorage.updateMatch(newMatchId, { status: 1 });
+			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
+			setMatchesList((prev) => prev.slice(1));
+			setCurrentMatches((prev) => [...prev, newMatchId]);
+		} else if (currentMatches.length !== 1) {
+			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
+		} else {
+			console.log('End event');
+		}
 	}
 
 	function handlePopup(e) {
@@ -39,13 +52,19 @@ export default function EventDashboard() {
 		<main className="px-4 py-12">
 			<nav className="flex items-center justify-between">
 				<h1 className="text-4xl font-bold">{event.name}</h1>
-				<h1 className="text-4xl font-bold">{event.name}</h1>
 				<Menu />
 			</nav>
 			<section className="my-12 flex flex-col gap-8">
-				{Array.from({ length: event['fields-number'] }, (_, i) => (
-					<FieldCard key={i} i={i} match={currentMatches[i]} />
-				))}
+				{currentMatches.map((match, i) => {
+					return (
+						<FieldCard
+							key={match}
+							i={i}
+							matchId={match}
+							addNextMatch={(id) => addNextMatch(id)}
+						/>
+					);
+				})}
 			</section>
 			<MatchPopUp
 				show={showPopup}
