@@ -13,30 +13,26 @@ export default function EventDashboard() {
 	const [showPopup, setShowPopup] = useState(false);
 	const [matchId, setMatchId] = useState(null);
 	const [currentMatches, setCurrentMatches] = useState([]);
-	const [matchesList, setMatchesList] = useState([]);
 	const [endEvent, setEndEvent] = useState(false);
 
 	useEffect(() => {
 		const currEvent = eventStorage.getEvent();
+		const matchesList = matchStorage.getMatchesList();
 		setEvent(() => currEvent);
-		const tmpList = matchStorage.getMatchesList();
-		setMatchesList(() => tmpList.slice(currEvent['fields-number']));
-		const mlist = [];
+		const tmpList = [];
 		for (let i = 0; i < currEvent['fields-number']; i++) {
-			matchStorage.updateMatch(tmpList[i], { status: 1 });
-			mlist.push(tmpList[i]);
+			tmpList.push(matchesList[i]);
 		}
-		setCurrentMatches(() => mlist);
+		setCurrentMatches(() => tmpList);
 	}, []);
 
 	function addNextMatch(id) {
-		if (matchesList.length !== 0) {
-			const newMatchId = matchesList[0];
+		const newMatch = matchStorage.getNextMatch();
+		if (newMatch !== -1) {
 			matchStorage.updateMatch(id, { status: 2 });
-			matchStorage.updateMatch(newMatchId, { status: 1 });
+			matchStorage.updateMatch(newMatch, { status: 1 });
 			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
-			setMatchesList((prev) => prev.slice(1));
-			setCurrentMatches((prev) => [...prev, newMatchId]);
+			setCurrentMatches((prev) => [...prev, newMatch]);
 		} else if (currentMatches.length !== 1) {
 			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
 		} else {

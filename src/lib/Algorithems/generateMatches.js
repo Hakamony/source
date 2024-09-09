@@ -42,7 +42,7 @@ function generateMatches() {
 	});
 
 	for (let i = 0; i < fields; i++) {
-		const id = matches[i].id;
+		const id = matchStorage.getNextMatch();
 		matchStorage.updateMatch(id, { status: 1 });
 	}
 }
