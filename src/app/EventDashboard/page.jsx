@@ -25,6 +25,10 @@ export default function EventDashboard() {
 		setCurrentMatches(() => mlist);
 	}, []);
 
+	function addNextMatch() {
+		if ()
+	}
+
 	function handlePopup(e) {
 		setShowPopup((prev) => !prev);
 		if (e.target.id === 'match-card') {
