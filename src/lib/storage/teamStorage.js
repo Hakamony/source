@@ -36,8 +36,24 @@ const getTeam = (id) => {
 	return result;
 };
 
+const getTeamRating = (players) => {
+	if (players.length) {
+		const totalRating = players.reduce((sum, playerId) => {
+			const player = playerStorage.getPlayer(playerId);
+			return sum + player.Rating;
+		}, 0);
+		return totalRating / players.length;
+	}
+	return 0;
+};
+
 const saveTeamsNoValidation = (teams) => {
-	window.localStorage.setItem('teams', JSON.stringify(teams));
+	const newTeams = teams.map((team) =>{
+		team['team-rating'] = getTeamRating(team.players);
+		team['number-of-players'] = team.players.length;
+		return team;
+	})
+	window.localStorage.setItem('teams', JSON.stringify(newTeams));
 };
 
 const saveTeams = (teams) => {
@@ -103,18 +119,6 @@ const removePlayerFromTeam = (playerId, teamId) => {
 	updateTeam(teamId, team);
 };
 
-const getTeamRating = (teamId) => {
-	const team = getTeam(teamId);
-	if (team.players.length) {
-		const totalRating = team.players.reduce((sum, playerId) => {
-			const player = playerStorage.getPlayer(playerId);
-			return sum + player.Rating;
-		}, 0);
-		return totalRating / team.players.length;
-	}
-	return 0;
-};
-
 const addWinToTeam = (teamId) => {
 	const team = getTeam(teamId);
 	team['match-played'].won += 1;
@@ -146,7 +150,6 @@ const teamStorage = {
 	removeTeam,
 	addPlayerToTeam,
 	removePlayerFromTeam,
-	getTeamRating,
 	addWinToTeam,
 	addLoseToTeam,
 	addTieToTeam,
