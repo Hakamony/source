@@ -47,17 +47,18 @@ export default function AddPlayer({
 					type="text"
 					name="name"
 					id="name"
-					className="h-12 w-full p-2"
+					className="h-12 w-full rounded-lg p-2 drop-shadow-md"
+					placeholder="ادخل اسم اللاعب"
 					value={form.name}
 					onChange={handleFormChange}
 					required
 				/>
 			</div>
 			<div>
-				<h3 className="mb-4 text-2xl font-bold" for="playerName">
+				<h3 className="text-2xl font-bold" for="playerName">
 					الفئة العمرية
 				</h3>
-				<div className="flex items-center justify-center gap-2">
+				<div className="mt-6 flex items-center justify-center gap-2">
 					<div className="flex-1">
 						<input
 							type="radio"
@@ -70,7 +71,7 @@ export default function AddPlayer({
 						/>
 						<label
 							for="young"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
 						>
 							صغار
 						</label>
@@ -87,7 +88,7 @@ export default function AddPlayer({
 						/>
 						<label
 							for="youth"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
 						>
 							شباب
 						</label>
@@ -104,7 +105,7 @@ export default function AddPlayer({
 						/>
 						<label
 							for="adult"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 py-1.5 text-xl font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
 						>
 							كبار
 						</label>
@@ -116,7 +117,7 @@ export default function AddPlayer({
 				<select
 					name="Rating"
 					id="rating"
-					className="h-12 w-full bg-white text-center"
+					className="h-12 w-full rounded-lg bg-white p-2 text-center drop-shadow-md"
 					onChange={handleFormChange}
 					value={form.Rating}
 					required

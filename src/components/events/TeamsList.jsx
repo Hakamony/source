@@ -23,7 +23,7 @@ export default function TeamsList({ ...props }) {
 	return (
 		<form
 			style={{ display: props.active ? 'flex' : 'none' }}
-			className="fixed inset-x-2 top-[30%] flex flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-16"
+			className="fixed inset-x-2 top-[30%] flex flex-col gap-8 rounded-lg border-2 border-solid border-prime-orange bg-prime-white p-16"
 			onSubmit={handleSubmit}
 		>
 			<select
@@ -48,7 +48,7 @@ export default function TeamsList({ ...props }) {
 			<input
 				type="submit"
 				value="نقل"
-				className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
+				className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-dark"
 			/>
 			<button
 				type="button"

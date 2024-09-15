@@ -63,145 +63,152 @@ export default function UploadPlayers() {
 	};
 
 	return (
-		<main className="px-4 py-12">
+		<main className="px-2 py-12">
 			<EventsNav active={3} />
-			<form action="" className="flex flex-col gap-8" onSubmit={handleFormSubmit}>
-				<div className="flex items-center justify-between">
-					<label htmlFor="score-type" className="text-2xl font-bold">
-						نظام التقييم
-					</label>
-					<select
-						name="score-type"
-						id="score-type"
-						className="h-10 w-1/2 rounded-lg bg-white text-center"
-						required
-						onChange={handleFormChange}
-						value={form['score-type']}
-					>
-						<option value="" disabled>
-							اختر
-						</option>
-						<option value="points">نقاط</option>
-						<option value="points" disabled>
-							محدد بوقت
-						</option>
-					</select>
-				</div>
-				<div className="flex items-center justify-between gap-2">
-					<h3 className="mb-4 text-2xl font-bold">عدد لاعبين الفريق</h3>
-					{/* <Counter
+			<form
+				action=""
+				className="flex flex-col gap-6 rounded-lg bg-white p-4 drop-shadow-md"
+				onSubmit={handleFormSubmit}
+			>
+				<h2 className="text-center text-2xl font-bold">اعدادات الفاعلية</h2>
+				<div className="flex h-fit flex-col gap-6 divide-y">
+					<div className="flex items-center justify-between pt-6">
+						<label htmlFor="score-type" className="text-xl font-bold">
+							نظام التقييم
+						</label>
+						<select
+							name="score-type"
+							id="score-type"
+							className="h-10 w-1/2 rounded-lg bg-white text-center drop-shadow"
+							required
+							onChange={handleFormChange}
+							value={form['score-type']}
+						>
+							<option value="" disabled>
+								اختر
+							</option>
+							<option value="points">نقاط</option>
+							<option value="points" disabled>
+								محدد بوقت
+							</option>
+						</select>
+					</div>
+					<div className="flex items-center justify-between gap-2 pt-6">
+						<h3 className="text-xl font-bold">عدد لاعبين الفريق</h3>
+						{/* <Counter
 						className="h-10 w-1/2 bg-white pt-1 text-center"
 						onChange={(e) => handleFormChange(e)}
 						value={form['max-team-player']}
 					/> */}
-					<div className="flex w-1/2 items-center justify-around">
-						<button
-							type="button"
-							onClick={handlePlus}
-							className="w-1/4 rounded-r-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
-							name="max-team-player"
-						>
-							+
-						</button>
-						<input
-							type="number"
-							name="max-team-player"
-							id="max-team-player"
-							required
-							className="h-10 w-1/2 text-center text-4xl font-bold text-prime-dark"
-							placeholder="0"
-							onChange={handleFormChange}
-							value={form['max-team-player']}
-						/>
-						<button
-							type="button"
-							onClick={handleMinus}
-							className="w-1/4 items-center rounded-l-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
-							name="max-team-player"
-						>
-							-
-						</button>
+						<div className="flex w-1/2 items-center justify-around drop-shadow">
+							<button
+								type="button"
+								onClick={handlePlus}
+								className="w-1/4 rounded-r-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
+								name="max-team-player"
+							>
+								+
+							</button>
+							<input
+								type="number"
+								name="max-team-player"
+								id="max-team-player"
+								required
+								className="h-10 w-1/2 text-center text-4xl font-bold text-prime-dark"
+								placeholder="0"
+								onChange={handleFormChange}
+								value={form['max-team-player']}
+							/>
+							<button
+								type="button"
+								onClick={handleMinus}
+								className="w-1/4 items-center rounded-l-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
+								name="max-team-player"
+							>
+								-
+							</button>
+						</div>
 					</div>
-				</div>
-				<div className="flex items-center justify-between gap-2">
-					<h3 className="mb-4 text-2xl font-bold">عدد الملاعب</h3>
-					{/* <Counter
+					<div className="flex items-center justify-between gap-2 pt-6">
+						<h3 className="text-xl font-bold">عدد الملاعب</h3>
+						{/* <Counter
 						className="h-10 w-1/2 bg-white pt-1 text-center"
 						onChange={(e) => handleFormChange(e)}
 						value={form['fields-number']}
 					/> */}
-					<div className="flex w-1/2 items-center justify-around">
-						<button
-							type="button"
-							onClick={handlePlus}
-							className="w-1/4 rounded-r-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
-							name="fields-number"
+						<div className="flex w-1/2 items-center justify-around drop-shadow">
+							<button
+								type="button"
+								onClick={handlePlus}
+								className="w-1/4 rounded-r-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
+								name="fields-number"
+							>
+								+
+							</button>
+							<input
+								type="number"
+								name="fields-number"
+								id="fields-number"
+								required
+								className="h-10 w-1/2 text-center text-4xl font-bold text-prime-dark"
+								placeholder="0"
+								onChange={handleFormChange}
+								value={form['fields-number']}
+							/>
+							<button
+								type="button"
+								onClick={handleMinus}
+								className="w-1/4 items-center rounded-l-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
+								name="fields-number"
+							>
+								-
+							</button>
+						</div>
+					</div>
+					<div className="flex items-center justify-between pt-6">
+						<label htmlFor="score-type" className="text-xl font-bold">
+							نظام البطولة
+						</label>
+						<select
+							name="event-type"
+							id="type"
+							className="h-10 w-1/2 rounded-lg bg-white text-center drop-shadow"
+							value={form['event-type']}
+							required
+							onChange={handleFormChange}
 						>
-							+
-						</button>
+							<option value="" disabled>
+								اختر
+							</option>
+							<option value="league" defaultChecked>
+								دوري
+							</option>
+							<option value="winner" disabled>
+								الفائز مستمر-قريباً-
+							</option>
+							<option value="time" disabled>
+								مفتوحة -قريباً-
+							</option>
+							<option value="random" disabled>
+								تحديات عشوائية -قريبا-
+							</option>
+						</select>
+					</div>
+					<div className="itemc-center flex justify-between pt-6">
+						<label htmlFor="price" className="text-xl font-bold">
+							التكلفة الكلية
+						</label>
 						<input
 							type="number"
-							name="fields-number"
-							id="fields-number"
+							name="total-cost"
+							id="total-cost"
 							required
-							className="h-10 w-1/2 text-center text-4xl font-bold text-prime-dark"
-							placeholder="0"
+							className="h-10 w-1/2 rounded-lg bg-white text-center text-2xl font-bold drop-shadow"
 							onChange={handleFormChange}
-							value={form['fields-number']}
+							placeholder="0"
+							value={form['total-cost']}
 						/>
-						<button
-							type="button"
-							onClick={handleMinus}
-							className="w-1/4 items-center rounded-l-lg bg-white text-center text-4xl font-bold text-prime-dark hover:bg-prime-green-100"
-							name="fields-number"
-						>
-							-
-						</button>
 					</div>
-				</div>
-				<div className="flex items-center justify-between">
-					<label htmlFor="score-type" className="text-2xl font-bold">
-						نظام البطولة
-					</label>
-					<select
-						name="event-type"
-						id="type"
-						className="h-10 w-1/2 rounded-lg bg-white text-center"
-						value={form['event-type']}
-						required
-						onChange={handleFormChange}
-					>
-						<option value="" disabled>
-							اختر
-						</option>
-						<option value="league" defaultChecked>
-							دوري
-						</option>
-						<option value="winner" disabled>
-							الفائز مستمر-قريباً-
-						</option>
-						<option value="time" disabled>
-							مفتوحة -قريباً-
-						</option>
-						<option value="random" disabled>
-							تحديات عشوائية -قريبا-
-						</option>
-					</select>
-				</div>
-				<div className="itemc-center flex justify-between">
-					<label htmlFor="price" className="text-2xl font-bold">
-						التكلفة الكلية
-					</label>
-					<input
-						type="number"
-						name="total-cost"
-						id="total-cost"
-						required
-						className="h-10 w-1/2 bg-white text-center text-2xl font-bold"
-						onChange={handleFormChange}
-						placeholder="0"
-						value={form['total-cost']}
-					/>
 				</div>
 				<input
 					type="submit"

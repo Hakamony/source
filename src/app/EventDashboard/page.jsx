@@ -21,7 +21,7 @@ export default function EventDashboard() {
 		setEvent(() => currEvent);
 		const tmpList = [];
 		for (let i = 0; i < currEvent['fields-number']; i++) {
-			tmpList.push(matchesList);
+			tmpList.push(matchesList[i]);
 		}
 		setCurrentMatches(() => tmpList);
 	}, []);
@@ -47,7 +47,7 @@ export default function EventDashboard() {
 		}
 	}
 	return (
-		<main className="px-4 py-12">
+		<main className="px-2 py-12">
 			<nav className="flex items-center justify-between">
 				<h1 className="text-4xl font-bold">{event.name}</h1>
 				{/* <Menu /> */}

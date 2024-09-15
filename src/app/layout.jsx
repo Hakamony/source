@@ -1,9 +1,11 @@
-import { El_Messiri } from 'next/font/google';
+import { Cairo } from 'next/font/google';
 import '../styles/globals.css';
+import Image from 'next/image';
+import texture from '../../public/assets/texture-full-screen.png';
 
-const inter = El_Messiri({
+const inter = Cairo({
 	subsets: ['arabic'],
-	weight: ['400', '500', '600', '700'],
+	weight: ['200', '300', '400', '700', '800', '900', '1000'],
 });
 
 export const metadata = {
@@ -19,7 +21,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="ar">
-			<body className={`${inter.className} h-[100vh]`} dir="rtl">
+			<body className={`${inter.className} relative h-[100vh]`} dir="rtl">
+				<Image
+					alt="texture"
+					src={texture}
+					placeholder="blur"
+					quality={100}
+					fill
+					sizes="100vw"
+					style={{
+						objectFit: 'cover',
+					}}
+					className="-z-30 opacity-20"
+				/>
 				{children}
 			</body>
 		</html>

@@ -8,7 +8,11 @@
 	}
 
 	option {
-		@apply text-center text-lg font-bold;
+		@apply text-center text-lg font-bold text-prime-dark;
+	}
+
+	option:disabled {
+		@apply text-gray-400;
 	}
 }
 
