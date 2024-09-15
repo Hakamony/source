@@ -35,7 +35,7 @@ function generateMatches() {
 		const randomIndex = Math.floor(Math.random() * (i + 1));
 		[matches[i], matches[randomIndex]] = [matches[randomIndex], matches[i]];
 	}
-	matchStorage.saveMatchList([])
+	matchStorage.saveMatchList([]);
 	// Return a list of match IDs in the randomized order
 	matches.forEach((match) => {
 		matchStorage.addToMatchList(match.id);

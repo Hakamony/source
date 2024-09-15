@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import {
+	MdOutlineDriveFileRenameOutline,
+	MdOutlineSportsVolleyball,
+} from 'react-icons/md';
 import eventStorage from '@/lib/storage/eventStorage';
 import storageHelper from '@/lib/storage/storageHelper';
 
@@ -31,80 +35,63 @@ export default function SelectEventsForm() {
 	return (
 		<form
 			action=""
-			className="mt-8 flex h-[80vh] flex-col items-center justify-center gap-16"
+			className="mt-8 flex min-h-[60vh] flex-col items-center justify-between rounded-xl bg-white p-4"
 			onSubmit={handleFormSubmit}
 		>
-			<div className="flex w-full flex-col items-center gap-4">
-				<label for="name" htmlFor="name" className="text-4xl font-bold">
-					اسم الفعالية
-				</label>
-				<input
-					type="text"
-					name="name"
-					id="name"
-					value={form.name}
-					className="h-12 w-full p-2 text-xl"
-					onChange={handleFormChange}
-					required
-				/>
-			</div>
-			<div className="flex w-full flex-col items-center gap-4">
-				<label for="sport" htmlFor="sport" className="text-4xl font-bold">
-					اختر نوع الرياضة
-				</label>
-				<select
-					name="sport"
-					id="sport"
-					className="h-12 w-full bg-white p-2 text-center"
-					value={form.sport}
-					onChange={handleFormChange}
-					required
-				>
-					<option value="" disabled>
-						اختر
-					</option>
-					<option value="football">كرة قدم</option>
-					<option value="volyball">كرة طائرة</option>
-					<option value="pingpong" disabled>
-						تنس طاولة
-					</option>
-					<option value="padel" disabled>
-						بادل
-					</option>
-				</select>
-			</div>
-			<div className="flex w-full flex-col items-center gap-4">
-				<label for="type" htmlFor="type" className="text-4xl font-bold">
-					اختر نوع الفعالية
-				</label>
-				<select
-					name="event-type"
-					id="type"
-					className="h-12 w-full bg-white text-center"
-					value={form['event-type']}
-					required
-					onChange={handleFormChange}
-				>
-					<option value="" disabled>
-						اختر
-					</option>
-					<option value="league" defaultChecked>
-						دوري
-					</option>
-					<option value="winner" disabled>
-						الفائز مستمر-قريباً-
-					</option>
-					<option value="time" disabled>
-						مفتوحة -قريباً-
-					</option>
-					<option value="random" disabled>
-						تحديات عشوائية -قريبا-
-					</option>
-				</select>
+			<div className="flex w-full flex-col gap-8">
+				<div className="w-full">
+					<label
+						for="name"
+						htmlFor="name"
+						className="mx-2 flex items-center gap-2 text-2xl font-bold"
+					>
+						<span>اسم الفعالية</span> <MdOutlineDriveFileRenameOutline />
+					</label>
+					<input
+						type="text"
+						name="name"
+						id="name"
+						value={form.name}
+						className="mt-4 h-12 w-full rounded-lg bg-prime-white p-4 text-xl drop-shadow-md"
+						placeholder="ادخل اسم الفعالية"
+						onChange={handleFormChange}
+						required
+					/>
+				</div>
+				<div className="w-full">
+					<label
+						for="sport"
+						htmlFor="sport"
+						className="mx-2 flex items-center gap-2 text-2xl font-bold"
+					>
+						<span>اختر نوع الرياضة</span>
+						<MdOutlineSportsVolleyball />
+					</label>
+					<select
+						name="sport"
+						id="sport"
+						className="mt-4 h-12 w-full rounded-lg bg-prime-white text-gray-500 drop-shadow-md"
+						value={form.sport}
+						onChange={handleFormChange}
+						required
+					>
+						<option value="" disabled>
+							اختر
+						</option>
+						<option value="football">كرة قدم</option>
+						<option value="volyball">كرة طائرة</option>
+						<option value="pingpong" disabled>
+							تنس طاولة
+						</option>
+						<option value="padel" disabled>
+							بادل
+						</option>
+					</select>
+				</div>
 			</div>
 			<input
 				type="submit"
-				className="rounded-lg bg-prime-green-200 px-20 py-2 text-xl font-bold text-prime-white"
+				className="w-full rounded-lg bg-prime-green-200 px-20 py-2 text-xl font-bold text-prime-white"
 				value="التالي"
 			/>
 		</form>

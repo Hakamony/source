@@ -21,7 +21,7 @@ export default function ExportPlayersButton() {
 		<div className="my-8 flex w-full text-center">
 			<label
 				htmlFor="export"
-				className="flex-1 cursor-pointer rounded-lg bg-prime-green-200 py-2 text-xl font-bold text-prime-white"
+				className="flex-1 cursor-pointer rounded-lg bg-prime-green-200 py-2 text-lg font-bold text-prime-white"
 			>
 				حفظ ملف اللاعبين
 			</label>
