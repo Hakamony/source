@@ -43,7 +43,7 @@ function generateMatches() {
 
 	for (let i = 0; i < fields; i++) {
 		const id = matchStorage.getNextMatch();
-		matchStorage.updateMatch(id, { status: 1 });
+		// matchStorage.updateMatch(id, { status: 1 });
 	}
 }
 // Example usage

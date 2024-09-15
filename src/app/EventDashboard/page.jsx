@@ -21,7 +21,7 @@ export default function EventDashboard() {
 		setEvent(() => currEvent);
 		const tmpList = [];
 		for (let i = 0; i < currEvent['fields-number']; i++) {
-			tmpList.push(matchesList[i]);
+			tmpList.push(matchesList);
 		}
 		setCurrentMatches(() => tmpList);
 	}, []);
