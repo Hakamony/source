@@ -35,16 +35,16 @@ function generateMatches() {
 		const randomIndex = Math.floor(Math.random() * (i + 1));
 		[matches[i], matches[randomIndex]] = [matches[randomIndex], matches[i]];
 	}
-
+	matchStorage.saveMatchList([]);
 	// Return a list of match IDs in the randomized order
 	matches.forEach((match) => {
 		matchStorage.addToMatchList(match.id);
 	});
 
-	for (let i = 0; i < fields; i++) {
-		const id = matchStorage.getNextMatch();
-		matchStorage.updateMatch(id, { status: 1 });
-	}
+	// for (let i = 0; i < fields; i++) {
+	// 	const id = matchStorage.getNextMatch();
+	// 	matchStorage.updateMatch(id, { status: 1 });
+	// }
 }
 // Example usage
 const teams = [

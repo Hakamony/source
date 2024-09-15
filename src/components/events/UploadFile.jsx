@@ -21,11 +21,11 @@ export default function UploadFile(props) {
 		}
 	}
 	return (
-		<form className="my-8 text-center" id="uploadPlayers">
+		<form className="my-4 text-center" id="uploadPlayers">
 			<div className="my-8 flex w-full text-center">
 				<label
 					htmlFor="file"
-					className="flex-1 cursor-pointer rounded-lg bg-prime-orange py-2 text-xl font-bold text-prime-white"
+					className="flex-1 cursor-pointer rounded-lg bg-prime-orange py-2 text-lg font-bold text-prime-white"
 				>
 					تحميل الملف (صيغة <span dir="ltr">.json</span>)
 				</label>

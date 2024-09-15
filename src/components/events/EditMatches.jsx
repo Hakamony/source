@@ -1,6 +1,7 @@
 'use client';
 
 import { FaArrowUp } from 'react-icons/fa';
+import { IoCloseCircle } from 'react-icons/io5';
 import matchStorage from '@/lib/storage/matchStorage';
 import teamStorage from '@/lib/storage/teamStorage';
 
@@ -28,11 +29,21 @@ export default function EditMatches({ ...props }) {
 	return (
 		<div
 			style={{ display: props.active ? 'flex' : 'none' }}
-			className="fixed inset-x-2 bottom-12 top-12 flex h-fit flex-col gap-8 rounded-lg border-2 border-solid border-prime-green-200 bg-prime-white p-4"
+			className="fixed inset-x-0 bottom-0 top-12 flex flex-col gap-8 overflow-y-scroll rounded-lg rounded-b-none border-2 border-b-0 border-solid border-prime-orange bg-white p-4"
 		>
-			<h2 className="text-2xl font-bold">تعديل قائمة المباريات</h2>
+			<div className="flex items-center justify-between">
+				<h2 className="text-2xl font-bold">تعديل قائمة المباريات</h2>
+				<button
+					onClick={() => {
+						props.setShowEditMatches((prev) => !prev);
+					}}
+					type="button"
+				>
+					<IoCloseCircle className="flex-0 text-4xl text-red-700" />
+				</button>
+			</div>
 
-			<ul className="flex max-h-[50vh] flex-col gap-4 overflow-y-scroll">
+			<ul className="flex flex-col gap-4 overflow-y-scroll">
 				{props.mathces.map((match, i) => {
 					const team1 = teamStorage.getTeam(match.teams.first);
 					const team2 = teamStorage.getTeam(match.teams.second);
@@ -66,15 +77,6 @@ export default function EditMatches({ ...props }) {
 					);
 				})}
 			</ul>
-			<button
-				onClick={() => {
-					props.setShowEditMatches((prev) => !prev);
-				}}
-				type="button"
-				className="rounded-lg bg-red-700 px-20 py-2 text-xl font-bold text-prime-white"
-			>
-				اغلاق
-			</button>
 		</div>
 	);
 }

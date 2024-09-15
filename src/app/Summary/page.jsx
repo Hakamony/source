@@ -42,32 +42,35 @@ export default function Summary() {
 		setShowEdit((prev) => !prev);
 	}
 	return (
-		<main className="px-4 py-12 text-center">
+		<main className="px-2 py-12 text-center">
 			{/* <StorageButton /> */}
 			<EventsNav active={4} />
-			<section className="my-12">
-				<h1 className="mb-8 text-4xl font-bold">{event.name}</h1>
+			<section className="my-12 rounded-xl bg-white p-4">
+				<h1 className="mb-4 text-4xl font-bold">{event.name}</h1>
+				<hr className="mb-8 text-4xl font-bold text-black" />
 				<ul className="text-center">
 					<li>
-						<h2 className="text-2xl font-bold">
-							الرياضة:{' '}
+						<h2 className="flex justify-between px-20 text-lg font-bold">
+							<span>الرياضة:</span>
 							<span>{event.sport === 'football' ? 'كرة قدم' : 'كرة طائرة'}</span>
 						</h2>
 					</li>
 					<li>
-						<h2 className="text-2xl font-bold">
-							نظام التقييم: نقاط
-							{/* <span>{event['score-type']}</span> */}
+						<h2 className="flex w-full justify-between px-20 text-lg font-bold">
+							<span>نظام التقييم: </span>
+							<span>{}نقاط</span>
 						</h2>
 					</li>
 					<li>
-						<h2 className="text-2xl font-bold">
-							عدد اللاعبين: <span>{event['players-number']}</span>
+						<h2 className="flex w-full justify-between px-20 text-lg font-bold">
+							<span>عدد اللاعبين:</span>
+							<span>{event['players-number']}</span>
 						</h2>
 					</li>
 					<li>
-						<h2 className="text-2xl font-bold">
-							عدد الفرق: <span>{teams.length}</span>
+						<h2 className="flex w-full justify-between px-20 text-lg font-bold">
+							<span>عدد الفرق:</span>
+							<span>{teams.length}</span>
 						</h2>
 					</li>
 				</ul>
@@ -78,18 +81,9 @@ export default function Summary() {
 					{teams.map((team) => {
 						return (
 							<div
-								className="shrink-0 rounded-lg border-2 border-prime-orange p-4 shadow-lg"
+								className="shrink-0 rounded-lg border-2 border-prime-orange bg-white p-4 shadow-lg drop-shadow-md"
 								key={team.id}
 							>
-								<div className="mb-8 flex flex-1 flex-col items-start justify-between gap-2 text-start font-bold">
-									<h3 className="text-start text-2xl font-bold text-prime-orange">
-										{team.name}
-									</h3>
-									<div className="flex items-center gap-2">
-										{stars(Math.floor(team['team-rating']))}
-										<span>. {team['number-of-players']} لاعبين</span>
-									</div>
-								</div>
 								<ul className="flex h-48 w-full list-inside list-decimal flex-col flex-wrap content-start gap-4 gap-x-12">
 									{team.players.map((id) => {
 										const player = playerStorage.getPlayer(id);
@@ -100,68 +94,79 @@ export default function Summary() {
 										);
 									})}
 								</ul>
-							</div>
-						);
-					})}
-				</div>
-			</section>
-			<section className="my-12">
-				<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
-				<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll">
-					{matches.map((match, i) => {
-						const team1 = teamStorage.getTeam(match.teams.first);
-						const team2 = teamStorage.getTeam(match.teams.second);
-
-						return (
-							<div
-								className="w-full shrink-0 rounded-lg border-2 border-prime-orange p-4 shadow-lg"
-								key={match.id}
-							>
-								<h3 className="t mb-8 text-4xl font-bold text-prime-orange">
-									مباراة رقم {i + 1}
-								</h3>
-								<div className="flex flex-col gap-4 text-xl font-bold">
-									<p className="flex justify-between">
-										<span>{team1.name}</span>
-										<span>V.S</span>
-										<span>{team2.name}</span>
-									</p>
-									{/* <p>ملعب: </p> */}
+								<div className="mt-8 flex flex-1 flex-col items-start justify-between gap-2 border-t-2 border-prime-orange text-start font-bold">
+									<h3 className="text-start text-2xl font-bold text-prime-orange">
+										{team.name}
+									</h3>
+									<div className="flex items-center gap-2">
+										{stars(Math.floor(team['team-rating']))}
+										<span>. {team['number-of-players']} لاعبين</span>
+									</div>
 								</div>
 							</div>
 						);
 					})}
 				</div>
 			</section>
-			<section className="my-12 flex flex-col gap-4 font-bold">
-				<button
-					type="button"
-					color="yellow"
-					link="/"
-					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
-					onClick={() => setShowEditMatches((prev) => !prev)}
-				>
-					تعديل جدول المباريات
-				</button>
-				<button
-					type="button"
-					color="yellow"
-					link="/"
-					className="rounded-lg bg-prime-yellow px-20 py-2 text-xl font-bold text-prime-white"
-					onClick={handleEditPlayers}
-				>
-					تعديل الفرق
-				</button>
-				{/* <ButtonNav color="yellow" link="/">
+			<div className="rounded-xl bg-white p-4">
+				<section className="my-12">
+					<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
+					<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll border-y-2 border-prime-orange bg-prime-white py-4">
+						{matches.map((match, i) => {
+							const team1 = teamStorage.getTeam(match.teams.first);
+							const team2 = teamStorage.getTeam(match.teams.second);
+
+							return (
+								<div
+									className="w-full shrink-0 rounded-lg border-2 border-prime-orange bg-white p-4 shadow-lg"
+									key={match.id}
+								>
+									<h3 className="t mb-8 text-4xl font-bold text-prime-orange">
+										مباراة رقم {i + 1}
+									</h3>
+									<div className="flex flex-col gap-4 text-xl font-bold">
+										<p className="flex justify-between">
+											<span>{team1.name}</span>
+											<span>V.S</span>
+											<span>{team2.name}</span>
+										</p>
+										{/* <p>ملعب: </p> */}
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</section>
+				<section className="my-12 flex flex-col gap-4 font-bold">
+					<button
+						type="button"
+						color="yellow"
+						link="/"
+						className="rounded-lg bg-prime-yellow py-2 text-xl font-bold text-prime-dark"
+						onClick={() => setShowEditMatches((prev) => !prev)}
+					>
+						تعديل جدول المباريات
+					</button>
+					<button
+						type="button"
+						color="yellow"
+						link="/"
+						className="rounded-lg bg-prime-yellow py-2 text-xl font-bold text-prime-dark"
+						onClick={handleEditPlayers}
+					>
+						تعديل الفرق
+					</button>
+					{/* <ButtonNav color="yellow" link="/">
 					تعديل الفعالية
 				</ButtonNav> */}
-				{/* <ButtonNav color="yellow" link="/UploadPlayers">
+					{/* <ButtonNav color="yellow" link="/UploadPlayers">
 					تعديل اللاعبين
 				</ButtonNav> */}
-				<ButtonNav color="bg-prime-green-200" link="/EventDashboard">
-					بدء الفاعلية
-				</ButtonNav>
-			</section>
+					<ButtonNav color="bg-prime-green-200" link="/EventDashboard">
+						بدء الفاعلية
+					</ButtonNav>
+				</section>
+			</div>
 			{showEdit && (
 				<EditPlayers
 					active={showEdit}
