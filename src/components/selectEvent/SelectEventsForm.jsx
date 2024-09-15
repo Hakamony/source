@@ -73,35 +73,6 @@ export default function SelectEventsForm() {
 					</option>
 				</select>
 			</div>
-			<div className="flex w-full flex-col items-center gap-4">
-				<label for="type" htmlFor="type" className="text-4xl font-bold">
-					اختر نوع الفعالية
-				</label>
-				<select
-					name="event-type"
-					id="type"
-					className="h-12 w-full bg-white text-center"
-					value={form['event-type']}
-					required
-					onChange={handleFormChange}
-				>
-					<option value="" disabled>
-						اختر
-					</option>
-					<option value="league" defaultChecked>
-						دوري
-					</option>
-					<option value="winner" disabled>
-						الفائز مستمر-قريباً-
-					</option>
-					<option value="time" disabled>
-						مفتوحة -قريباً-
-					</option>
-					<option value="random" disabled>
-						تحديات عشوائية -قريبا-
-					</option>
-				</select>
-			</div>
 			<input
 				type="submit"
 				className="rounded-lg bg-prime-green-200 px-20 py-2 text-xl font-bold text-prime-white"

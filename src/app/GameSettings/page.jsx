@@ -66,14 +66,14 @@ export default function UploadPlayers() {
 		<main className="px-4 py-12">
 			<EventsNav active={3} />
 			<form action="" className="flex flex-col gap-8" onSubmit={handleFormSubmit}>
-				<div className="itemc-center flex justify-between">
+				<div className="flex items-center justify-between">
 					<label htmlFor="score-type" className="text-2xl font-bold">
 						نظام التقييم
 					</label>
 					<select
 						name="score-type"
 						id="score-type"
-						className="h-10 w-1/2 bg-white text-center"
+						className="h-10 w-1/2 rounded-lg bg-white text-center"
 						required
 						onChange={handleFormChange}
 						value={form['score-type']}
@@ -165,18 +165,26 @@ export default function UploadPlayers() {
 					</label>
 					<select
 						name="event-type"
-						id="event-type"
-						className="h-10 w-1/2 bg-white text-center"
-						onChange={handleFormChange}
+						id="type"
+						className="h-10 w-1/2 rounded-lg bg-white text-center"
 						value={form['event-type']}
 						required
+						onChange={handleFormChange}
 					>
 						<option value="" disabled>
 							اختر
 						</option>
-						<option value="league">دوري</option>
+						<option value="league" defaultChecked>
+							دوري
+						</option>
 						<option value="winner" disabled>
-							الفائز مستمر
+							الفائز مستمر-قريباً-
+						</option>
+						<option value="time" disabled>
+							مفتوحة -قريباً-
+						</option>
+						<option value="random" disabled>
+							تحديات عشوائية -قريبا-
 						</option>
 					</select>
 				</div>
