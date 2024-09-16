@@ -14,6 +14,10 @@
 	option:disabled {
 		@apply text-gray-400;
 	}
+
+	input[type='radio']:checked + label {
+		@apply bg-prime-orange text-white;
+	}
 }
 
 @layer components {

@@ -73,6 +73,12 @@ export default function Summary() {
 							<span>{teams.length}</span>
 						</h2>
 					</li>
+					<li>
+						<h2 className="flex w-full justify-between px-20 text-lg font-bold">
+							<span>تكلفة الفاعيلة: </span>
+							<span>{event['total-cost']}</span>
+						</h2>
+					</li>
 				</ul>
 			</section>
 			<section className="my-12">
@@ -111,31 +117,26 @@ export default function Summary() {
 			<div className="rounded-xl bg-white p-4">
 				<section className="my-12">
 					<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
-					<div className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll border-y-2 border-prime-orange bg-prime-white py-4">
+					<ul className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll rounded-lg bg-prime-white py-4">
 						{matches.map((match, i) => {
 							const team1 = teamStorage.getTeam(match.teams.first);
 							const team2 = teamStorage.getTeam(match.teams.second);
 
 							return (
-								<div
-									className="w-full shrink-0 rounded-lg border-2 border-prime-orange bg-white p-4 shadow-lg"
+								<li
+									className="flex w-full shrink-0 justify-center gap-4 bg-prime-white py-4 text-lg font-bold shadow-md"
 									key={match.id}
 								>
-									<h3 className="t mb-8 text-4xl font-bold text-prime-orange">
-										مباراة رقم {i + 1}
-									</h3>
-									<div className="flex flex-col gap-4 text-xl font-bold">
-										<p className="flex justify-between">
-											<span>{team1.name}</span>
-											<span>V.S</span>
-											<span>{team2.name}</span>
-										</p>
-										{/* <p>ملعب: </p> */}
-									</div>
-								</div>
+									<span>{team1.name}</span>
+									<p className="flex flex-col items-center text-sm">
+										<span>V.S</span>
+										<span>مباراة: {i + 1}</span>
+									</p>
+									<span>{team2.name}</span>
+								</li>
 							);
 						})}
-					</div>
+					</ul>
 				</section>
 				<section className="my-12 flex flex-col gap-4 font-bold">
 					<button
