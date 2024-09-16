@@ -12,6 +12,7 @@ export default function PlayersList() {
 	const [showForm, setShowForm] = useState(false);
 	const [players, setPlayers] = useState([]);
 	const [form, setForm] = useState({
+		id: '',
 		name: '',
 		Rating: '',
 		'Age-Group': 0,
@@ -23,6 +24,7 @@ export default function PlayersList() {
 
 	function handleForm() {
 		setForm({
+			id: '',
 			name: '',
 			Rating: '',
 			'Age-Group': 0,
@@ -35,8 +37,9 @@ export default function PlayersList() {
 		setPlayers(playerStorage.getPlayers());
 	};
 
-	const handleUpdate = (name, Rating, ageGroup) => {
+	const handleUpdate = (id, name, Rating, ageGroup) => {
 		setForm({
+			id: id,
 			name,
 			Rating,
 			'Age-Group': ageGroup.toString(),
@@ -75,7 +78,12 @@ export default function PlayersList() {
 										type="button"
 										className="flex-1 rounded-md bg-prime-yellow py-2"
 										onClick={() => {
-											handleUpdate(player.name, player.Rating, player['Age-Group']);
+											handleUpdate(
+												player.id,
+												player.name,
+												player.Rating,
+												player['Age-Group'],
+											);
 										}}
 									>
 										<TbUserEdit className="w-full" />

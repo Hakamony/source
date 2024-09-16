@@ -21,7 +21,7 @@ export default function AddPlayer({
 
 	function handleNewPlayer(e) {
 		e.preventDefault();
-		const toBeUpdated = players.find((player) => player.name === form.name);
+		const toBeUpdated = players.find((player) => player.id === form.id);
 		if (!toBeUpdated) {
 			playerStorage.addPlayer({
 				name: form.name,
@@ -37,6 +37,7 @@ export default function AddPlayer({
 		}
 		setPlayers(playerStorage.getPlayers());
 		setForm({
+			id: '',
 			name: '',
 			Rating: '',
 			'Age-Group': '0',
