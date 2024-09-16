@@ -87,7 +87,9 @@ export default function UploadPlayers() {
 							<option value="" disabled>
 								اختر
 							</option>
-							<option value="points">نقاط</option>
+							<option value="points" selected>
+								نقاط
+							</option>
 							<option value="points" disabled>
 								محدد بوقت
 							</option>
@@ -180,7 +182,7 @@ export default function UploadPlayers() {
 							<option value="" disabled>
 								اختر
 							</option>
-							<option value="league" defaultChecked>
+							<option value="league" selected>
 								دوري
 							</option>
 							<option value="winner" disabled>

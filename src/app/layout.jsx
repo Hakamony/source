@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="ar">
-			<body className={`${inter.className} relative h-[100vh]`} dir="rtl">
+			<body className={`${inter.className} relative h-screen w-screen`} dir="rtl">
 				<Image
 					alt="texture"
 					src={texture}

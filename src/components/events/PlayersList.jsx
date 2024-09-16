@@ -14,7 +14,7 @@ export default function PlayersList() {
 	const [form, setForm] = useState({
 		name: '',
 		Rating: '',
-		'Age-Group': 1,
+		'Age-Group': 0,
 	});
 
 	useEffect(() => {
@@ -22,6 +22,11 @@ export default function PlayersList() {
 	}, []);
 
 	function handleForm() {
+		setForm({
+			name: '',
+			Rating: '',
+			'Age-Group': 0,
+		});
 		setShowForm((prev) => !prev);
 	}
 
@@ -34,7 +39,7 @@ export default function PlayersList() {
 		setForm({
 			name,
 			Rating,
-			'Age-Group': ageGroup,
+			'Age-Group': ageGroup.toString(),
 		});
 		setShowForm((prev) => !prev);
 	};
@@ -66,7 +71,7 @@ export default function PlayersList() {
 									<div className="flex items-center gap-2">{stars(player.Rating)}</div>
 								</div>
 								<div className="flex w-1/3 flex-none gap-2">
-									{/* <button
+									<button
 										type="button"
 										className="flex-1 rounded-md bg-prime-yellow py-2"
 										onClick={() => {
@@ -74,7 +79,7 @@ export default function PlayersList() {
 										}}
 									>
 										<TbUserEdit className="w-full" />
-									</button> */}
+									</button>
 									<button
 										type="button"
 										className="flex-1 rounded-md bg-red-500 py-2 text-prime-white"
