@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Menu from '@/components/layout/Menu';
-import MatchPopUp from '@/components/events/MatchPopUp';
 import eventStorage from '@/lib/storage/eventStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import FieldCard from '@/components/events/FieldCard';
@@ -10,11 +8,10 @@ import EndEventPopUp from '@/components/events/EndEventPopUp';
 
 export default function EventDashboard() {
 	const [event, setEvent] = useState({});
-	const [showPopup, setShowPopup] = useState(false);
-	const [matchId, setMatchId] = useState(null);
 	const [currentMatches, setCurrentMatches] = useState([]);
 	const [endEvent, setEndEvent] = useState(false);
 	const [counter, setCounter] = useState(1);
+	const [fields, setFields] = useState([]);
 
 	useEffect(() => {
 		const currEvent = eventStorage.getEvent();
@@ -25,30 +22,26 @@ export default function EventDashboard() {
 			tmpList.push(matchesList[i]);
 		}
 		setCurrentMatches(() => tmpList);
+		setFields(() => [...Array(currEvent['fields-number'])]);
 	}, []);
+
+	function updateMatchStatus(id) {
+		matchStorage.updateMatch(id, { status: 1 });
+	}
 
 	function addNextMatch(id) {
 		const newMatch = matchStorage.getNextMatch();
 		if (newMatch !== -1) {
 			matchStorage.updateMatch(id, { status: 2 });
-			matchStorage.updateMatch(newMatch, { status: 1 });
 			setCurrentMatches((prev) => {
 				const removedEndedMatchList = prev.filter((tId) => tId !== id);
 				return [...removedEndedMatchList, newMatch];
 			});
-		} else if (currentMatches.length !== 1) {
-			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
 		} else {
 			setEndEvent((prev) => !prev);
 		}
 	}
 
-	function handlePopup(e) {
-		setShowPopup((prev) => !prev);
-		if (e.target.id === 'match-card') {
-			setMatchId(() => e.target.dataset.matchId);
-		}
-	}
 	return (
 		<main className="px-2 py-12">
 			<nav className="flex items-center justify-between">
@@ -56,24 +49,20 @@ export default function EventDashboard() {
 				{/* <Menu /> */}
 			</nav>
 			<section className="my-12 flex flex-col gap-8">
-				{currentMatches.map((match, i) => {
+				{fields.map((_, i) => {
 					return (
 						<FieldCard
-							key={match}
+							key={currentMatches[i]}
 							i={i}
-							matchId={match}
+							matchId={currentMatches[i]}
 							addNextMatch={(id) => addNextMatch(id)}
 							counter={counter}
 							setCounter={setCounter}
+							updateMatchStatus={(id) => updateMatchStatus(id)}
 						/>
 					);
 				})}
 			</section>
-			<MatchPopUp
-				show={showPopup}
-				handlePopup={(e) => handlePopup(e)}
-				matchId={matchId}
-			/>
 			<EndEventPopUp show={endEvent} />
 		</main>
 	);

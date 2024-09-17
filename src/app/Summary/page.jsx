@@ -89,10 +89,10 @@ export default function Summary() {
 					{teams.map((team) => {
 						return (
 							<div
-								className="shrink-0 rounded-lg border-2 border-prime-orange bg-white p-4 shadow-lg drop-shadow-md"
+								className="relative shrink-0 rounded-lg border-2 border-prime-orange bg-white p-4 shadow-lg drop-shadow-md"
 								key={team.id}
 							>
-								<ul className="flex max-h-48 w-full list-inside list-decimal flex-col flex-wrap content-start gap-4 gap-x-12">
+								<ul className="flex h-48 w-full list-inside list-decimal flex-col flex-wrap content-start gap-4 gap-x-12">
 									{team.players.map((id) => {
 										const player = playerStorage.getPlayer(id);
 										return (
@@ -114,9 +114,9 @@ export default function Summary() {
 									</h3>
 									<div className="flex items-center gap-2">
 										{stars(Math.floor(team['team-rating']))}
-										<spa className="text-sm font-normal">
+										<span className="text-sm font-normal">
 											. {team['number-of-players']} لاعبين
-										</spa>
+										</span>
 									</div>
 								</div>
 							</div>
