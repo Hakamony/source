@@ -2,6 +2,8 @@
 
 import { FaStar } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import teamIcon from '../../../public/assets/team-icon.jpg';
 import EventsNav from '@/components/events/EventsNav';
 import ButtonNav from '@/components/layout/ButtonNav';
 import eventStorage from '@/lib/storage/eventStorage';
@@ -94,15 +96,21 @@ export default function Summary() {
 									{team.players.map((id) => {
 										const player = playerStorage.getPlayer(id);
 										return (
-											<li key={player.id} className="text-start text-xl font-bold">
+											<li key={player.id} className="text-center text-xl font-bold">
 												{player.name}
 											</li>
 										);
 									})}
 								</ul>
-								<div className="mt-8 flex flex-1 flex-col items-start justify-between gap-2 border-t-2 border-prime-orange text-start font-bold">
-									<h3 className="text-start text-2xl font-bold text-prime-orange">
-										{team.name}
+								<div className="mt-8 flex flex-1 flex-col items-start justify-between gap-2 border-t-2 border-prime-orange pt-2 text-start font-bold">
+									<h3 className="flex w-full items-center justify-between text-start text-2xl font-bold text-prime-orange">
+										<span>{team.name}</span>
+										<Image
+											src={teamIcon}
+											alt="Picture of the author"
+											width={40}
+											className="rounded-full border-2 border-prime-orange"
+										/>
 									</h3>
 									<div className="flex items-center gap-2">
 										{stars(Math.floor(team['team-rating']))}
@@ -117,22 +125,38 @@ export default function Summary() {
 			<div className="rounded-xl bg-white p-4">
 				<section className="my-12">
 					<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
-					<ul className="flex h-[350px] flex-col items-center gap-8 overflow-y-scroll rounded-lg bg-prime-white py-4">
+					<ul className="flex h-[350px] flex-col items-center divide-y divide-white overflow-y-scroll rounded-lg bg-prime-white">
 						{matches.map((match, i) => {
 							const team1 = teamStorage.getTeam(match.teams.first);
 							const team2 = teamStorage.getTeam(match.teams.second);
 
 							return (
 								<li
-									className="flex w-full shrink-0 justify-center gap-4 bg-prime-white py-4 text-lg font-bold shadow-md"
+									className="flex w-full shrink-0 items-center justify-center gap-6 bg-prime-white py-6 text-lg font-bold"
 									key={match.id}
 								>
-									<span>{team1.name}</span>
-									<p className="flex flex-col items-center text-sm">
-										<span>V.S</span>
+									<div className="flex items-center justify-center gap-2">
+										<span>{team1.name}</span>
+										<Image
+											src={teamIcon}
+											alt="Picture of the author"
+											width={30}
+											className="rounded-full"
+										/>
+									</div>
+									<p className="flex flex-col items-center justify-center text-sm font-normal">
 										<span>مباراة: {i + 1}</span>
+										<span>في مواجهة</span>
 									</p>
-									<span>{team2.name}</span>
+									<div className="flex items-center justify-center gap-2">
+										<Image
+											src={teamIcon}
+											alt="Picture of the author"
+											width={30}
+											className="rounded-full"
+										/>
+										<span>{team2.name}</span>
+									</div>
 								</li>
 							);
 						})}
