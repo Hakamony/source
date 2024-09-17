@@ -32,10 +32,10 @@ export default function Summary() {
 	function stars(num) {
 		const starArr = [];
 		for (let i = 0; i < num; i++) {
-			starArr.push(<FaStar key={i} className="text-prime-yellow" />);
+			starArr.push(<FaStar key={i} className="text-sm text-prime-yellow" />);
 		}
 		for (let i = num; i < 5; i++) {
-			starArr.push(<FaStar key={i} />);
+			starArr.push(<FaStar key={i} className="text-sm" />);
 		}
 		return starArr;
 	}
@@ -92,17 +92,17 @@ export default function Summary() {
 								className="shrink-0 rounded-lg border-2 border-prime-orange bg-white p-4 shadow-lg drop-shadow-md"
 								key={team.id}
 							>
-								<ul className="flex h-48 w-full list-inside list-decimal flex-col flex-wrap content-start gap-4 gap-x-12">
+								<ul className="flex max-h-48 w-full list-inside list-decimal flex-col flex-wrap content-start gap-4 gap-x-12">
 									{team.players.map((id) => {
 										const player = playerStorage.getPlayer(id);
 										return (
-											<li key={player.id} className="text-center text-xl font-bold">
+											<li key={player.id} className="text-start text-lg font-bold">
 												{player.name}
 											</li>
 										);
 									})}
 								</ul>
-								<div className="mt-8 flex flex-1 flex-col items-start justify-between gap-2 border-t-2 border-prime-orange pt-2 text-start font-bold">
+								<div className="mt-4 flex flex-1 flex-col items-start justify-between gap-2 border-t-2 border-prime-orange pt-2 text-start font-bold">
 									<h3 className="flex w-full items-center justify-between text-start text-2xl font-bold text-prime-orange">
 										<span>{team.name}</span>
 										<Image
@@ -114,7 +114,9 @@ export default function Summary() {
 									</h3>
 									<div className="flex items-center gap-2">
 										{stars(Math.floor(team['team-rating']))}
-										<span>. {team['number-of-players']} لاعبين</span>
+										<spa className="text-sm font-normal">
+											. {team['number-of-players']} لاعبين
+										</spa>
 									</div>
 								</div>
 							</div>
@@ -144,7 +146,7 @@ export default function Summary() {
 											className="rounded-full"
 										/>
 									</div>
-									<p className="flex flex-col items-center justify-center text-sm font-normal">
+									<p className="flex flex-col items-center justify-center pb-2 text-sm font-normal">
 										<span>مباراة: {i + 1}</span>
 										<span>في مواجهة</span>
 									</p>
@@ -181,9 +183,9 @@ export default function Summary() {
 					>
 						تعديل الفرق
 					</button>
-					{/* <ButtonNav color="yellow" link="/">
-					تعديل الفعالية
-				</ButtonNav> */}
+					<ButtonNav color="bg-prime-yellow text-prime-dark" link="/GameSettings">
+						تعديل الفعالية
+					</ButtonNav>
 					{/* <ButtonNav color="yellow" link="/UploadPlayers">
 					تعديل اللاعبين
 				</ButtonNav> */}
