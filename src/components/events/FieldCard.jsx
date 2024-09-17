@@ -17,6 +17,11 @@ export default function FieldCard({ ...props }) {
 		setShowTeam((prev) => !prev);
 	}
 
+	function handleEndMatch() {
+		props.addNextMatch(props.matchId);
+		props.setCounter((prev) => prev + 1);
+	}
+
 	return (
 		<div className="relative rounded-lg bg-white py-2 text-center shadow-md">
 			<h3 className="mb-2 text-2xl font-bold text-prime-orange">
@@ -38,7 +43,7 @@ export default function FieldCard({ ...props }) {
 				<div className="relative z-[1] px-2 pb-28 pt-14">
 					<div className="flex flex-col items-center justify-start gap-4 text-xl font-bold">
 						<p className="text-dark w-fit rounded bg-white px-4 py-2">
-							مباراة: {match.number}{' '}
+							مباراة: {props.counter + props.i}{' '}
 						</p>
 						<p className="flex w-full items-center justify-between gap-4">
 							<button
@@ -69,7 +74,7 @@ export default function FieldCard({ ...props }) {
 				<button
 					type="button"
 					className="rounded-lg bg-prime-green-200 px-12 py-1 text-xl font-bold text-prime-white"
-					onClick={() => props.addNextMatch(props.matchId)}
+					onClick={handleEndMatch}
 					data-match-id={match.id}
 					id="match-card"
 				>

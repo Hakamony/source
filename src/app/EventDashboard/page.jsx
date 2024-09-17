@@ -14,6 +14,7 @@ export default function EventDashboard() {
 	const [matchId, setMatchId] = useState(null);
 	const [currentMatches, setCurrentMatches] = useState([]);
 	const [endEvent, setEndEvent] = useState(false);
+	const [counter, setCounter] = useState(1);
 
 	useEffect(() => {
 		const currEvent = eventStorage.getEvent();
@@ -31,8 +32,10 @@ export default function EventDashboard() {
 		if (newMatch !== -1) {
 			matchStorage.updateMatch(id, { status: 2 });
 			matchStorage.updateMatch(newMatch, { status: 1 });
-			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
-			setCurrentMatches((prev) => [...prev, newMatch]);
+			setCurrentMatches((prev) => {
+				const removedEndedMatchList = prev.filter((tId) => tId !== id);
+				return [...removedEndedMatchList, newMatch];
+			});
 		} else if (currentMatches.length !== 1) {
 			setCurrentMatches((prev) => prev.filter((tId) => tId !== id));
 		} else {
@@ -60,6 +63,8 @@ export default function EventDashboard() {
 							i={i}
 							matchId={match}
 							addNextMatch={(id) => addNextMatch(id)}
+							counter={counter}
+							setCounter={setCounter}
 						/>
 					);
 				})}

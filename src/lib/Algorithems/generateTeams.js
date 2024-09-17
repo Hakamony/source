@@ -53,7 +53,7 @@ function generateTeamsByNumber(numTeams) {
 
 	const teams = ageBalancedTeams.map((team, i) => {
 		const newTeam = {
-			name: `Team ${i + 1}`,
+			name: `فريق ${i + 1}`,
 			players: team,
 			'team-rating': calculateAverageRating(team),
 			'number-of-players': team.length,
@@ -85,7 +85,7 @@ function generateTeamsByMaxPlayers(maxPlayersPerTeam) {
 
 	const teams = ageBalancedTeams.map((team, i) => {
 		const newTeam = {
-			name: `Team ${i + 1}`,
+			name: `فريق ${i + 1}`,
 			players: team,
 			'team-rating': calculateAverageRating(team),
 			'number-of-players': team.length,
