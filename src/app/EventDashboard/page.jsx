@@ -9,6 +9,8 @@ import EndEventPopUp from '@/components/events/EndEventPopUp';
 export default function EventDashboard() {
 	const [event, setEvent] = useState({});
 	const [currentMatches, setCurrentMatches] = useState([]);
+	// const [doneMatch, setDoneMatch] = useState([])
+	const [activeFields, setActiveFields] = useState([]);
 	const [endEvent, setEndEvent] = useState(false);
 	const [counter, setCounter] = useState(1);
 	const [fields, setFields] = useState([]);
@@ -21,6 +23,7 @@ export default function EventDashboard() {
 		for (let i = 0; i < currEvent['fields-number']; i++) {
 			tmpList.push(matchesList[i]);
 		}
+		setActiveFields(() => new Array(currEvent['fields-number']).fill(true));
 		setCurrentMatches(() => tmpList);
 		setFields(() => [...Array(currEvent['fields-number'])]);
 	}, []);
@@ -29,15 +32,25 @@ export default function EventDashboard() {
 		matchStorage.updateMatch(id, { status: 1 });
 	}
 
-	function addNextMatch(id) {
+	function addNextMatch(id, index) {
+		matchStorage.updateMatch(id, { status: 2 });
 		const newMatch = matchStorage.getNextMatch();
+		console.log(activeFields);
 		if (newMatch !== -1) {
-			matchStorage.updateMatch(id, { status: 2 });
 			setCurrentMatches((prev) => {
-				const removedEndedMatchList = prev.filter((tId) => tId !== id);
-				return [...removedEndedMatchList, newMatch];
+				prev[index] = newMatch;
+				return prev;
+			});
+		} else if (activeFields.filter((x) => x === true).length > 1) {
+			setActiveFields((prev) => {
+				prev[index] = false;
+				return prev;
 			});
 		} else {
+			setActiveFields((prev) => {
+				prev[index] = false;
+				return prev;
+			});
 			setEndEvent((prev) => !prev);
 		}
 	}
@@ -53,9 +66,10 @@ export default function EventDashboard() {
 					return (
 						<FieldCard
 							key={currentMatches[i]}
+							active={activeFields[i]}
 							i={i}
 							matchId={currentMatches[i]}
-							addNextMatch={(id) => addNextMatch(id)}
+							addNextMatch={(id, index) => addNextMatch(id, index)}
 							counter={counter}
 							setCounter={setCounter}
 							updateMatchStatus={(id) => updateMatchStatus(id)}

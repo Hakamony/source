@@ -30,10 +30,10 @@
 	}
 
 	.scoreboard-mid {
-		border-top: 55px solid #ff6f00;
+		border-top: 65px solid #ff6f00;
 		border-left: 20px solid transparent;
 		border-right: 20px solid transparent;
 		height: 0;
-		width: 95px;
+		width: 110px;
 	}
 }
