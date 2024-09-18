@@ -25,6 +25,7 @@ function generateMatches() {
 				'start-time': 'fdafdfa',
 				'end-time': 'fdafdfa',
 				status: 0,
+				added: false,
 			});
 		}
 	}

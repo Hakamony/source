@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FaCirclePlus } from 'react-icons/fa6';
+import { FaCirclePlus, FaUserLarge } from 'react-icons/fa6';
 import { FaStar } from 'react-icons/fa';
 import { TbUserEdit } from 'react-icons/tb';
 import { AiOutlineUserDelete } from 'react-icons/ai';
@@ -61,7 +61,13 @@ export default function PlayersList() {
 	return (
 		<>
 			<section className="mt-8 rounded-lg bg-white px-2 py-8 drop-shadow-md">
-				<h2 className="text-center text-2xl font-bold">قائمة اللاعبين المضافة</h2>
+				<div className="flex items-center justify-between">
+					<h2 className="text-center text-2xl font-bold">قائمة اللاعبين المضافة</h2>
+					<span className="flex items-center justify-center gap-2 rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-4 text-lg font-bold text-prime-dark">
+						{players.length}
+						<FaUserLarge className="text-sm" />
+					</span>
+				</div>
 				<ul className="mt-4 flex flex-col gap-2">
 					{players.map((player) => {
 						return (

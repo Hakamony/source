@@ -28,4 +28,12 @@
 	.btn-disabled {
 		@apply bg-prime-green-100;
 	}
+
+	.scoreboard-mid {
+		border-top: 65px solid #ff6f00;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		height: 0;
+		width: 110px;
+	}
 }
