@@ -10,13 +10,13 @@ export default function StorageButton() {
 		const nextMatchId = matchStorage.getNextMatch();
 		const matchList = matchStorage.getMatchesList()
 
-		matchStorage.updateMatch(matchList[0], {status: 1});
-		matchStorage.updateMatch(matchList[1], {status: 1});
-		matchStorage.updateMatch(matchList[5], {status: 1});
+		matchStorage.updateMatch(matchList[1], {added: true});
+		// matchStorage.updateMatch(matchList[1], {added: true});
+		// matchStorage.updateMatch(matchList[5], {added: true});
 
 
 		// for(let i =0; i < matchList.length; i++){
-		// 	matchStorage.updateMatch(matchList[i], {status: 0});
+		// 	matchStorage.updateMatch(matchList[i], {status: 0, added: false});
 		// }
 		const position = matchList.indexOf(nextMatchId);
 		const match = matchStorage.getMatch(nextMatchId);
