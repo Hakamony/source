@@ -152,7 +152,7 @@ const getNextMatch = () => {
 	const matches0 = [];
 	for (let i = 0; i < matchList.length; i++) {
 		const match = getMatch(matchList[i]);
-		if (match.status === 1 && match.added) {
+		if (match.status === 1 || match.added) {
 			teamsPlaying.push(match.teams.first);
 			teamsPlaying.push(match.teams.second);
 		} else if (match.status === 0) {

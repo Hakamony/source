@@ -1,15 +1,18 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { BsFillClipboardCheckFill } from 'react-icons/bs';
 import eventStorage from '@/lib/storage/eventStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import FieldCard from '@/components/events/FieldCard';
 import EndEventPopUp from '@/components/events/EndEventPopUp';
+import HistoryCard from '@/components/events/HistoryCard';
 
 export default function EventDashboard() {
 	const [event, setEvent] = useState({});
 	const [currentMatches, setCurrentMatches] = useState([]);
-	// const [doneMatch, setDoneMatch] = useState([])
+	const [doneMatches, setDoneMatches] = useState([]);
+	const [showHistory, setShowHistory] = useState(false);
 	const [activeFields, setActiveFields] = useState([]);
 	const [endEvent, setEndEvent] = useState(false);
 	const [counter, setCounter] = useState(1);
@@ -22,6 +25,7 @@ export default function EventDashboard() {
 		const tmpList = [];
 		for (let i = 0; i < currEvent['fields-number']; i++) {
 			tmpList.push(matchesList[i]);
+			matchStorage.updateMatch(matchesList[i], { added: true });
 		}
 		setActiveFields(() => new Array(currEvent['fields-number']).fill(true));
 		setCurrentMatches(() => tmpList);
@@ -35,8 +39,8 @@ export default function EventDashboard() {
 	function addNextMatch(id, index) {
 		matchStorage.updateMatch(id, { status: 2 });
 		const newMatch = matchStorage.getNextMatch();
-		console.log(activeFields);
 		if (newMatch !== -1) {
+			matchStorage.updateMatch(newMatch, { added: true });
 			setCurrentMatches((prev) => {
 				prev[index] = newMatch;
 				return prev;
@@ -78,6 +82,14 @@ export default function EventDashboard() {
 				})}
 			</section>
 			<EndEventPopUp show={endEvent} />
+			<HistoryCard active={showHistory} setShowHistory={setShowHistory} />
+			<button
+				type="button"
+				onClick={() => setShowHistory((prev) => !prev)}
+				className="fixed bottom-4 right-4 rounded-full bg-prime-blue p-4"
+			>
+				<BsFillClipboardCheckFill className="text-4xl text-white" />
+			</button>
 		</main>
 	);
 }

@@ -36,6 +36,7 @@ export default function FieldCard({ ...props }) {
 	}
 
 	function handleEndMatch() {
+		matchStorage.updateMatch(props.matchId, { added: false });
 		props.addNextMatch(props.matchId, props.i);
 		props.setCounter((prev) => prev + 1);
 	}
@@ -75,11 +76,11 @@ export default function FieldCard({ ...props }) {
 										<Image
 											src={teamIcon}
 											alt="Picture of the author"
-											width={30}
+											width={25}
 											className="rounded-full"
 										/>
 									</button>
-									<div className="scoreboard-mid relative z-10 mx-[-20px]">
+									<div className="scoreboard-mid relative z-10 mx-[-1.5rem]">
 										<div className="absolute top-[-55px] flex w-full flex-col items-center justify-center text-sm text-white">
 											<span>مباراة: {props.counter + props.i}</span>
 											{match.status === 0 ? (
@@ -101,7 +102,7 @@ export default function FieldCard({ ...props }) {
 										<Image
 											src={teamIcon}
 											alt="Picture of the author"
-											width={30}
+											width={25}
 											className="rounded-full"
 										/>
 										<span>{secondTeam.name}</span>
