@@ -36,17 +36,17 @@ export default function FieldCard({ ...props }) {
 	}
 
 	function handleEndMatch() {
-		props.addNextMatch(props.matchId);
+		props.addNextMatch(props.matchId, props.i);
 		props.setCounter((prev) => prev + 1);
 	}
 
 	return (
-		<div className="relative rounded-lg bg-white py-2 text-center shadow-md">
+		<div
+			className="relative rounded-lg bg-white p-2 text-center shadow-md"
+			style={{ display: props.active ? 'block' : 'none' }}
+		>
 			{props.match !== -1 && (
 				<>
-					<h3 className="mb-2 text-2xl font-bold text-prime-orange">
-						ملعب {props.i + 1}
-					</h3>
 					<div className="relative">
 						<Image
 							alt="texture"
@@ -60,18 +60,16 @@ export default function FieldCard({ ...props }) {
 							}}
 							className="blur-[2px]"
 						/>
-						<div className="relative z-[1] px-2 pb-28 pt-14">
-							<div className="flex flex-col items-center justify-start gap-4 text-xl font-bold">
-								<p className="text-dark flex w-fit items-center justify-center gap-2 rounded bg-white px-4 py-1">
-									<span>{match.scores.first}</span>
-									<span>:</span>
-									<span>{match.scores.second}</span>
-								</p>
+						<div className="relative z-[1] px-2 pb-28 pt-16">
+							<div className="flex flex-col items-center justify-start text-xl font-bold">
+								<h4 className="text-dark mb-4 rounded bg-white px-6">
+									ملعب {props.i + 1}
+								</h4>
 								<div className="flex w-full items-center justify-between">
 									<button
 										type="button"
 										onClick={() => handleShowTeam(firstTeam)}
-										className="flex flex-1 items-center justify-center gap-4 rounded-r-md border-2 border-prime-orange bg-white py-1 pl-6"
+										className="flex flex-1 items-center justify-center gap-4 rounded-r-md border-2 border-prime-orange bg-white py-2 pl-6"
 									>
 										<span>{firstTeam.name}</span>
 										<Image
@@ -82,15 +80,23 @@ export default function FieldCard({ ...props }) {
 										/>
 									</button>
 									<div className="scoreboard-mid relative z-10 mx-[-20px]">
-										<div className="absolute top-[-47px] flex w-full flex-col items-center justify-center text-sm text-white">
+										<div className="absolute top-[-55px] flex w-full flex-col items-center justify-center text-sm text-white">
 											<span>مباراة: {props.counter + props.i}</span>
-											{match.status === 0 ? <span>لم تبدأ</span> : <span>بدأت</span>}
+											{match.status === 0 ? (
+												<span>لم تبدأ</span>
+											) : (
+												<p className="flex items-center justify-center gap-2 text-lg font-bold">
+													<span>{match.scores.first}</span>
+													<span>:</span>
+													<span>{match.scores.second}</span>
+												</p>
+											)}
 										</div>
 									</div>
 									<button
 										type="button"
 										onClick={() => handleShowTeam(secondTeam)}
-										className="flex flex-1 items-center justify-center gap-4 rounded-l-md border-2 border-prime-orange bg-white py-1 pr-6"
+										className="flex flex-1 items-center justify-center gap-4 rounded-l-md border-2 border-prime-orange bg-white py-2 pr-6"
 									>
 										<Image
 											src={teamIcon}
@@ -107,11 +113,11 @@ export default function FieldCard({ ...props }) {
 							<PlayersPopUp team={teamId} show={showTeam} setShowTeam={setShowTeam} />
 						)}
 					</div>
-					<div className="mt-2 flex justify-center gap-4">
+					<div className="mt-2 flex justify-center gap-4 px-4">
 						{match.status === 0 && (
 							<button
 								type="button"
-								className="flex items-center gap-2 rounded-lg bg-prime-green-200 px-8 py-1 text-xl font-bold text-white"
+								className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-prime-green-200 py-1 text-xl font-bold text-white"
 								onClick={handleMatchStart}
 							>
 								ابدأ
@@ -121,7 +127,7 @@ export default function FieldCard({ ...props }) {
 						{match.status !== 0 && (
 							<button
 								type="button"
-								className="flex items-center gap-2 rounded-lg bg-prime-yellow px-8 py-1 text-lg font-bold"
+								className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-prime-yellow py-1 text-lg font-bold"
 								onClick={handleMatchStart}
 							>
 								حاسبة النقاط
@@ -131,7 +137,7 @@ export default function FieldCard({ ...props }) {
 						{match.status !== 0 && (
 							<button
 								type="button"
-								className="flex items-center gap-2 rounded-lg bg-red-700 px-8 py-1 text-lg font-bold text-prime-white"
+								className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-red-700 py-1 text-lg font-bold text-prime-white"
 								onClick={handleEndMatch}
 								data-match-id={match.id}
 								id="match-card"

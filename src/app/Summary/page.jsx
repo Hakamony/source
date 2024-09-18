@@ -44,7 +44,10 @@ export default function Summary() {
 		setShowEdit((prev) => !prev);
 	}
 	return (
-		<main className="px-2 py-12 text-center">
+		<main
+			className="overflow-hidden px-2 py-12 text-center"
+			style={{ touchAction: showEdit || showEditMatches ? 'none' : 'auto' }}
+		>
 			{/* <StorageButton /> */}
 			<EventsNav active={4} />
 			<section className="my-12 rounded-xl bg-white p-4">
