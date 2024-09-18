@@ -156,19 +156,14 @@ export default function AddPlayer({
 					<option value="5">5</option>
 				</select>
 			</div>
-			<div className="flex justify-between">
-				<button
-					type="submit"
-					htmlFor="uploadPlayers"
-					className="flex cursor-pointer items-center justify-center gap-4 rounded-lg bg-prime-green-200 px-16 py-2 text-xl font-bold text-prime-white"
-				>
-					اضف لاعب
-					<FaUserPlus className="text-2xl" />
-				</button>
-				<span className="flex items-center justify-center rounded-lg border-2 border-solid border-prime-green-200 px-4 py-2 text-xl font-bold text-prime-green-200">
-					{players.length}
-				</span>
-			</div>
+			<button
+				type="submit"
+				htmlFor="uploadPlayers"
+				className="flex cursor-pointer items-center justify-center gap-4 rounded-lg bg-prime-green-200 px-16 py-2 text-xl font-bold text-prime-white"
+			>
+				اضف لاعب
+				<FaUserPlus className="text-2xl" />
+			</button>
 		</form>
 	);
 }

@@ -88,7 +88,7 @@ export default function GameSettings() {
 								اختر
 							</option>
 							<option value="points">نقاط</option>
-							<option value="points" disabled>
+							<option value="time" disabled>
 								محدد بوقت
 							</option>
 						</select>
