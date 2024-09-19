@@ -3,83 +3,77 @@ import matchStorage from '../storage/matchStorage';
 import eventStorage from '../storage/eventStorage';
 
 function generateMatches() {
-	const teams = teamStorage.getTeams();
-	const event = eventStorage.getEvent();
-	const fields = event['fields-number'];
-	let matches = [];
-	let matchId = 1;
+    const teams = teamStorage.getTeams();
+    const event = eventStorage.getEvent();
+    const fields = event['fields-number'];
+    let matches = [];
+    let matchId = 1;
+    let matchList = [];  
 
-	// Generate matches so that each team plays against each other once
-	for (let i = 0; i < teams.length; i++) {
-		for (let j = i + 1; j < teams.length; j++) {
-			matches.push({
-				number: matchId++,
-				teams: {
-					first: teams[i].id,
-					second: teams[j].id,
-				},
-				scores: {
-					first: 0,
-					second: 0,
-				},
-				'start-time': 'faff',
-				'end-time': 'faff',
-				status: 0,
-				added: false,
-			});
-		}
-	}
-	matchStorage.saveMatches(matches);
-	matches = matchStorage.getMatches();
-	// Shuffle matches to randomize the order
-	for (let i = matches.length - 1; i > 0; i--) {
-		const randomIndex = Math.floor(Math.random() * (i + 1));
-		[matches[i], matches[randomIndex]] = [matches[randomIndex], matches[i]];
-	}
-	matchStorage.saveMatchList([]);
-	// Return a list of match IDs in the randomized order
-	matches.forEach((match) => {
-		matchStorage.addToMatchList(match.id);
-	});
+    // Create match objects, each team plays once against every other team
+    for (let i = 0; i < teams.length; i++) {
+        for (let j = i + 1; j < teams.length; j++) {
+            matches.push({
+                id: matchId++,  
+                teams: {
+                    first: teams[i].id,
+                    second: teams[j].id,
+                },
+                scores: {
+                    first: 0,
+                    second: 0,
+                },
+                'start-time': 'TBD',
+                'end-time': 'TBD',
+                status: 0,
+                added: false,
+                field: null  // Field assignment will be done later
+            });
+        }
+    }
+
+    // This array tracks the last time each team played a match
+    let teamMatchOrder = Array(teams.length).fill(0);
+
+    // Function to find the next available teams that haven't played recently
+    function findNextAvailableTeams(matches, currentTimeSlot) {
+        for (let i = 0; i < teams.length; i++) {
+            for (let j = i + 1; j < teams.length; j++) {
+                // Check if these two teams are available to play in this time slot
+                if (teamMatchOrder[i] <= currentTimeSlot && teamMatchOrder[j] <= currentTimeSlot) {
+                    teamMatchOrder[i] = currentTimeSlot + 1; // Mark the team as having played
+                    teamMatchOrder[j] = currentTimeSlot + 1;
+                    return [teams[i].id, teams[j].id];  // Return the pair of teams
+                }
+            }
+        }
+        return null;  // Return null if no teams are available
+    }
+
+    // Assign matches to time slots and fields
+    let currentTimeSlot = 0;
+    while (matches.length > 0) {
+        for (let field = 1; field <= fields; field++) {
+            const nextTeams = findNextAvailableTeams(matches, currentTimeSlot);
+
+            if (nextTeams) {
+                // Assign match to field and time slot
+                const match = matches.find(m => m.teams.first === nextTeams[0] && m.teams.second === nextTeams[1]);
+                match['field'] = field;
+                
+                matchList.push(match.id);  // Add the match ID to the matchList in the correct order
+                matches = matches.filter(m => m !== match);  // Remove the match from the list after it's scheduled
+            }
+        }
+        currentTimeSlot++;  // Move to the next time slot after filling all fields
+    }
+
+    // Save the final list of matches
+    matchStorage.saveMatches(matches);
+
+    // Return the list of match IDs in the order they will be played
+    return matchList;
 }
 
-// Example usage
-const teams = [
-	{
-		id: 1,
-		name: 'Team 1',
-		players: [22, 13, 17, 10, 35, 34, 44, 66],
-		teamRating: '3.50',
-		numberOfPlayers: 8,
-	},
-	{
-		id: 2,
-		name: 'Team 2',
-		players: [17, 12, 14, 16, 15, 77, 33],
-		teamRating: '4.14',
-		numberOfPlayers: 7,
-	},
-	{
-		id: 3,
-		name: 'Team 3',
-		players: [55, 9, 17, 99, 68, 11, 88],
-		teamRating: '3.29',
-		numberOfPlayers: 7,
-	},
-	{
-		id: 4,
-		name: 'Team 4',
-		players: [55, 9, 17, 99, 68, 11],
-		teamRating: '3.6',
-		numberOfPlayers: 6,
-	},
-	{
-		id: 5,
-		name: 'Team 5',
-		players: [55, 9, 17, 99, 68, 11, 13, 22, 14],
-		teamRating: '3.2',
-		numberOfPlayers: 9,
-	},
-];
 
 export default generateMatches;
