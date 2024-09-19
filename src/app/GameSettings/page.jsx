@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import EventsNav from '@/components/events/EventsNav';
-// import Counter from '@/components/input/Counter';
-// import ButtonNav from '@/components/layout/ButtonNav';
 import eventStorage from '@/lib/storage/eventStorage';
 import generateTeams from '@/lib/Algorithems/generateTeams';
 import generateMatches from '@/lib/Algorithems/generateMatches';

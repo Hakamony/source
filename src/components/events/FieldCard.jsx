@@ -8,17 +8,15 @@ import Field from '../../../public/assets/field.jpg';
 import teamStorage from '@/lib/storage/teamStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import PlayersPopUp from './PlayersPopUp';
+import MatchPopUp from './MatchPopUp';
 
 export default function FieldCard({ ...props }) {
 	const [showTeam, setShowTeam] = useState(false);
 	const [teamId, setTeamId] = useState();
 	const [match, setMatch] = useState(matchStorage.getMatch(props.matchId));
-	const [firstTeam, setFirstMatch] = useState(
-		teamStorage.getTeam(match.teams.first),
-	);
-	const [secondTeam, setSecondMatch] = useState(
-		teamStorage.getTeam(match.teams.second),
-	);
+	const firstTeam = teamStorage.getTeam(match.teams.first);
+	const secondTeam = teamStorage.getTeam(match.teams.second);
+	const [showEndMatchPopUp, setShowEndMatchPopUP] = useState(false);
 
 	function handleMatchStart() {
 		setMatch((prev) => {
@@ -88,7 +86,7 @@ export default function FieldCard({ ...props }) {
 											) : (
 												<p className="flex items-center justify-center gap-2 text-lg font-bold">
 													<span>{match.scores.first}</span>
-													<span>:</span>
+													<span>-</span>
 													<span>{match.scores.second}</span>
 												</p>
 											)}
@@ -139,7 +137,7 @@ export default function FieldCard({ ...props }) {
 							<button
 								type="button"
 								className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-red-700 py-1 text-lg font-bold text-prime-white"
-								onClick={handleEndMatch}
+								onClick={() => setShowEndMatchPopUP((prev) => !prev)}
 								data-match-id={match.id}
 								id="match-card"
 							>
@@ -150,6 +148,15 @@ export default function FieldCard({ ...props }) {
 					</div>
 				</>
 			)}
+			<MatchPopUp
+				active={showEndMatchPopUp}
+				setShowEndMatchPopUP={setShowEndMatchPopUP}
+				match={match}
+				firstTeam={firstTeam}
+				secondTeam={secondTeam}
+				handleEndMatch={() => handleEndMatch()}
+				eventSport={props.eventSport}
+			/>
 		</div>
 	);
 }

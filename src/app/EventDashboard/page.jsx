@@ -11,7 +11,7 @@ import HistoryCard from '@/components/events/HistoryCard';
 export default function EventDashboard() {
 	const [event, setEvent] = useState({});
 	const [currentMatches, setCurrentMatches] = useState([]);
-	const [doneMatches, setDoneMatches] = useState([]);
+	const [endedMatches, setEndedMatches] = useState([]);
 	const [showHistory, setShowHistory] = useState(false);
 	const [activeFields, setActiveFields] = useState([]);
 	const [endEvent, setEndEvent] = useState(false);
@@ -20,12 +20,12 @@ export default function EventDashboard() {
 
 	useEffect(() => {
 		const currEvent = eventStorage.getEvent();
-		const matchesList = matchStorage.getMatchesList();
+		const matchesList = matchStorage.getMatches().filter((match) => match.added);
 		setEvent(() => currEvent);
 		const tmpList = [];
 		for (let i = 0; i < currEvent['fields-number']; i++) {
-			tmpList.push(matchesList[i]);
-			matchStorage.updateMatch(matchesList[i], { added: true });
+			tmpList.push(matchesList[i].id);
+			matchStorage.updateMatch(matchesList[i].id, { added: true });
 		}
 		setActiveFields(() => new Array(currEvent['fields-number']).fill(true));
 		setCurrentMatches(() => tmpList);
@@ -38,6 +38,7 @@ export default function EventDashboard() {
 
 	function addNextMatch(id, index) {
 		matchStorage.updateMatch(id, { status: 2 });
+		setEndedMatches((prev) => [...prev, currentMatches[index]]);
 		const newMatch = matchStorage.getNextMatch();
 		if (newMatch !== -1) {
 			matchStorage.updateMatch(newMatch, { added: true });
@@ -77,19 +78,26 @@ export default function EventDashboard() {
 							counter={counter}
 							setCounter={setCounter}
 							updateMatchStatus={(id) => updateMatchStatus(id)}
+							eventSport={event.sport}
 						/>
 					);
 				})}
 			</section>
 			<EndEventPopUp show={endEvent} />
-			<HistoryCard active={showHistory} setShowHistory={setShowHistory} />
-			<button
-				type="button"
-				onClick={() => setShowHistory((prev) => !prev)}
-				className="fixed bottom-4 right-4 rounded-full bg-prime-blue p-4"
-			>
-				<BsFillClipboardCheckFill className="text-4xl text-white" />
-			</button>
+			<HistoryCard
+				active={showHistory}
+				setShowHistory={setShowHistory}
+				endedMatches={endedMatches}
+			/>
+			{endedMatches.length !== 0 && (
+				<button
+					type="button"
+					onClick={() => setShowHistory((prev) => !prev)}
+					className="fixed bottom-4 right-4 rounded-full bg-prime-orange p-4"
+				>
+					<BsFillClipboardCheckFill className="text-4xl text-white" />
+				</button>
+			)}
 		</main>
 	);
 }

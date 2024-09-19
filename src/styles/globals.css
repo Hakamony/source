@@ -18,6 +18,11 @@
 	input[type='radio']:checked + label {
 		@apply bg-prime-orange text-white;
 	}
+
+	td,
+	th {
+		@apply py-2;
+	}
 }
 
 @layer components {
