@@ -22,8 +22,8 @@ function generateMatches() {
 					first: 0,
 					second: 0,
 				},
-				'start-time': 'fdafdfa',
-				'end-time': 'fdafdfa',
+				'start-time': 'faff',
+				'end-time': 'faff',
 				status: 0,
 				added: false,
 			});
@@ -41,12 +41,8 @@ function generateMatches() {
 	matches.forEach((match) => {
 		matchStorage.addToMatchList(match.id);
 	});
-
-	// for (let i = 0; i < fields; i++) {
-	// 	const id = matchStorage.getNextMatch();
-	// 	matchStorage.updateMatch(id, { status: 1 });
-	// }
 }
+
 // Example usage
 const teams = [
 	{
@@ -85,8 +81,5 @@ const teams = [
 		numberOfPlayers: 9,
 	},
 ];
-
-// const matchIds = generateMatches(teams);
-// console.log(matchIds);
 
 export default generateMatches;
