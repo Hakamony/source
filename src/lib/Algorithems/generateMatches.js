@@ -42,10 +42,10 @@ function generateMatches() {
 		matchStorage.addToMatchList(match.id);
 	});
 
-	// for (let i = 0; i < fields; i++) {
-	// 	const id = matchStorage.getNextMatch();
-	// 	matchStorage.updateMatch(id, { status: 1 });
-	// }
+	for (let i = 0; i < fields; i++) {
+		const id = matchStorage.getNextMatch();
+		matchStorage.updateMatch(id, { added: true });
+	}
 }
 // Example usage
 const teams = [

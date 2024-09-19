@@ -18,6 +18,11 @@
 	input[type='radio']:checked + label {
 		@apply bg-prime-orange text-white;
 	}
+
+	td,
+	th {
+		@apply py-2;
+	}
 }
 
 @layer components {
@@ -30,10 +35,10 @@
 	}
 
 	.scoreboard-mid {
-		border-top: 65px solid #ff6f00;
-		border-left: 20px solid transparent;
-		border-right: 20px solid transparent;
+		border-top: 4rem solid #ff6f00;
+		border-left: 1.2rem solid transparent;
+		border-right: 1.2rem solid transparent;
 		height: 0;
-		width: 110px;
+		width: 6rem;
 	}
 }
