@@ -3,18 +3,16 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import EventsNav from '@/components/events/EventsNav';
-// import Counter from '@/components/input/Counter';
-// import ButtonNav from '@/components/layout/ButtonNav';
 import eventStorage from '@/lib/storage/eventStorage';
 import generateTeams from '@/lib/Algorithems/generateTeams';
 import generateMatches from '@/lib/Algorithems/generateMatches';
 
-export default function UploadPlayers() {
+export default function GameSettings() {
 	const [form, setForm] = useState({
-		'score-type': '',
+		'score-type': 'points',
 		'max-team-player': 0,
 		'fields-number': 0,
-		'event-type': '',
+		'event-type': 'league',
 		'total-cost': '',
 	});
 
@@ -88,7 +86,7 @@ export default function UploadPlayers() {
 								اختر
 							</option>
 							<option value="points">نقاط</option>
-							<option value="points" disabled>
+							<option value="time" disabled>
 								محدد بوقت
 							</option>
 						</select>
@@ -180,9 +178,7 @@ export default function UploadPlayers() {
 							<option value="" disabled>
 								اختر
 							</option>
-							<option value="league" defaultChecked>
-								دوري
-							</option>
+							<option value="league">دوري</option>
 							<option value="winner" disabled>
 								الفائز مستمر-قريباً-
 							</option>

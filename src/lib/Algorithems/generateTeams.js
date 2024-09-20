@@ -1,6 +1,29 @@
 import playerStorage from '../storage/playerStorage';
 import teamStorage from '../storage/teamStorage';
 
+let teamsNames = [
+	'الفحلقي',
+	'القرمزي',
+	'المشمشي',
+	'البترولي',
+	'التنانين',
+	'الذيبان',
+	'الفرسان',
+	'المخضرمين',
+	'الصقور',
+	'النمور',
+	'المهندسين',
+	'المش مهندسين',
+	'النصر',
+	'المعضلين',
+	'المحنكين',
+];
+function getRandomInt(min, max) {
+	const minCeiled = Math.ceil(min);
+	const maxFloored = Math.floor(max);
+	return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+}
+
 function calculateAverageRating(players) {
 	const totalRating = players.reduce((sum, player) => sum + player.Rating, 0);
 	return totalRating / players.length;
@@ -52,12 +75,18 @@ function generateTeamsByNumber(numTeams) {
 	const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
 
 	const teams = ageBalancedTeams.map((team, i) => {
+		const name = teamsNames.length
+			? teamsNames[getRandomInt(0, teamsNames.length - 1)]
+			: `فريق ${i}`;
 		const newTeam = {
-			name: `Team ${i + 1}`,
+			name,
 			players: team,
 			'team-rating': calculateAverageRating(team),
 			'number-of-players': team.length,
 		};
+		if (teamsNames.length) {
+			teamsNames = teamsNames.filter((n) => n !== name);
+		}
 		return newTeam;
 	});
 
@@ -84,12 +113,18 @@ function generateTeamsByMaxPlayers(maxPlayersPerTeam) {
 	const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
 
 	const teams = ageBalancedTeams.map((team, i) => {
+		const name = teamsNames.length
+			? teamsNames[getRandomInt(0, teamsNames.length - 1)]
+			: `فريق ${i}`;
 		const newTeam = {
-			name: `Team ${i + 1}`,
+			name,
 			players: team,
 			'team-rating': calculateAverageRating(team),
 			'number-of-players': team.length,
 		};
+		if (teamsNames.length) {
+			teamsNames = teamsNames.filter((n) => n !== name);
+		}
 		return newTeam;
 	});
 

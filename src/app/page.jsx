@@ -6,9 +6,9 @@ import ButtonNav from '@/components/layout/ButtonNav';
 
 export default function Home() {
 	return (
-		<main className="h-100vh font-main flex h-screen w-screen flex-col items-center justify-start gap-24 py-8">
+		<main className="h-100vh font-main flex h-screen w-screen flex-col items-center justify-start gap-8 py-8">
 			<section>
-				<Image src={hakamImg} alt="Picture of the author" width={250} />
+				<Image src={hakamImg} alt="Picture of the author" width={200} />
 			</section>
 			<section className="flex flex-col gap-4 text-center">
 				<ButtonNav link="/SelectEvent" color="bg-prime-orange">
@@ -17,13 +17,13 @@ export default function Home() {
 						<IoRocketSharp />
 					</div>
 				</ButtonNav>
-				<ButtonNav link="/" color="bg-prime-dark">
+				<ButtonNav link="/" color="bg-gray-400">
 					<div className="flex items-center justify-center gap-4">
 						<span>عرض الفاعليات</span>
 						<IoMdConstruct />
 					</div>
 				</ButtonNav>
-				<ButtonNav link="/" color="bg-prime-dark">
+				<ButtonNav link="/" color="bg-gray-400">
 					<div className="flex items-center justify-center gap-4">
 						<span>العاب عشوائية</span>
 						<IoMdConstruct />

@@ -21,16 +21,26 @@ export default function AddPlayer({
 
 	function handleNewPlayer(e) {
 		e.preventDefault();
-		playerStorage.addPlayer({
-			name: form.name,
-			Rating: Number(form.Rating),
-			'Age-Group': Number(form['Age-Group']),
-		});
+		const toBeUpdated = players.find((player) => player.id === form.id);
+		if (!toBeUpdated) {
+			playerStorage.addPlayer({
+				name: form.name,
+				Rating: Number(form.Rating),
+				'Age-Group': Number(form['Age-Group']),
+			});
+		} else {
+			playerStorage.updatePlayer(toBeUpdated.id, {
+				name: form.name,
+				Rating: Number(form.Rating),
+				'Age-Group': Number(form['Age-Group']),
+			});
+		}
 		setPlayers(playerStorage.getPlayers());
 		setForm({
+			id: '',
 			name: '',
 			Rating: '',
-			'Age-Group': 1,
+			'Age-Group': '0',
 		});
 		setShowForm((prev) => !prev);
 	}
@@ -59,6 +69,17 @@ export default function AddPlayer({
 					الفئة العمرية
 				</h3>
 				<div className="mt-6 flex items-center justify-center gap-2">
+					<input
+						type="radio"
+						id="none"
+						name="Age-Group"
+						value="0"
+						className="hidden"
+						onChange={handleFormChange}
+						checked={form['Age-Group'] === '0'}
+						disabled
+						required
+					/>
 					<div className="flex-1">
 						<input
 							type="radio"
@@ -67,11 +88,12 @@ export default function AddPlayer({
 							value="1"
 							className="hidden"
 							onChange={handleFormChange}
+							checked={form['Age-Group'] === '1'}
 							required
 						/>
 						<label
 							for="young"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white"
 						>
 							صغار
 						</label>
@@ -84,11 +106,12 @@ export default function AddPlayer({
 							value="2"
 							className="hidden"
 							onChange={handleFormChange}
+							checked={form['Age-Group'] === '2'}
 							required
 						/>
 						<label
 							for="youth"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white"
 						>
 							شباب
 						</label>
@@ -101,11 +124,12 @@ export default function AddPlayer({
 							value="3"
 							className="hidden"
 							onChange={handleFormChange}
+							checked={form['Age-Group'] === '3'}
 							required
 						/>
 						<label
 							for="adult"
-							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white data-[selected=true]:bg-prime-orange data-[selected=true]:text-white"
+							className="text-prime-whit hover:bg-ptime-orange rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-8 text-lg font-bold hover:bg-prime-orange hover:text-white"
 						>
 							كبار
 						</label>
@@ -132,19 +156,14 @@ export default function AddPlayer({
 					<option value="5">5</option>
 				</select>
 			</div>
-			<div className="flex justify-between">
-				<button
-					type="submit"
-					htmlFor="uploadPlayers"
-					className="flex cursor-pointer items-center justify-center gap-4 rounded-lg bg-prime-green-200 px-16 py-2 text-xl font-bold text-prime-white"
-				>
-					اضف لاعب
-					<FaUserPlus className="text-2xl" />
-				</button>
-				<span className="flex items-center justify-center rounded-lg border-2 border-solid border-prime-green-200 px-4 py-2 text-xl font-bold text-prime-green-200">
-					{players.length}
-				</span>
-			</div>
+			<button
+				type="submit"
+				htmlFor="uploadPlayers"
+				className="flex cursor-pointer items-center justify-center gap-4 rounded-lg bg-prime-green-200 px-16 py-2 text-xl font-bold text-prime-white"
+			>
+				اضف لاعب
+				<FaUserPlus className="text-2xl" />
+			</button>
 		</form>
 	);
 }

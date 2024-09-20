@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FaCirclePlus } from 'react-icons/fa6';
+import { FaCirclePlus, FaUserLarge } from 'react-icons/fa6';
 import { FaStar } from 'react-icons/fa';
 import { TbUserEdit } from 'react-icons/tb';
 import { AiOutlineUserDelete } from 'react-icons/ai';
@@ -12,9 +12,10 @@ export default function PlayersList() {
 	const [showForm, setShowForm] = useState(false);
 	const [players, setPlayers] = useState([]);
 	const [form, setForm] = useState({
+		id: '',
 		name: '',
 		Rating: '',
-		'Age-Group': 1,
+		'Age-Group': 0,
 	});
 
 	useEffect(() => {
@@ -22,6 +23,12 @@ export default function PlayersList() {
 	}, []);
 
 	function handleForm() {
+		setForm({
+			id: '',
+			name: '',
+			Rating: '',
+			'Age-Group': 0,
+		});
 		setShowForm((prev) => !prev);
 	}
 
@@ -30,11 +37,12 @@ export default function PlayersList() {
 		setPlayers(playerStorage.getPlayers());
 	};
 
-	const handleUpdate = (name, Rating, ageGroup) => {
+	const handleUpdate = (id, name, Rating, ageGroup) => {
 		setForm({
+			id: id,
 			name,
 			Rating,
-			'Age-Group': ageGroup,
+			'Age-Group': ageGroup.toString(),
 		});
 		setShowForm((prev) => !prev);
 	};
@@ -53,7 +61,13 @@ export default function PlayersList() {
 	return (
 		<>
 			<section className="mt-8 rounded-lg bg-white px-2 py-8 drop-shadow-md">
-				<h2 className="text-center text-2xl font-bold">قائمة اللاعبين المضافة</h2>
+				<div className="flex items-center justify-between">
+					<h2 className="text-center text-2xl font-bold">قائمة اللاعبين المضافة</h2>
+					<span className="flex items-center justify-center gap-2 rounded-lg border-2 border-solid border-prime-orange bg-prime-white px-4 text-lg font-bold text-prime-dark">
+						{players.length}
+						<FaUserLarge className="text-sm" />
+					</span>
+				</div>
 				<ul className="mt-4 flex flex-col gap-2">
 					{players.map((player) => {
 						return (
@@ -66,15 +80,20 @@ export default function PlayersList() {
 									<div className="flex items-center gap-2">{stars(player.Rating)}</div>
 								</div>
 								<div className="flex w-1/3 flex-none gap-2">
-									{/* <button
+									<button
 										type="button"
 										className="flex-1 rounded-md bg-prime-yellow py-2"
 										onClick={() => {
-											handleUpdate(player.name, player.Rating, player['Age-Group']);
+											handleUpdate(
+												player.id,
+												player.name,
+												player.Rating,
+												player['Age-Group'],
+											);
 										}}
 									>
 										<TbUserEdit className="w-full" />
-									</button> */}
+									</button>
 									<button
 										type="button"
 										className="flex-1 rounded-md bg-red-500 py-2 text-prime-white"
