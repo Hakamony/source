@@ -11,8 +11,8 @@ export default function EndEventPopUp({ ...props }) {
 				نشكرك على استخدام حكموني، ونرجو ان ينال موقعنا اعجابك، انتظر المزيد من
 				المزايا قريبا!
 			</p>
-			<ButtonNav link="/" color="bg-prime-green-200">
-				العودة للصفحة الرئيسية
+			<ButtonNav link="/EventStats" color="bg-prime-green-200">
+				احصائيات الفاعلية
 			</ButtonNav>
 		</div>
 	);

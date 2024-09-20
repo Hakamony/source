@@ -93,7 +93,7 @@ export default function EventDashboard() {
 				<button
 					type="button"
 					onClick={() => setShowHistory((prev) => !prev)}
-					className="fixed bottom-4 right-4 rounded-full bg-prime-orange p-4"
+					className="fixed bottom-4 right-4 z-30 rounded-full bg-prime-orange p-4"
 				>
 					<BsFillClipboardCheckFill className="text-4xl text-white" />
 				</button>
