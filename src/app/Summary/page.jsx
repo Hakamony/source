@@ -137,10 +137,10 @@ export default function Summary() {
 
 							return (
 								<li
-									className="flex w-full shrink-0 items-center justify-center gap-6 bg-prime-white py-6 text-lg font-bold"
+									className="flex w-full shrink-0 items-center justify-center gap-4 bg-prime-white py-6 text-lg font-bold"
 									key={match.id}
 								>
-									<div className="flex items-center justify-center gap-2">
+									<div className="flex flex-1 items-center justify-end gap-2">
 										<span>{team1.name}</span>
 										<Image
 											src={teamIcon}
@@ -153,7 +153,7 @@ export default function Summary() {
 										<span>مباراة: {i + 1}</span>
 										<span>في مواجهة</span>
 									</p>
-									<div className="flex items-center justify-center gap-2">
+									<div className="flex flex-1 items-center justify-start gap-2">
 										<Image
 											src={teamIcon}
 											alt="Picture of the author"
