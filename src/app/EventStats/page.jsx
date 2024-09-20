@@ -43,6 +43,16 @@ export default function UploadPlayers() {
 					</li>
 				))}
 			</ul>
+			<div className="mt-8 flex flex-col gap-2 rounded-md bg-white py-2">
+				<div className="flex items-center justify-between px-8">
+					<span>التكلفة الاجمالية</span>
+					<span>{event['total-cost']}</span>
+				</div>
+				<div className="flex items-center justify-between px-8">
+					<span>التكلفة لكل لاعب</span>
+					<span>{event['total-cost'] / event['players-number']}</span>
+				</div>
+			</div>
 		</main>
 	);
 }
