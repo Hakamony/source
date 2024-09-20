@@ -2,20 +2,29 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import teamIcon from '../../../public/assets/team-icon.jpg';
 import eventStorage from '@/lib/storage/eventStorage';
 import matchStorage from '@/lib/storage/matchStorage';
 import teamStorage from '@/lib/storage/teamStorage';
 import ButtonNav from '@/components/layout/ButtonNav';
 
-export default function UploadPlayers() {
-	const event = eventStorage.getEvent();
-	const teams = teamStorage
-		.getTeams()
-		.sort(
-			(team1, team2) => team2['match-played'].won - team1['match-played'].won,
+export default function EventStats() {
+	const [event, setEvent] = useState({});
+	const [teams, setTeams] = useState([]);
+	const [matches, setMatches] = useState([]);
+
+	useEffect(() => {
+		setEvent(eventStorage.getEvent());
+		setTeams(
+			teamStorage
+				.getTeams()
+				.sort(
+					(team1, team2) => team2['match-played'].won - team1['match-played'].won,
+				),
 		);
-	const matches = matchStorage.getMatches();
+		setMatches(matchStorage.getMatches());
+	}, []);
 	return (
 		<main className="flex flex-col gap-4 px-2 py-12">
 			<nav className="flex items-center justify-between">
