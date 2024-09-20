@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaCalculator } from 'react-icons/fa';
+import { FaCalculator, FaPlusCircle, FaMinusCircle } from 'react-icons/fa';
 import { FaCirclePlay } from 'react-icons/fa6';
 import { GiWhistle } from 'react-icons/gi';
 import Image from 'next/image';
@@ -17,6 +17,7 @@ export default function FieldCard({ ...props }) {
 	const firstTeam = teamStorage.getTeam(match.teams.first);
 	const secondTeam = teamStorage.getTeam(match.teams.second);
 	const [showEndMatchPopUp, setShowEndMatchPopUP] = useState(false);
+	const [showEditScores, setShowEditScores] = useState(false);
 
 	function handleMatchStart() {
 		setMatch((prev) => {
@@ -57,10 +58,9 @@ export default function FieldCard({ ...props }) {
 							style={{
 								objectFit: 'cover',
 							}}
-							className="blur-[2px]"
 						/>
-						<div className="relative z-[1] px-2 pb-28 pt-16">
-							<div className="flex flex-col items-center justify-start text-xl font-bold">
+						<div className="relative z-[1] h-[30vh] w-full px-2">
+							<div className="flex h-full flex-col items-center justify-center text-xl font-bold">
 								<h4 className="text-dark mb-4 rounded bg-white px-6">
 									ملعب {props.i + 1}
 								</h4>
@@ -106,8 +106,83 @@ export default function FieldCard({ ...props }) {
 										<span>{secondTeam.name}</span>
 									</button>
 								</div>
+								<div className="z-10 mt-2 flex w-full items-center justify-between px-8 text-4xl text-prime-green-200">
+									{!showEditScores && match.status !== 0 && (
+										<>
+											<button
+												type="button"
+												className="rounded-full bg-white p-1"
+												onClick={() =>
+													setMatch((prev) => ({
+														...prev,
+														scores: {
+															first: prev.scores.first + 1,
+															second: prev.scores.second,
+														},
+													}))
+												}
+											>
+												<FaPlusCircle />
+											</button>
+											<button
+												type="button"
+												className="rounded-full bg-white p-1"
+												onClick={() =>
+													setMatch((prev) => ({
+														...prev,
+														scores: {
+															first: prev.scores.first,
+															second: prev.scores.second + 1,
+														},
+													}))
+												}
+											>
+												<FaPlusCircle />
+											</button>
+										</>
+									)}
+									{showEditScores && match.status !== 0 && (
+										<>
+											<button
+												type="button"
+												className="rounded-full bg-white p-1 text-red-700"
+												onClick={() => {
+													if (match.scores.first !== 0) {
+														setMatch((prev) => ({
+															...prev,
+															scores: {
+																first: prev.scores.first - 1,
+																second: prev.scores.second,
+															},
+														}));
+													}
+												}}
+											>
+												<FaMinusCircle />
+											</button>
+											<button
+												type="button"
+												className="rounded-full bg-white p-1 text-red-700"
+												onClick={() => {
+													if (match.scores.second !== 0) {
+														setMatch((prev) => ({
+															...prev,
+															scores: {
+																first: prev.scores.first,
+																second: prev.scores.second - 1,
+															},
+														}));
+													}
+												}}
+											>
+												<FaMinusCircle />
+											</button>
+										</>
+									)}
+								</div>
 							</div>
 						</div>
+
 						{teamId && (
 							<PlayersPopUp team={teamId} show={showTeam} setShowTeam={setShowTeam} />
 						)}
@@ -127,9 +202,9 @@ export default function FieldCard({ ...props }) {
 							<button
 								type="button"
 								className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-prime-yellow py-1 text-lg font-bold"
-								onClick={handleMatchStart}
+								onClick={() => setShowEditScores((prev) => !prev)}
 							>
-								حاسبة النقاط
+								تعديل النقاط
 								<FaCalculator />
 							</button>
 						)}
