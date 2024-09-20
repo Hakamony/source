@@ -1,17 +1,25 @@
-import { useState } from 'react';
-import { FaRegSquareCheck } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import teamIcon from '../../../public/assets/team-icon.jpg';
 import matchStorage from '@/lib/storage/matchStorage';
 import teamStorage from '@/lib/storage/teamStorage';
 
 export default function MatchPopUp({ ...props }) {
+	const defaultWinnerValue = props.eventSport === 'volleyball' ? 24 : 1;
+
 	const [scoresList, setScoresList] = useState({
 		first: '',
 		second: '',
 	});
 
-	const defaultWinnerValue = props.eventSport === 'volleyball' ? 24 : 1;
+	useEffect(
+		() =>
+			setScoresList(() => ({
+				first: props.match.scores.first,
+				second: props.match.scores.second,
+			})),
+		[props.match],
+	);
 
 	function handleFormChange(e) {
 		setScoresList((prev) => {
@@ -50,6 +58,7 @@ export default function MatchPopUp({ ...props }) {
 			props.setShowEndMatchPopUP((prev) => !prev);
 		}
 	}
+
 	return (
 		<div
 			className="fixed inset-x-2 top-1/3 z-30 h-fit flex-col gap-8 rounded-lg border-2 border-solid border-prime-dark bg-prime-white py-8 text-center"
