@@ -6,9 +6,13 @@ import ButtonNav from '@/components/layout/ButtonNav';
 
 export default function Home() {
 	return (
-		<main className="h-100vh font-main flex h-screen w-screen flex-col items-center justify-start gap-8 py-8">
+		<main className="h-100vh font-main mx-auto flex h-screen w-screen max-w-[485px] flex-col items-center justify-start gap-14 py-4">
 			<section>
-				<Image src={hakamImg} alt="Picture of the author" width={200} />
+				<Image
+					src={hakamImg}
+					alt="Picture of the author"
+					style={{ width: '70%', margin: 'auto' }}
+				/>
 			</section>
 			<section className="flex flex-col gap-4 text-center">
 				<ButtonNav link="/SelectEvent" color="bg-prime-orange">
