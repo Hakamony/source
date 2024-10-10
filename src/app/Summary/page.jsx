@@ -43,6 +43,13 @@ export default function Summary() {
 	function handleEditPlayers() {
 		setShowEdit((prev) => !prev);
 	}
+
+	const eventName = {
+		football: 'كرة قدم',
+		volleyball: 'كرة طائرة',
+		padel: 'بادل',
+	};
+
 	return (
 		<main
 			className="overflow-hidden px-2 py-12 text-center"
@@ -57,7 +64,7 @@ export default function Summary() {
 					<li>
 						<h2 className="flex justify-between px-20 text-lg font-bold">
 							<span>الرياضة:</span>
-							<span>{event.sport === 'football' ? 'كرة قدم' : 'كرة طائرة'}</span>
+							<span>{eventName[event.sport]}</span>
 						</h2>
 					</li>
 					<li>
@@ -127,7 +134,7 @@ export default function Summary() {
 					})}
 				</div>
 			</section>
-			<div className="rounded-xl bg-white p-4">
+			<div className="rounded-xl bg-white p-2">
 				<section className="my-12">
 					<h1 className="mb-8 text-4xl font-bold">جدول المباريات</h1>
 					<ul className="flex h-[350px] flex-col items-center divide-y divide-white overflow-y-scroll rounded-lg bg-prime-white">
@@ -137,7 +144,7 @@ export default function Summary() {
 
 							return (
 								<li
-									className="flex w-full shrink-0 items-center justify-center gap-4 bg-prime-white py-6 text-lg font-bold"
+									className="flex w-full shrink-0 items-center justify-center gap-2 bg-prime-white py-6 text-lg font-bold"
 									key={match.id}
 								>
 									<div className="flex flex-1 items-center justify-end gap-2">
@@ -150,8 +157,8 @@ export default function Summary() {
 										/>
 									</div>
 									<p className="flex flex-col items-center justify-center pb-2 text-sm font-normal">
+										<span>V.S</span>
 										<span>مباراة: {i + 1}</span>
-										<span>في مواجهة</span>
 									</p>
 									<div className="flex flex-1 items-center justify-start gap-2">
 										<Image

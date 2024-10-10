@@ -120,7 +120,7 @@ export default function EventStats() {
 				</div>
 				<div className="flex items-center justify-between px-8">
 					<span>التكلفة لكل لاعب</span>
-					<span>{event['total-cost'] / event['players-number']}</span>
+					<span>{(event['total-cost'] / event['players-number']).toFixed(2)}</span>
 				</div>
 			</div>
 			<ButtonNav link="/" color="bg-prime-green-200">

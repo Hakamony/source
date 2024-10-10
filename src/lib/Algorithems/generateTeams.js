@@ -1,7 +1,7 @@
 import playerStorage from '../storage/playerStorage';
 import teamStorage from '../storage/teamStorage';
 
-let teamsNames = [
+const teamsNames = [
 	'الفحلقي',
 	'القرمزي',
 	'المشمشي',
@@ -73,19 +73,20 @@ function generateTeamsByNumber(numTeams) {
 	const players = playerStorage.getPlayers();
 	const shuffledPlayers = shuffleArray([...players]);
 	const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
+	let names = [...teamsNames];
 
 	const teams = ageBalancedTeams.map((team, i) => {
-		const name = teamsNames.length
-			? teamsNames[getRandomInt(0, teamsNames.length - 1)]
-			: `فريق ${i}`;
+		const name = names.length
+			? names[getRandomInt(0, names.length - 1)]
+			: `فريق ${i + 1}`;
 		const newTeam = {
 			name,
 			players: team,
 			'team-rating': calculateAverageRating(team),
 			'number-of-players': team.length,
 		};
-		if (teamsNames.length) {
-			teamsNames = teamsNames.filter((n) => n !== name);
+		if (names.length) {
+			names = names.filter((n) => n !== name);
 		}
 		return newTeam;
 	});
@@ -112,18 +113,20 @@ function generateTeamsByMaxPlayers(maxPlayersPerTeam) {
 
 	const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
 
+	let names = [...teamsNames];
+
 	const teams = ageBalancedTeams.map((team, i) => {
-		const name = teamsNames.length
-			? teamsNames[getRandomInt(0, teamsNames.length - 1)]
-			: `فريق ${i}`;
+		const name = names.length
+			? names[getRandomInt(0, names.length - 1)]
+			: `فريق ${i + 1}`;
 		const newTeam = {
 			name,
 			players: team,
 			'team-rating': calculateAverageRating(team),
 			'number-of-players': team.length,
 		};
-		if (teamsNames.length) {
-			teamsNames = teamsNames.filter((n) => n !== name);
+		if (names.length) {
+			names = names.filter((n) => n !== name);
 		}
 		return newTeam;
 	});
