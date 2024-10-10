@@ -68,18 +68,18 @@ export default function FieldCard({ ...props }) {
 									<button
 										type="button"
 										onClick={() => handleShowTeam(firstTeam)}
-										className="flex flex-1 items-center justify-center gap-4 rounded-r-md border-2 border-prime-orange bg-white py-2 pl-6"
+										className="text-md flex flex-1 items-center justify-center gap-4 rounded-r-md border-2 border-prime-orange bg-white py-2 pl-4"
 									>
 										<span>{firstTeam.name}</span>
-										<Image
+										{/* <Image
 											src={teamIcon}
 											alt="Picture of the author"
 											width={25}
 											className="rounded-full"
-										/>
+										/> */}
 									</button>
 									<div className="scoreboard-mid relative z-10 mx-[-1.5rem]">
-										<div className="absolute top-[-55px] flex w-full flex-col items-center justify-center text-sm text-white">
+										<div className="absolute top-[-50px] flex w-full flex-col items-center justify-center text-xs text-white">
 											<span>مباراة: {props.counter + props.i}</span>
 											{match.status === 0 ? (
 												<span>لم تبدأ</span>
@@ -95,14 +95,14 @@ export default function FieldCard({ ...props }) {
 									<button
 										type="button"
 										onClick={() => handleShowTeam(secondTeam)}
-										className="flex flex-1 items-center justify-center gap-4 rounded-l-md border-2 border-prime-orange bg-white py-2 pr-6"
+										className="text-md flex flex-1 items-center justify-center gap-4 rounded-l-md border-2 border-prime-orange bg-white py-2 pr-4"
 									>
-										<Image
+										{/* <Image
 											src={teamIcon}
 											alt="Picture of the author"
 											width={25}
 											className="rounded-full"
-										/>
+										/> */}
 										<span>{secondTeam.name}</span>
 									</button>
 								</div>
