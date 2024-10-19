@@ -119,7 +119,7 @@ export default function PlayersList() {
 			/>
 			<button type="button" onClick={handleForm}>
 				<FaCirclePlus
-					className="fixed bottom-4 right-4 text-6xl text-prime-green-200 duration-200 data-[active=true]:rotate-45"
+					className="fixed bottom-4 right-4 rounded-full bg-prime-white text-6xl text-prime-green-200 duration-200 data-[active=true]:rotate-45 data-[active=false]:animate-bounce"
 					data-active={showForm ? 'true' : 'false'}
 				/>
 			</button>

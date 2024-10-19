@@ -42,7 +42,7 @@ export default function MatchPopUp({ ...props }) {
 	}
 
 	function endMatch() {
-		if (scoresList.first && scoresList.second) {
+		if (scoresList.first || scoresList.second) {
 			matchStorage.updateMatch(props.match.id, { scores: scoresList });
 			teamStorage.addWinToTeam(
 				scoresList.first > scoresList.second

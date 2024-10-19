@@ -16,7 +16,7 @@ module.exports = {
 				'prime-blue': '#01baef',
 				'prime-orange': '#ff6f00',
 				'prime-green': {
-					100: '#379634',
+					100: '#32cd3260',
 					200: '#32cd32',
 				},
 				'prime-yellow': '#ffe156',

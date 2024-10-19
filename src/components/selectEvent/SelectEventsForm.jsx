@@ -80,11 +80,9 @@ export default function SelectEventsForm() {
 						</option>
 						<option value="football">كرة قدم</option>
 						<option value="volleyball">كرة طائرة</option>
+						<option value="padel">بادل</option>
 						<option value="pingpong" disabled>
 							تنس طاولة
-						</option>
-						<option value="padel" disabled>
-							بادل
 						</option>
 					</select>
 				</div>

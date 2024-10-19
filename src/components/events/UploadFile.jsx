@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CiSquareCheck } from 'react-icons/ci';
+import { FaSquareCheck } from 'react-icons/fa6';
 import playerStorage from '@/lib/storage/playerStorage';
 
 export default function UploadFile(props) {
@@ -27,7 +27,7 @@ export default function UploadFile(props) {
 					htmlFor="file"
 					className="flex-1 cursor-pointer rounded-lg bg-prime-orange py-2 text-lg font-bold text-prime-white"
 				>
-					تحميل الملف (صيغة <span dir="ltr">.json</span>)
+					اختيار ملف اللاعبين
 				</label>
 				<input
 					type="file"
@@ -39,8 +39,16 @@ export default function UploadFile(props) {
 			</div>
 			<div className="flex items-center justify-between">
 				<p> تم اختيار الملف التالي: {file.name}</p>
-				<button type="submit" htmlFor="uploadPlayers" onClick={handleFileSubmit}>
-					<CiSquareCheck className="text-5xl text-prime-green-200" />
+				<button
+					type="submit"
+					htmlFor="uploadPlayers"
+					onClick={handleFileSubmit}
+					className="h-fit w-fit"
+				>
+					<FaSquareCheck
+						className="text-4xl text-prime-green-100 data-[active=true]:animate-pulse data-[active=true]:text-prime-green-200"
+						data-active={file.length !== 0}
+					/>
 				</button>
 			</div>
 		</form>
