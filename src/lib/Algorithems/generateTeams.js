@@ -57,22 +57,41 @@ function balanceAgeGroups(players, numTeams) {
 	return balancedTeams;
 }
 
+function sortByRating(players) {
+	return players.sort((a, b) => b.rating - a.rating);
+}
+
 function distributePlayersEqually(players, numTeams) {
 	const teams = Array.from({ length: numTeams }, () => []);
 	const totalPlayers = players.length;
+	const sortedPlayers = sortByRating(players);
 
 	// Distribute players equally across teams
-	players.forEach((player, index) => {
-		teams[index % numTeams].push(player);
-	});
+	let first = -1;
+	while (sortedPlayers.length !== 0) {
+		first = first < 0 ? 1 : -1;
+		for (let i = 0; i < numTeams; i++) {
+			if (sortedPlayers.length !== 0) {
+				let player;
+				if (first > 0) {
+					player = sortedPlayers.shift();
+				} else {
+					player = sortedPlayers.pop();
+				}
+				teams[i].push(player);
+			} else {
+				break;
+			}
+		}
+	}
 
 	return teams;
 }
 
 function generateTeamsByNumber(numTeams) {
 	const players = playerStorage.getPlayers();
-	const shuffledPlayers = shuffleArray([...players]);
-	const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
+	// const shuffledPlayers = shuffleArray([...players]);
+	const ageBalancedTeams = distributePlayersEqually(players, numTeams);
 
 	const teams = ageBalancedTeams.map((team, i) => {
 		const name = teamsNames.length
@@ -107,10 +126,10 @@ function generateTeamsByNumber(numTeams) {
 
 function generateTeamsByMaxPlayers(maxPlayersPerTeam) {
 	const players = playerStorage.getPlayers();
-	const shuffledPlayers = shuffleArray([...players]);
-	const numTeams = Math.ceil(shuffledPlayers.length / maxPlayersPerTeam);
+	// const shuffledPlayers = shuffleArray([...players]);
+	const numTeams = Math.ceil(players.length / maxPlayersPerTeam);
 
-	const ageBalancedTeams = distributePlayersEqually(shuffledPlayers, numTeams);
+	const ageBalancedTeams = distributePlayersEqually(players, numTeams);
 
 	const teams = ageBalancedTeams.map((team, i) => {
 		const name = teamsNames.length
@@ -171,7 +190,7 @@ const players = [
 
 // // For number of teams
 // const teamsByNumber = generateTeamsByNumber(players, 4);
-// console.log("Teams by Number of Teams:", teamsByNumber);
+// console.log('Teams by Number of Teams:', teamsByNumber);
 
 // // For maximum number of players per team
 // const teamsByMaxPlayers = generateTeamsByMaxPlayers(players, 8);
